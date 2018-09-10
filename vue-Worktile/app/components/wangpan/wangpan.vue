@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>高级</h1>
+        <h1>全局</h1>
     </div>
 </template>
 

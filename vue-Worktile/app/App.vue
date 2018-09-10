@@ -33,9 +33,9 @@
         </div>
     </header>
     <!-- 用于展示路由连接的组件 -->
-    <!-- <router-view>
+    <router-view>
 
-    </router-view> -->
+    </router-view>
   </div>
 </template>
 
@@ -48,22 +48,22 @@ export default {
         {
           title:'消息',
           icon:"icon-xiaoxi",
-          url:'/index'
+          url:'/xiaoxi'
         },
         {
           title:'项目',
           icon:"icon-jijinxiangmu",
-          url:'/news'
+          url:'/xiangmu'
         },
         {
           title:'日历',
           icon:"icon-rili",
-          url:'/video'
+          url:'/rili'
         },
         {
           title:'网盘',
           icon:"icon-yunyingpan",
-          url:'/expert'
+          url:'/wangpan'
         }
       ],
       bottom_area:[

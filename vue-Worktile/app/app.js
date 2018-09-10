@@ -8,33 +8,33 @@ Vue.use(VueRouter)
 
 //使用路由管理使用几个子组件
 //引入子组件
-const Index = require('./components/index/index.vue');
-const news = require('./components/news/news.vue');
-const video = require('./components/video/video.vue');
-const expert = require('./components/expert/expert.vue');
+const xiaoxi = require('./components/xiaoxi/xiaoxi.vue');
+const xiangmu = require('./components/xiangmu/xiangmu.vue');
+const rili = require('./components/rili/rili.vue');
+const wangpan = require('./components/wangpan/wangpan.vue');
 const tongxun = require('./components/tongxun/tongxun.vue');
 
 
 //路由配置
 const r = [
   {
-    path:'/index',
-    component:Index.default,
+    path:'/xiaoxi',
+    component:xiaoxi.default,
     name:'消息'
   },
   {
-    path:'/news',
-    component:news.default,
+    path:'/xiangmu',
+    component:xiangmu.default,
     name:'项目'
   },
   {
-    path:'/video',
-    component:video.default,
+    path:'/rili',
+    component:rili.default,
     name:'日历'
   },
   {
-    path:'/expert',
-    component:expert.default,
+    path:'/wangpan',
+    component:wangpan.default,
     name:'网盘'
   },
   {
@@ -45,7 +45,7 @@ const r = [
   {
     //如果用户随便输入地址，转到首页
     path:'*',
-    redirect:'/index'
+    redirect:'/xiaoxi'
   }
 ]
 
