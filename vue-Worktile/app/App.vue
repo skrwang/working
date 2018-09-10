@@ -11,11 +11,25 @@
                 <!-- cur 样式要在点击的标题与路由中的挑剔匹配时展示 -->
                 <li v-for="item of tabNav" :class="{cur:item.title == $route.name}">
                     <!-- 做跳转 -->
-                    <router-link :to='item.url'  class="app-item">
+                    <router-link :to='item.url' class="iconfont" :class="item.icon">
                         
                     </router-link>
                 </li>
             </ul>
+        </div>
+        <div class="bottom-area">
+            <ul class="nav-apps">
+                <li v-for="item of bottom_area" :class="{cur:item.title == $route.name}">
+                    <router-link :to='item.url' class="iconfont" :class="item.icon">
+                        
+                    </router-link>
+                </li>
+            </ul>
+            <a href="javascript:;" class="user">
+                <span class="avatar-default">
+                    <div>SK</div>
+                </span>
+            </a>
         </div>
     </header>
     <!-- 用于展示路由连接的组件 -->
@@ -32,25 +46,32 @@ export default {
     return {
       tabNav:[
         {
-          title:'项目',
+          title:'消息',
+          icon:"icon-xiaoxi",
           url:'/index'
         },
         {
-          title:'任务',
+          title:'项目',
+          icon:"icon-jijinxiangmu",
           url:'/news'
         },
         {
-          title:'安全',
+          title:'日历',
+          icon:"icon-rili",
           url:'/video'
         },
         {
-          title:'高级',
+          title:'网盘',
+          icon:"icon-yunyingpan",
           url:'/expert'
-        },
-        {
-          title:'全局',
-          url:'/boxs'
         }
+      ],
+      bottom_area:[
+          {
+            title:'通讯录',
+            icon:"icon-tongxunlu",
+            url:'/tongxun'
+          }
       ]
     }
   }
@@ -98,16 +119,18 @@ export default {
         cursor: pointer;
         position: relative;
     }
-    .middle-area ul li.cur a.app-item{
-        background: #18bfa4;
-    }
-    .app-item {
+    .middle-area ul li > a,.bottom-area ul li > a{
+        width: 70px;
         display: block;
         text-decoration: none;
         height: 70px;
         transition: box-shadow .3s,-webkit-box-shadow .3s;
+        line-height: 70px;
     }
-    a.app-item:before {
+    .middle-area ul li.cur > a,.bottom-area ul li.cur > a{
+        background: #18bfa4;
+    }
+    .cur a:after {
         content: "";
         position: absolute;
         right: 0;
@@ -118,17 +141,39 @@ export default {
         border-right: 5px solid #fdfdfd;
         border-bottom: 6px solid transparent;
     }
-    .item-icon {
-        margin-top: 15px;
-        display: inline-block;
+    .iconfont:before {
+        color: white;
+        font-size: 23px;
+         font-weight: bold;
+    }
+    .bottom-area {
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+    }
+    .bottom-area .nav-apps{
+        margin-bottom: 10px;
+        list-style: none;
+    }
+    .user:hover{
+        opacity: 0.7;
+        position: relative;
+        display: block;
+    }
+    .avatar-default{
+        text-align: center;
+        overflow: hidden;
+        zoom: 1;
         color: #fff;
-        font-size: 24px;
-        opacity: .8;
-        -webkit-transition: opacity .5s,-webkit-transform .5s;
-        transition: opacity .5s,-webkit-transform .5s;
-        transition: transform .5s,opacity .5s;
-        transition: transform .5s,opacity .5s,-webkit-transform .5s;
-        opacity: 1;
-        transform: translateY(0);
+        text-shadow: transparent 0 0 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        line-height: 48px;
+        font-size: 12px;
+        vertical-align: middle;
+        background-color: rgb(44, 204, 218);
+        display: inline-block;
     }
 </style>

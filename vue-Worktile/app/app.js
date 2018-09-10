@@ -12,7 +12,7 @@ const Index = require('./components/index/index.vue');
 const news = require('./components/news/news.vue');
 const video = require('./components/video/video.vue');
 const expert = require('./components/expert/expert.vue');
-const boxs = require('./components/boxs/boxs.vue');
+const tongxun = require('./components/tongxun/tongxun.vue');
 
 
 //路由配置
@@ -20,27 +20,27 @@ const r = [
   {
     path:'/index',
     component:Index.default,
-    name:'项目'
+    name:'消息'
   },
   {
     path:'/news',
     component:news.default,
-    name:'任务'
+    name:'项目'
   },
   {
     path:'/video',
     component:video.default,
-    name:'安全'
+    name:'日历'
   },
   {
     path:'/expert',
     component:expert.default,
-    name:'高级'
+    name:'网盘'
   },
   {
-    path:'/boxs',
-    component:boxs.default,
-    name:'全局'
+    path:"/tongxun",
+    component:tongxun.default,
+    name:'通讯录'
   },
   {
     //如果用户随便输入地址，转到首页
