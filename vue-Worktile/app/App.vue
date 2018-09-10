@@ -75,6 +75,7 @@ export default {
       width: 70px;
       background: #22d7bb;
       overflow-y: hidden;
+      height: 100%;
     }
     header .logo{
       margin: 18px 0;
