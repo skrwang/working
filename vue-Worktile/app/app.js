@@ -51,9 +51,46 @@ const r = [
     name:'日历'
   },
   {
-    path:'/wangpan',
+    path:'/wangpan/',
     component:wangpan.default,
-    name:'网盘'
+    name:'网盘',
+    children:[
+      {
+        path:'/wangpan/qiye/',
+        component:require('./components/wangpan/qiye/qiye.vue').default,
+        name:"企业网盘"
+      },
+      {
+        path:'/wangpan/geren',
+        component:require('./components/wangpan/geren/geren.vue').default,
+        name:"个人网盘"
+      },
+      {
+        path:'/wangpan/chengyuan',
+        component:require('./components/wangpan/chengyuan/chengyuan.vue').default,
+        name:"成员"
+      },
+      {
+        path:'/wangpan/biaoqian',
+        component:require('./components/wangpan/biaoqian/biaoqian.vue').default,
+        name:"标签"
+      },
+      {
+        path:'/wangpan/gongxiang',
+        component:require('./components/wangpan/gongxiang/gongxiang.vue').default,
+        name:"与我共享"
+      },
+      {
+        path:'/wangpan/huishouzhan',
+        component:require('./components/wangpan/huishouzhan/huishouzhan.vue').default,
+        name:"回收站"
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path:'*',
+        redirect:'/wangpan/qiye'
+      }
+    ]
   },
   {
     path:"/tongxun",
@@ -75,12 +112,25 @@ const router = new VueRouter({
 //配置vuex
 const store =  new Vuex.Store({
   state:{
-    count:1
+    count:1,
+    wangpan:[]
+  },
+  mutations:{
+    GETALL(state,payload){
+      state.wangpan = payload;
+    },
+  },
+  actions:{
+    async GETALL(context,payload){
+      // 请求数据
+      var data = await fetch('/XCC/').then(res => res.json());
+      context.commit('GETALL',data);
+    },
   }
 })
 
 
-new Vue({
+var vm = new Vue({
   el: '#app',
   store,
   router,

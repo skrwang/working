@@ -1,37 +1,28 @@
 {
-    "mapList": [
+    "XCC":[
       {
-        "title": "123",
-        "id": "12345678",
-        "done": false
+        "id":"rq8mjy6j",
+        "icon":"icon-weibiaoti5",
+        "size":"-",
+        "title":"资料共享",
+        "updated":"skrwang",
+        "time":"9月11日14:35"
       },
       {
-        "title": "反对法",
-        "id": "yxpg67wg",
-        "done": true
+        "id":"sadw2132",
+        "icon":"icon-weibiaoti5",
+        "size":"-",
+        "title":"资料共享",
+        "updated":"skrwang",
+        "time":"9月11日14:35"
       },
       {
-        "title": "的说",
-        "id": "n3h51lvv",
-        "done": false
-      },
-      {
-        "title": "士大夫十分",
-        "id": "x6mq62q6",
-        "done": false
-      },
-      {
-        "title": "大师傅",
-        "id": "qyxbnqvw",
-        "done": false
-      },
-      {
-        "title": "撒地方王梓烨",
-        "id": "rs4wn6d4",
-        "done": true
+        "id":"fdf3255r",
+        "icon":"icon-weibiaoti5",
+        "size":"-",
+        "title":"资料共享",
+        "updated":"skrwang",
+        "time":"9月11日14:35"
       }
-    ],
-    "mapItem": {
-      "age": 23
-    }
+    ]
   }
