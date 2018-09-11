@@ -520,7 +520,7 @@ export default {
         padding-top: 3px;
         white-space: normal;
         -webkit-box-flex: 1;
-        -webkit-flex: 1 1 0;
+        flex: 1 1 0;
         overflow: hidden;
         text-overflow: ellipsis;
     }
