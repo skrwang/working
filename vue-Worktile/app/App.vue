@@ -33,7 +33,7 @@
         </div>
     </header>
     <!-- 用于展示路由连接的组件 -->
-    <router-view>
+    <router-view class="right">
 
     </router-view>
   </div>
@@ -92,6 +92,7 @@ export default {
       text-decoration: none;
     }
     header{
+      float: left;
       position: relative;
       width: 70px;
       background: #22d7bb;
@@ -175,5 +176,11 @@ export default {
         vertical-align: middle;
         background-color: rgb(44, 204, 218);
         display: inline-block;
+    }
+    .right{
+      float: left;
+      width: calc(100% - 70px);
+      background: gray;
+      height: 100%;
     }
 </style>

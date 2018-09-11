@@ -18,9 +18,27 @@ const tongxun = require('./components/tongxun/tongxun.vue');
 //路由配置
 const r = [
   {
-    path:'/xiaoxi',
+    path:'/xiaoxi/',
     component:xiaoxi.default,
-    name:'消息'
+    name:'消息',
+    children:[
+      //配置孙子路由
+      {
+        path:'/xiaoxi/qygg/',
+        component:require('./components/xiaoxi/qygg/qygg.vue').default,
+        name:"企业公告"
+      },
+      {
+        path:'/xiaoxi/xtjqr',
+        component:require('./components/xiaoxi/xtjqr/xtjqr.vue').default,
+        name:"小特机器人"
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path:'*',
+        redirect:'/xiaoxi/qygg'
+      }
+    ]
   },
   {
     path:'/xiangmu',

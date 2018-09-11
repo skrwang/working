@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>安全</h1>
+        <h1>我是日历</h1>
     </div>
 </template>
 
@@ -15,9 +15,9 @@ export default {
     div{
         width: 100%;
         height: 400px;
-        background-color: #0ff;
+        background-color: #f0f;
         h1{
-            color: orange;
+            color: black;
         }
     }
 </style>
