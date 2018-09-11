@@ -43,7 +43,129 @@ const r = [
   {
     path:'/xiangmu',
     component:xiangmu.default,
-    name:'项目'
+    name:'项目',
+    children: [
+      {
+        path: '/xiangmu/peizhi',
+        name: '配置中心',
+        component: require('./components/xiangmu/peizhi/peizhi.vue').default,
+        children: [
+          {
+            path: '/xiangmu/peizhi/xiangmu',
+            name: '项目',
+            component: require('./components/xiangmu/peizhi/xiangmu/xiangmu.vue').default,
+            children: [
+              {
+                path: '/xiangmu/peizhi/xiangmu/xiangmu',
+                name: '项目模板',
+                component: require('./components/xiangmu/peizhi/xiangmu/xiangmu/xiangmu.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/xiangmu/zujian',
+                name: '组件管理',
+                component: require('./components/xiangmu/peizhi/xiangmu/zujian/zujian.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/xiangmu/baobiao',
+                name: '报表',
+                component: require('./components/xiangmu/peizhi/xiangmu/baobiao/baobiao.vue').default,
+              }
+            ]
+          },
+          {
+            path: '/xiangmu/peizhi/renwu',
+            name: '任务',
+            component: require('./components/xiangmu/peizhi/renwu/renwu.vue').default,
+            children: [
+              {
+                path: '/xiangmu/peizhi/renwu/renwu',
+                name: '任务类型',
+                component: require('./components/xiangmu/peizhi/renwu/renwu/renwu.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/renwu/shuxing',
+                name: '属性管理',
+                component: require('./components/xiangmu/peizhi/renwu/shuxing/shuxing.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/renwu/zhuangtai',
+                name: '状态管理',
+                component: require('./components/xiangmu/peizhi/renwu/zhuangtai/zhuangtai.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/renwu/shuju',
+                name: '数据管理',
+                component: require('./components/xiangmu/peizhi/renwu/shuju/shuju.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/renwu/biaoqian',
+                name: '标签管理',
+                component: require('./components/xiangmu/peizhi/renwu/biaoqian/biaoqian.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/renwu/youxianji',
+                name: '优先级管理',
+                component: require('./components/xiangmu/peizhi/renwu/youxianji/youxianji.vue').default,
+              }
+            ]
+          },
+          {
+            path: '/xiangmu/peizhi/anquan',
+            name: '安全',
+            component: require('./components/xiangmu/peizhi/anquan/anquan.vue').default,
+            children: [
+              {
+                path: '/xiangmu/peizhi/anquan/juese',
+                name: '角色管理',
+                component: require('./components/xiangmu/peizhi/anquan/juese/juese.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/anquan/anquan',
+                name: '安全管理',
+                component: require('./components/xiangmu/peizhi/anquan/anquan/anquan.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/anquan/quanxian',
+                name: '权限管理',
+                component: require('./components/xiangmu/peizhi/anquan/quanxian/quanxian.vue').default,
+              },
+            ]
+          },
+          {
+            path: '/xiangmu/peizhi/gaoji',
+            name: '高级',
+            component: require('./components/xiangmu/peizhi/gaoji/gaoji.vue').default,
+            children: [
+              {
+                path: '/xiangmu/peizhi/gaoji/tixing',
+                name: '提醒管理',
+                component: require('./components/xiangmu/peizhi/gaoji/tixing/tixing.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/gaoji/tongzhi',
+                name: '通知管理',
+                component: require('./components/xiangmu/peizhi/gaoji/tongzhi/tongzhi.vue').default,
+              },
+              {
+                path: '/xiangmu/peizhi/gaoji/shijian',
+                name: '事件管理',
+                component: require('./components/xiangmu/peizhi/gaoji/shijian/shijian.vue').default,
+              },
+            ]
+          },
+          {
+            path: '/xiangmu/peizhi/quanju',
+            name: '全局',
+            component: require('./components/xiangmu/peizhi/quanju/quanju.vue').default,
+          }
+        ]
+      },
+      {
+        path: '/xiangmu/huishou',
+        name: '回收站',
+        component: require('./components/xiangmu/huishou/huishou.vue').default,
+      }
+    ]
   },
   {
     path:'/rili',
