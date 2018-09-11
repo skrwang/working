@@ -9,16 +9,65 @@
                 <input type="text" placeholder="搜索文件、文件夹">
                 <i class="icondel">×</i>
             </div>
-            <ul class="panList">
-                <li v-for="item of wList">
-                    <router-link :to='item.url' class="txt" :class="{cur : $route.name == item.title}">
-                        <i class="iconfont jiantou" :class="item.icon"></i>
-                        <i class="iconfont pan" :class="item.wangpan"></i>
-                         {{item.title}}
-                        <i class="iconfont tianjia" :class="item.tianjia"></i>
-                    </router-link>
-                </li>
-            </ul>
+            <!-- 文件夹 -->
+            <div class="toc-section file-section">
+                <ul class="qiyewangpan" :class="!isshow ? 'show' : ''">
+                    <li>
+                        <router-link :to="wList[0].url" class="txt" :class="{cur : $route.name == wList[0].title}" >
+                            <i class="iconfont jiantou" :class="wList[0].icon" @click="isshow = !isshow"></i>
+                            <i class="iconfont pan" :class="wList[0].wangpan"></i>
+                            {{wList[0].title}}
+                        </router-link>
+                        <ul class="ng-scope" :class="!isshow ? 'show' : '' ">
+                            <li v-for="(item,index) of list2">
+                                <a href="javascript:" :class="{cur : !index }"> 
+                                    <i class="iconfont" :class="item.icon"></i>
+                                    <span>{{item.title}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="gerenwangpan">
+                    <li>
+                        <router-link :to="wList[1].url" class="txt" :class="{cur : $route.name == wList[1].title}">
+                            <i class="iconfont jiantou" :class="wList[1].icon" @click="isshow = !isshow"></i>
+                            <i class="iconfont pan" :class="wList[1].wangpan"></i>
+                            {{wList[1].title}}
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+            <!-- 成员 -->
+            <div class="toc-section">
+                <a href="javascript:" class="section-header txt append">
+                    <i class="iconfont" :class="wList[2].icon"></i>
+                    {{wList[2].title}}
+                    <i class="iconfont" :class="wList[2].tianjia"></i>
+                </a>
+            </div>
+            <!-- 标签 -->
+             <div class="toc-section">
+                 <a href="javascript:" class="txt append">
+                     <i class="iconfont" :class="wList[3].icon"></i>
+                    {{wList[3].title}}
+                    <i class="iconfont" :class="wList[3].tianjia"></i>
+                 </a>
+             </div>
+             <!-- 与我共享 -->
+             <div class="toc-section selectable">
+                 <router-link :to="wList[4].url" class="txt" :class="{cur : $route.name == wList[4].title}">
+                    <i class="iconfont jiantou" :class="wList[4].icon" @click="isshow = !isshow"></i>
+                    {{wList[4].title}}
+                </router-link>
+             </div>
+             <!-- 回收站 -->
+             <div class="toc-section selectable">
+                 <router-link :to="wList[5].url" class="txt" :class="{cur : $route.name == wList[5].title}">
+                    <i class="iconfont jiantou" :class="wList[5].icon" @click="isshow = !isshow"></i>
+                    {{wList[5].title}}
+                </router-link>
+             </div>
         </div>
         <div class="zs">
             <router-view></router-view>
@@ -30,6 +79,7 @@
     export default {
         data(){
             return {
+                isshow:true,
                 wList:[
                     {
                         icon:"icon-jiantou",
@@ -64,6 +114,20 @@
                         icon:"icon-huishouzhan",
                         title:"回收站",
                         url:"/wangpan/huishouzhan/"
+                    }
+                ],
+                list2:[
+                    {
+                        title:"资料共享",
+                        icon:"icon-weibiaoti5"
+                    },
+                    {
+                        title:"公司照片",
+                        icon:"icon-weibiaoti5"
+                    },
+                    {
+                        title:"公司制度",
+                        icon:"icon-weibiaoti5"
                     }
                 ]
             }
@@ -127,9 +191,114 @@
                 outline: none;
             }
         }
-        .panList {
+        .toc-section {
+            margin-bottom: 2px;
+            width: 240px;
+            ul li .cur {
+                color: #22d7bb;
+                border-right: 4px solid #22d7bb;
+            }
+            ul li {
+                position: relative;
+                .ng-scope {
+                    position: absolute;
+                    top: 41px;
+                    left: 0;
+                    width: 100%;
+                    font-size: 14px;
+                    transition: all 0.2s;
+                    height: 0;
+                    display: none;
+                    a {
+                        display: -webkit-box;
+                        display: flex;
+                        display: -ms-flexbox;
+                        display: -webkit-flex;
+                        -ms-flex-direction: row;
+                        flex-direction: row;
+                        padding: 8px 10px 8px 18px;
+                        line-height: 24px;
+                        cursor: pointer;
+                        color: #666;
+                        transition: all .2s;
+                        padding-left: 40px !important;
+                        margin-bottom: 2px;
+                        .iconfont {
+                            margin: 6px;
+                        }
+                    }
+                }
+                .show{
+                    height: 200px;
+                    display: block;
+                }
+            }
+        }
+        
+        .toc-section .append {
+            padding-left: 40px !important;
+            .icon-jiahao1 {
+                position: absolute;
+                right: 20px;
+                display: none;
+            }
+            &:hover .icon-jiahao1 {
+                display: block;
+            }
+        }
+        .toc-section .txt {
+            text-decoration: none;
+            color: #666;
+            cursor: pointer;
+            padding: 8px 10px 8px 18px;
+            line-height: 24px;
+            transition: all .2s;
+            display: -webkit-box;
+            display: flex;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            font-size: 14px;
+            position: relative;
+            .jiantou {
+                padding-left: 20px;
+                margin-right: 6px;
+            }
+            .pan {
+                margin-right: 5px;
+            }
+            &:hover,.ng-scope a:hover{
+                box-shadow: 0 0 8px 2px #eee;
+                background: 0 0!important;
+                color: #333;
+            }
+        }
+        /* .panList {
             width: 240px;
             list-style: none;
+            position: relative;
+            .ng-scope {
+                position: absolute;
+                left: 0;
+                top: 40px;
+                width: 100%;
+                li a{
+                    display: -webkit-box;
+                    display: flex;
+                    display: -ms-flexbox;
+                    display: -webkit-flex;
+                    -ms-flex-direction: row;
+                    flex-direction: row;
+                    padding: 8px 10px 8px 18px;
+                    line-height: 24px;
+                    cursor: pointer;
+                    color: #666;
+                    transition: all .2s;
+                    padding-left: 40px;
+                    margin-bottom: 2px;
+                }
+            }
         }
         .panList li .txt{
             text-decoration: none;
@@ -151,7 +320,8 @@
             padding-left: 20px;
             margin-right: 6px;
         }
-        .panList li .txt:hover {
+        .panList li .txt:hover,
+        .panList .ng-scope li a:hover{
             box-shadow: 0 0 8px 2px #eee;
             background: 0 0!important;
             color: #333;
@@ -178,7 +348,7 @@
         }
         .panList li:hover .txt .tianjia {
             display: block;
-        }
+        } */
     }
     .zs {
         float: left;
