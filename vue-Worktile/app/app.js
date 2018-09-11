@@ -26,7 +26,29 @@ const r = [
       {
         path:'/xiaoxi/qygg/',
         component:require('./components/xiaoxi/qygg/qygg.vue').default,
-        name:"企业公告"
+        name:"企业公告",
+        children:[
+          {
+            path:'/xiaoxi/qygg/xx/',
+            component:require('./components/xiaoxi/qygg/xx/xx.vue').default,
+            name:'消息'
+          },
+          {
+            path:'/xiaoxi/qygg/file',
+            component:require('./components/xiaoxi/qygg/file/file.vue').default,
+            name:'文件'
+          },
+          {
+            path:'/xiaoxi/qygg/gdxx',
+            component:require('./components/xiaoxi/qygg/gdxx/gdxx.vue').default,
+            name:'固定消息'
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path:'*',
+            redirect:'/xiaoxi/qygg/xx'
+          }
+        ]
       },
       {
         path:'/xiaoxi/xtjqr',
@@ -34,9 +56,24 @@ const r = [
         name:"小特机器人"
       },
       {
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"日程助手"
+      },
+      {
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"网盘助手"
+      },
+      {
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"项目助手"
+      },
+      {
         //如果用户随便输入地址，转到首页
         path:'*',
-        redirect:'/xiaoxi/qygg'
+        redirect:'/xiaoxi/qygg/xx'
       }
     ]
   },
