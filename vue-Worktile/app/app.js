@@ -205,9 +205,31 @@ const r = [
     ]
   },
   {
-    path:'/rili',
+    path:'/rili/',
     component:rili.default,
-    name:'日历'
+    name:'日历',
+    children:[
+        {
+        path:'/rili/wdrc/',
+        component:require('./components/rili/wdrc/wdrc.vue').default,
+        name:"我的日程"
+        },
+        {
+          path:'/rili/tdrc',
+          component:require('./components/rili/tdrc/tdrc.vue').default,
+          name:"团队日程"
+        },
+        {
+          path:'/rili/cyrc',
+          component:require('./components/rili/cyrc/cyrc.vue').default,
+          name:"成员日程"
+        },
+        {
+          //如果用户随便输入地址，转到首页
+          path:'*',
+          redirect:'/rili/wdrc'
+        }
+    ]
   },
   {
     path:'/wangpan/',
