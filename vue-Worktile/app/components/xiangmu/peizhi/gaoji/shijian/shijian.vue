@@ -9,7 +9,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">任务事件</th>
+                        <th>任务事件</th>
                         <th>备注</th>
                         <th>分组</th>
                         <th>类型</th>
