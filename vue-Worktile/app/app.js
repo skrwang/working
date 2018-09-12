@@ -20,28 +20,28 @@ const r = [
   {
     path:'/xiaoxi/',
     component:xiaoxi.default,
-    // name:'消息',
+    name:'消息',
     children:[
       //配置孙子路由
       {
         path:'/xiaoxi/qygg/',
         component:require('./components/xiaoxi/qygg/qygg.vue').default,
-        // name:"企业公告",
+        name:"企业公告",
         children:[
           {
             path:'/xiaoxi/qygg/xx/',
             component:require('./components/xiaoxi/qygg/xx/xx.vue').default,
-            // name:'消息'
+            name:'消息'
           },
           {
             path:'/xiaoxi/qygg/file',
             component:require('./components/xiaoxi/qygg/file/file.vue').default,
-            // name:'文件'
+            name:'文件'
           },
           {
             path:'/xiaoxi/qygg/gdxx',
             component:require('./components/xiaoxi/qygg/gdxx/gdxx.vue').default,
-            // name:'固定消息'
+            name:'固定消息'
           },
           {
             //如果用户随便输入地址，转到首页
@@ -53,110 +53,22 @@ const r = [
       {
         path:'/xiaoxi/xtjqr',
         component:require('./components/xiaoxi/xtjqr/xtjqr.vue').default,
-        // name:"小特机器人",
-        children:[
-          {
-            path:'/xiaoxi/xtjqr/xx/',
-            component:require('./components/xiaoxi/xtjqr/xx/xx.vue').default,
-            // name:'消息'
-          },
-          {
-            path:'/xiaoxi/xtjqr/file',
-            component:require('./components/xiaoxi/xtjqr/file/file.vue').default,
-            // name:'文件'
-          },
-          {
-            path:'/xiaoxi/xtjqr/gdxx',
-            component:require('./components/xiaoxi/xtjqr/gdxx/gdxx.vue').default,
-            // name:'固定消息'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/xtjqr/xx/'
-          }
-        ]
+        name:"小特机器人"
       },
       {
         path:'/xiaoxi/rczs',
         component:require('./components/xiaoxi/rczs/rczs.vue').default,
-        // name:"日程助手",
-        children:[
-          {
-            path:'/xiaoxi/rczs/wd/',
-            component:require('./components/xiaoxi/rczs/wd/wd.vue').default,
-            // name:'未读'
-          },
-          {
-            path:'/xiaoxi/rczs/yd',
-            component:require('./components/xiaoxi/rczs/yd/yd.vue').default,
-            // name:'已读'
-          },
-          {
-            path:'/xiaoxi/rczs/dcl',
-            component:require('./components/xiaoxi/rczs/dcl/dcl.vue').default,
-            // name:'待处理'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/rczs/wd/'
-          }
-        ]
+        name:"日程助手"
       },
       {
-        path:'/xiaoxi/wpzs',
-        component:require('./components/xiaoxi/wpzs/wpzs.vue').default,
-        // name:"网盘助手",
-        children:[
-          {
-            path:'/xiaoxi/wpzs/wd/',
-            component:require('./components/xiaoxi/wpzs/wd/wd.vue').default,
-            // name:'未读'
-          },
-          {
-            path:'/xiaoxi/wpzs/yd',
-            component:require('./components/xiaoxi/wpzs/yd/yd.vue').default,
-            // name:'已读'
-          },
-          {
-            path:'/xiaoxi/wpzs/dcl',
-            component:require('./components/xiaoxi/wpzs/dcl/dcl.vue').default,
-            // name:'待处理'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/wpzs/wd/'
-          }
-        ]
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"网盘助手"
       },
       {
-        path:'/xiaoxi/xmzs',
-        component:require('./components/xiaoxi/xmzs/xmzs.vue').default,
-        // name:"项目助手",
-        children:[
-          {
-            path:'/xiaoxi/xmzs/wd/',
-            component:require('./components/xiaoxi/xmzs/wd/wd.vue').default,
-            // name:'未读'
-          },
-          {
-            path:'/xiaoxi/xmzs/yd',
-            component:require('./components/xiaoxi/xmzs/yd/yd.vue').default,
-            // name:'已读'
-          },
-          {
-            path:'/xiaoxi/xmzs/dcl',
-            component:require('./components/xiaoxi/xmzs/dcl/dcl.vue').default,
-            // name:'待处理'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/xmzs/wd/'
-          }
-        ]
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"项目助手"
       },
       {
         //如果用户随便输入地址，转到首页
@@ -566,34 +478,31 @@ const store =  new Vuex.Store({
   state:{
     count:1,
     wangpan:[],
-    corporator:[]
+    xiaoxi:[],
   },
   mutations:{
-    GETALL(state,payload){
+    XGETALL(state,payload){
       state.wangpan = payload;
     },
-    CGETALL(state,payload){
-      state.corporator = payload;
+    XADD(state,payload){
+      state.wangpan.push(payload);
     },
-    CADD(state,payload){
-      state.corporator.push(payload);
-    }
+    FADD(state,payload){
+      state.xiaoxi.push(payload);
+    },
+    FGETALL(state,payload){
+      state.xiaoxi = payload;
+    },
   },
   actions:{
-    async GETALL(context,payload){
+    async XGETALL(context,payload){
       // 请求数据
       var data = await fetch('/XCC/').then(res => res.json());
-      context.commit('GETALL',data);
+      context.commit('XGETALL',data);
     },
-    async CGETALL(context,payload){
-      // 请求数据
-      var data = await fetch('/corporator/').then(res => res.json());
-      console.log(data,'woshidata');
-      context.commit('CGETALL',data);
-    },
-    async CADD({commit},payload){
+    async XADD({commit},payload){
       // 上传数据
-      var data = await fetch('/corporator/',{
+      var data = await fetch('XCC/',{
           "method":"POST",
           "headers":{
               "Content-Type":"application/json"
@@ -601,7 +510,24 @@ const store =  new Vuex.Store({
           "body":JSON.stringify(payload)
       }).then(res => res.json());
 
-      commit('CADD',data);
+      commit('XADD',data);
+    },
+    async FGETALL(context,payload){
+      // 请求数据
+      var data = await fetch('/FXY/').then(res => res.json());
+      context.commit('FGETALL',data);
+    },
+    async FADD({commit},payload){
+      // 上传数据
+      var data = await fetch('FXY/',{
+          "method":"POST",
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+
+      commit('FADD',data);
   }
   }
 })
