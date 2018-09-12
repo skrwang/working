@@ -484,19 +484,14 @@ const store =  new Vuex.Store({
     XGETALL(state,payload){
       state.wangpan = payload;
     },
-<<<<<<< HEAD
     XADD(state,payload){
       state.wangpan.push(payload);
     },
-    CGETALL(state,payload){
-      state.corporator = payload;
-=======
     FADD(state,payload){
       state.xiaoxi.push(payload);
     },
     FGETALL(state,payload){
       state.xiaoxi = payload;
->>>>>>> 689efbc9146c1cc37d971b4f93c2ce3fe2ed281c
     },
   },
   actions:{
