@@ -1,34 +1,30 @@
+
 <template>
-    <div style="padding:15px;box-sizing: border-box;">
-        <div class="module">
+    <div class="module">
         <div class="left">
-             <i class="iconfont icon-icon-"></i>
-            <input type="text" placeholder="搜索任务事件" >
+            <i class="iconfont icon-icon-"></i>
+            <input type="text" placeholder="搜索项目模板" >
         </div>
         <div class="pad">
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">任务事件</th>
+                        <th style="width:20%">标签模式</th>
                         <th>备注</th>
-                        <th>分组</th>
-                        <th>类型</th>
+                        <th>标签数</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                           {{item.renwu}}
+                           {{item.biaoqian}}
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
                         <td >
-                            {{item.fenzu}}
-                        </td>
-                        <td >
-                            {{item.leixing}}
+                            {{item.shu}}
                         </td>
                         <td >
                             {{item.caozuo}}
@@ -39,7 +35,6 @@
             </table>
         </div>
     </div>
-    </div>
 </template>
 <script>
 export default {
@@ -47,39 +42,22 @@ export default {
         return{
             arr:[
                 {
-                    renwu:'创建任务',
-                    beizhu:'创建任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
+                    biaoqian:'通用标签模式',
+                    beizhu:'通用标签模式',
+                    shu:'3',
+                    caozuo:'配置'
                 },
                 {
-                    renwu:'删除任务',
-                    beizhu:'删除任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
+                    biaoqian:'敏捷开发标签模式',
+                    beizhu:'敏捷开发标签模式',
+                    shu:'4',
+                    caozuo:'配置'
                 },
                 {
-                    renwu:'归档任务',
-                    beizhu:'归档任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
-                },
-                {
-                    renwu:'评论任务',
-                    beizhu:'评论任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
-                },
-                {
-                    renwu:'点赞任务',
-                    beizhu:'点赞任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
+                    biaoqian:'缺陷管理标签模式',
+                    beizhu:'缺陷管理标签模式',
+                    shu:'2',
+                    caozuo:'配置'
                 },
             ]
         }
@@ -94,13 +72,14 @@ export default {
         width: 100%;
         background-color: #fff;
         .left{
-            position: relative;
             float: left;
             width: 300px;
-            .icon-icon-{
+            position: relative;
+            i{
                 position: absolute;
-                top: 10px;
+                top: 7px;
                 left: 10px;
+                font-size: 20px;
             }
             input{
                 padding: 8px 0;
@@ -148,24 +127,13 @@ export default {
                 display: table-cell;
                 text-align: center;
                 color: #666;
-            }
-            img{
-                vertical-align: -6px;
-            }
-            span{
-                padding: 5px 10px;
-            }
-            .wancheng{
-                background: rgb(232, 251, 248);
-            }
-            .weikaishi{
-                background: rgb(254, 238, 238);
-            }
-            .jinxingzhong{
-                background: rgb(255, 245, 231);
-            }
-            .guanbi{
-                background: rgb(235, 248, 238);
+                img{
+                    position: relative;
+                    top: 7px;
+                }
+                span:hover{
+                    color: #22d7bb;
+                }
             }
         }
     }

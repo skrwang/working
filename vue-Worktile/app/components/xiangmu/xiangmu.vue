@@ -15,7 +15,15 @@
                     <input type="text" placeholder="搜索任务">
                 </div>
                 <ul>
-                    <li  v-for="item of tabNav" :class="{cur : item.title==$route.name}">
+                    <li  v-for="item of tabNav1" :class="{cur : $route.name.indexOf(item.title) != -1}">
+                        <i :class="item.leiming"></i> 
+                        <router-link :to='item.url'>
+                            {{item.title}}
+                        </router-link>
+                    </li>
+                </ul>
+                <ul>
+                    <li  v-for="item of tabNav" :class="{cur : $route.name.indexOf(item.title) != -1}">
                         <i :class="item.leiming"></i> 
                         <router-link :to='item.url'>
                             {{item.title}}
@@ -33,6 +41,13 @@
 export default {
     data () {
         return {
+            tabNav1:[
+                {
+                url:'/xiangmu/wode',
+                title:"我的任务",
+                leiming:'iconfont icon-xintubiao-'
+                }
+            ],
             tabNav:[
                 {
                 url:'/xiangmu/peizhi',

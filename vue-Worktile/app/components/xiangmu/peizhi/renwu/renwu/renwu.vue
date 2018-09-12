@@ -8,17 +8,16 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">项目模板</th>
+                        <th style="width:20%">任务类型</th>
                         <th>备注</th>
-                        <th>类型</th>
-                        <th>状态</th>
+                        <th>分组</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                            <img :src="item.imgpath" alt="">
+                            <img :src="item.i" alt="">
                             {{item.xiangmu}}
                         </td>
                         <td style="text-align:left">
@@ -26,11 +25,6 @@
                         </td>
                         <td style="text-align:left">
                             {{item.leixing}}
-                        </td>
-                        <td style="">
-                            <span style="background: #22d7bb;padding: 5px 10px;font-size: 12px;border-radius: 3px;color: #fff;box-sizing: border-box;">
-                                {{item.zhuangtai}}
-                            </span>
                         </td>
                         <td>
                             <span style="color:#22d7bb;">
@@ -53,39 +47,95 @@ export default {
         return{
             arr:[
                 {
-                    xiangmu:'事物',
+                    i:'imgs/a1.png',
+                    xiangmu:'任务',
                     beizhu:'适用于最简单的事务管理',
                     leixing:'通用',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/6.png'
+                    zhuangtai:'已启用'
                 },
                 {
-                    xiangmu:'项目',
+                    i:'imgs/a2.png',
+                    xiangmu:'事务',
                     beizhu:'适用于通用的项目管理',
                     leixing:'通用',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/1.png'
+                    zhuangtai:'已启用'
                 },
                 {
-                    xiangmu:'敏捷',
+                    i:'imgs/a3.png',
+                    xiangmu:'工时任务',
                     beizhu:'适用于敏捷研发管理，包括迭代、需求和缺陷',
                     leixing:'软件',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/2.png'
+                    zhuangtai:'已启用'
                 },
                 {
-                    xiangmu:'缺陷',
+                    i:'imgs/a4.png',
+                    xiangmu:'敏捷需求',
                     beizhu:'适用于缺陷管理',
                     leixing:'软件',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/3.png'
+                    zhuangtai:'已启用'
                 },
                 {
-                    xiangmu:'测试',
+                    i:'imgs/a5.png',
+                    xiangmu:'敏捷任务',
                     beizhu:'适用于测试用例管理',
                     leixing:'软件',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/4.png'
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a6.png',
+                    xiangmu:'敏捷缺陷',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a7.png',
+                    xiangmu:'Web缺陷',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a8.png',
+                    xiangmu:'iOS缺陷',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a9.png',
+                    xiangmu:'Android缺陷',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a10.png',
+                    xiangmu:'测试用例',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a11.png',
+                    xiangmu:'研发需求',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a12.png',
+                    xiangmu:'研发任务',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
+                },
+                {
+                    i:'imgs/a13.png',
+                    xiangmu:'缺陷',
+                    beizhu:'适用于测试用例管理',
+                    leixing:'软件',
+                    zhuangtai:'已启用'
                 },
             ]
         }

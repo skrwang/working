@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="header">
-            <span><i class="iconfont icon-gongxiangtubiaozhuangtaileicaozuolei34"></i> 配置中心</span>
+            <span><i class="iconfont icon-xintubiao-"></i> 配置中心</span>
             <ul>
                <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur : $route.name.indexOf(item.title) != -1}">{{item.title}}</li>
             </ul>
@@ -17,20 +17,17 @@ export default {
         return {
             tabNav:[
                 {
-                url:'/xiangmu/peizhi/xiangmu/xiangmu',
-                title:"项目",
+                url:'/xiangmu/wode/fuze',
+                title:"我负责的",
                 },{
-                url:'/xiangmu/peizhi/renwu',
-                title:"任务"
+                url:'/xiangmu/wode/fenpei',
+                title:"我分配的"
                 },{
-                url:'/xiangmu/peizhi/anquan',
-                title:"安全"
+                url:'/xiangmu/wode/canyu',
+                title:"我参与的"
                 },{
-                url:'/xiangmu/peizhi/gaoji',
-                title:"高级"
-                },{
-                url:'/xiangmu/peizhi/quanju',
-                title:"全局"
+                url:'/xiangmu/wode/chuangjian',
+                title:"我创建的"
                 }
             ]
         }
@@ -55,7 +52,7 @@ export default {
             float: left;
         }
     }
-    .icon-gongxiangtubiaozhuangtaileicaozuolei34{
+    .icon-xintubiao-{
         color: #22d7bb;
     }
     ul{
