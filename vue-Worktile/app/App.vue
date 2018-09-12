@@ -48,7 +48,7 @@ export default {
         {
           title:'消息',
           icon:"icon-xiaoxi",
-          url:'/xiaoxi'
+          url:'/xiaoxi/'
         },
         {
           title:'项目',

@@ -15,15 +15,35 @@
                     <input type="text" placeholder="搜索任务">
                 </div>
                 <ul>
-                    <li  v-for="item of tabNav1" :class="{cur : $route.name.indexOf(item.title) != -1}">
-                        <i :class="item.leiming"></i> 
-                        <router-link :to='item.url'>
-                            {{item.title}}
-                        </router-link>
+                    <li  @click="isShow = !isShow">
+                        <i class="iconfont icon-jiantou"></i>
+                        工作
+                        
+                        
+                    </li>
+                    <div :class="!isShow ?'in' : 'sj'">
+                        <p v-for="item of tabNav1" :class="{cur:$route.path.indexOf(item.url) != -1}">
+                            <i :class="item.leiming"></i> 
+                            <router-link :to='item.url'>
+                                {{item.title}}
+                            </router-link>
+                        </p>
+                    </div>
+                    <li>
+                        <i class="iconfont icon-jiantou"></i>
+                        项目
+                        <span class="span" @click="showToggle">···</span>
+                        <div class="divbox" v-show="isShow2">
+                            <dl>
+                                <dt>创建项目</dt>
+                                <dt>创建项目分组</dt>
+                                <dt>查看归档项目</dt>
+                            </dl>
+                        </div>
                     </li>
                 </ul>
                 <ul>
-                    <li  v-for="item of tabNav" :class="{cur : $route.name.indexOf(item.title) != -1}">
+                    <li  v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">
                         <i :class="item.leiming"></i> 
                         <router-link :to='item.url'>
                             {{item.title}}
@@ -41,16 +61,18 @@
 export default {
     data () {
         return {
+            isShow:true,
+            isShow2:false,
             tabNav1:[
                 {
-                url:'/xiangmu/wode',
+                url:'/xiangmu/wode/',
                 title:"我的任务",
                 leiming:'iconfont icon-xintubiao-'
                 }
             ],
             tabNav:[
                 {
-                url:'/xiangmu/peizhi',
+                url:'/xiangmu/peizhi/',
                 title:"配置中心",
                 leiming:'iconfont icon-gongxiangtubiaozhuangtaileicaozuolei34'
                 },{
@@ -60,6 +82,12 @@ export default {
                 }
             ]
         }
+    },
+    methods:{
+        showToggle:function(){
+            this.isShow2 = !this.isShow2
+		}
+
     }
 }
 </script>
@@ -151,14 +179,62 @@ export default {
         ul li{
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 2px;
+            margin-bottom: 13px;
             padding: 8px 20px;
             position: relative;
             cursor: pointer;
             font-size: 14px;
+            .span{
+                float:right;
+                display: none;
+            }
+            .divbox{
+                
+                position: absolute;
+                top: 41px;
+                right: -175px;
+                border: 1px solid transparent;
+                border-radius: 17%;
+                width: 240px;
+                background: #fff; 
+                padding: 5px 0;
+                dt{
+                    display: flex;
+                    flex-wrap: wrap;
+                    padding: 10px 20px;
+                    position: relative;
+                    line-height: 20px;
+                    color: #666;
+                    align-items: center;
+                    cursor: pointer;
+                    text-decoration: none;
+                    transition: all .2s;
+                }
+                dt:hover{
+                    padding-left: 40px;
+                    background-color: #f3f3f3;
+                }
+            }
+        }
+        ul li:hover .span{
+            display: block;
+        }
+        ul{
+            list-style: none;
             a{
                 font-size: 14px;
                 color: black;
+            }
+            .sj{
+
+                display: none;
+            }
+            p{
+                margin-top: 10px;
+                transition: all 1s;
+                padding: 8px 20px;
+                font-size: 14px;
+                margin-bottom: 2px;
             }
         }
         ul li:hover{
@@ -167,6 +243,15 @@ export default {
         ul li.cur{
             background: #e7f9f6;
             border-right: 4px solid #22d7bb;
+            display: block;
+        }
+        ul p.cur{
+            background: #e7f9f6;
+            border-right: 4px solid #22d7bb;
+            display: block;
+        }
+        ul div.in{
+            display: block;
         }
     }
 }

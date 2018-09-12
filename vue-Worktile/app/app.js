@@ -179,21 +179,82 @@ const r = [
             path:'/xiangmu/wode/fuze',
             name:'我负责的',
             component: require('./components/xiangmu/wode/fuze/fuze.vue').default,
+            children:[
+              {
+                path:'/xiangmu/wode/fuze/hdrw',
+                name:'活动任务',
+                component:require('./components/xiangmu/wode/fuze/hdrw/hdrw.vue').default
+              },{
+                path:'/xiangmu/wode/fuze/wcrw',
+                name:'完成任务',
+                component:require('./components/xiangmu/wode/fuze/wcrw/wcrw.vue').default
+              },{
+                path: '*',
+                redirect: '/xiangmu/wode/fuze/hdrw'
+              }
+            ]
           },
           {
             path:'/xiangmu/wode/fenpei',
             name:'我分配的',
             component: require('./components/xiangmu/wode/fenpei/fenpei.vue').default,
+            children: [
+              {
+                path: '/xiangmu/wode/fenpei/hdrw',
+                name: '活动任务',
+                component: require('./components/xiangmu/wode/fenpei/hdrw/hdrw.vue').default
+              }, {
+                path: '/xiangmu/wode/fenpei/wcrw',
+                name: '完成任务',
+                component: require('./components/xiangmu/wode/fenpei/wcrw/wcrw.vue').default
+              }, {
+                path: '*',
+                redirect: '/xiangmu/wode/fenpei/hdrw'
+              }
+            ]
           },
           {
             path:'/xiangmu/wode/canyu',
             name:'我参与的',
             component: require('./components/xiangmu/wode/canyu/canyu.vue').default,
+            children: [
+              {
+                path: '/xiangmu/wode/canyu/hdrw',
+                name: '活动任务',
+                component: require('./components/xiangmu/wode/canyu/hdrw/hdrw.vue').default
+              }, {
+                path: '/xiangmu/wode/canyu/wcrw',
+                name: '完成任务',
+                component: require('./components/xiangmu/wode/canyu/wcrw/wcrw.vue').default
+              }, {
+                path: '*',
+                redirect: '/xiangmu/wode/canyu/hdrw'
+              }
+            ]
           },
           {
             path:'/xiangmu/wode/chuangjian',
             name:'我创建的',
             component: require('./components/xiangmu/wode/chuangjian/chuangjian.vue').default,
+            children: [
+              {
+                path: '/xiangmu/wode/chuangjian/hdrw',
+                name: '活动任务',
+                component: require('./components/xiangmu/wode/chuangjian/hdrw/hdrw.vue').default
+              }, {
+                path: '/xiangmu/wode/chuangjian/wcrw',
+                name: '完成任务',
+                component: require('./components/xiangmu/wode/chuangjian/wcrw/wcrw.vue').default
+              }, {
+                path: '*',
+                redirect: '/xiangmu/wode/chuangjian/hdrw'
+              }
+            ]
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path: '*',
+            redirect: '/xiangmu/wode/fuze/'
           }
         ]
       },
@@ -221,6 +282,11 @@ const r = [
                 path: '/xiangmu/peizhi/xiangmu/baobiao',
                 name: '报表',
                 component: require('./components/xiangmu/peizhi/xiangmu/baobiao/baobiao.vue').default,
+              },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/xiangmu/xiangmu'
               }
             ]
           },
@@ -258,6 +324,11 @@ const r = [
                 path: '/xiangmu/peizhi/renwu/youxianji',
                 name: '优先级管理',
                 component: require('./components/xiangmu/peizhi/renwu/youxianji/youxianji.vue').default,
+              },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/renwu/renwu'
               }
             ]
           },
@@ -281,6 +352,11 @@ const r = [
                 name: '权限管理',
                 component: require('./components/xiangmu/peizhi/anquan/quanxian/quanxian.vue').default,
               },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/anquan/juese'
+              }
             ]
           },
           {
@@ -303,6 +379,11 @@ const r = [
                 name: '事件管理',
                 component: require('./components/xiangmu/peizhi/gaoji/shijian/shijian.vue').default,
               },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/gaoji/tixing'
+              }
             ]
           },
           {
@@ -314,8 +395,18 @@ const r = [
                 path: '/xiangmu/peizhi/quanju/gongzuo',
                 name: '工作组件',
                 component: require('./components/xiangmu/peizhi/quanju/gongzuo/gongzuo.vue').default,
+              },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/quanju/gongzuo'
               }
             ]
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path: '*',
+            redirect:'/xiangmu/peizhi/xiangmu/xiangmu'
           }
         ]
       },
@@ -327,7 +418,7 @@ const r = [
       {
         //如果用户随便输入地址，转到首页
         path: '*',
-        redirect: '/xiangmu/wode/'
+        redirect: '/xiangmu/wode/fuze/'
       }
     ]
   },
@@ -392,6 +483,21 @@ const r = [
         path:'/wangpan/huishouzhan',
         component:require('./components/wangpan/huishouzhan/huishouzhan.vue').default,
         name:"回收站"
+      },
+      {
+        path:'/wangpan/ziliao',
+        component:require('./components/wangpan/ziliao/ziliao.vue').default,
+        name:"资料共享",
+      },
+      {
+        path:'/wangpan/zhaopian',
+        component:require('./components/wangpan/zhaopian/zhaopian.vue').default,
+        name:"公司照片",
+      },
+      {
+        path:'/wangpan/zhidu',
+        component:require('./components/wangpan/zhidu/zhidu.vue').default,
+        name:"公司制度",
       },
       {
         //如果用户随便输入地址，转到首页

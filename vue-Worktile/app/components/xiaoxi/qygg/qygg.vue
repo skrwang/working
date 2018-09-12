@@ -84,7 +84,7 @@ export default {
     }
     .head span:nth-child(1) img{
         position: relative;
-        left: -2px;
+        left: 0px;
         top: -3px;
     }
     .head span:nth-child(2) img{

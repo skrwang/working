@@ -13,25 +13,25 @@
             <div class="toc-section file-section">
                 <ul class="qiyewangpan">
                     <li>
-                        <router-link :to="wList[0].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
+                        <router-link :to="wList[0].url" class="txt" :class="{cur : $route.path.indexOf(wList[0].url) != -1}">
                             <i class="iconfont jiantou" :class="wList[0].icon" @click="isshow = !isshow"></i>
                             <i class="iconfont pan" :class="wList[0].wangpan"></i>
                             {{wList[0].title}}
                         </router-link>
                         <ul class="ng-scope" :class="!isshow ? 'show' : ''">
                             <li v-for="(item,index) of list2">
-                                <a href="javascript:" @click="checkItem(index)" :class="{cur : index == active}"> 
+                                <router-link :to="item.url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
                                     <i class="iconfont" :class="item.icon"></i>
                                     {{item.title}}
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
                     </li>
                 </ul>
                 <ul class="gerenwangpan">
                     <li>
-                        <router-link :to="wList[1].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
-                            <i class="iconfont jiantou" :class="wList[1].icon" @click="isshow = !isshow"></i>
+                        <router-link :to="wList[1].url" class="txt" :class="{cur : $route.path.indexOf(wList[1].url) != -1}">
+                            <i class="iconfont jiantou" :class="wList[1].icon" ></i>
                             <i class="iconfont pan" :class="wList[1].wangpan"></i>
                             {{wList[1].title}}
                         </router-link>
@@ -56,15 +56,15 @@
              </div>
              <!-- 与我共享 -->
              <div class="toc-section selectable">
-                 <router-link :to="wList[4].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
-                    <i class="iconfont jiantou" :class="wList[4].icon" @click="isshow = !isshow"></i>
+                 <router-link :to="wList[4].url" class="txt" :class="{cur : $route.path.indexOf(wList[4].url) != -1}">
+                    <i class="iconfont jiantou" :class="wList[4].icon"></i>
                     {{wList[4].title}}
                 </router-link>
              </div>
              <!-- 回收站 -->
              <div class="toc-section selectable">
-                 <router-link :to="wList[5].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
-                    <i class="iconfont jiantou" :class="wList[5].icon" @click="isshow = !isshow"></i>
+                 <router-link :to="wList[5].url" class="txt" :class="{cur : $route.path.indexOf(wList[5].url) != -1}">
+                    <i class="iconfont jiantou" :class="wList[5].icon"></i>
                     {{wList[5].title}}
                 </router-link>
              </div>
@@ -120,15 +120,18 @@
                 list2:[
                     {
                         title:"资料共享",
-                        icon:"icon-weibiaoti5"
+                        icon:"icon-weibiaoti5",
+                        url:"/wangpan/ziliao"
                     },
                     {
                         title:"公司照片",
-                        icon:"icon-weibiaoti5"
+                        icon:"icon-weibiaoti5",
+                        url:"/wangpan/zhaopian"
                     },
                     {
                         title:"公司制度",
-                        icon:"icon-weibiaoti5"
+                        icon:"icon-weibiaoti5",
+                        url:"/wangpan/zhidu"
                     }
                 ]
             }
@@ -206,7 +209,7 @@
             .gerenwangpan .pan {
                 color: rgb(249, 105, 170);
             }
-            ul li .cur {
+            .txt.cur {
                 color: #22d7bb;
                 background: rgb(231,249,246);
                 border-right: 4px solid #22d7bb;
