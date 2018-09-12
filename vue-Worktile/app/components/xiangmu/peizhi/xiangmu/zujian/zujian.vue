@@ -23,8 +23,8 @@
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
-                        <td style="text-align:left">
-                            {{item.pingtai}}
+                        <td style="text-align:center">
+                            <i v-for="(tre,index)  of item.pingtai" :class="tre"></i>
                         </td>
                         <td>
                             <span class="iconfont icon-huishouzhan"></span>
@@ -43,49 +43,81 @@ export default {
                 {
                     zujian:'看板',
                     beizhu:'用看板的方式分组展示任务',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/6.png'
                 },
                 {
                     zujian:'迭代',
                     beizhu:'用于敏捷开发管理中的迭代管理，支持迭代统计、故事板及规划',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/7.png'
                 },
                 {
                     zujian:'列表',
                     beizhu:'用列表的方式直观的展示任务',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/8.png'
                 },
                 {
                     zujian:'时间',
                     beizhu:'用甘特图的方式展示任务，支持任务视图与人员视图',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/9.png'
                 },
                 {
                     zujian:'表格',
                     beizhu:'用表格的方式展示任务，支持表头自定义',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/10.png'
                 },
                 {
                     zujian:'报表',
                     beizhu:'提供基于任务的多维度统计，可以自定义统计报表',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/11.png'
                 },
                 {
                     zujian:'日历',
                     beizhu:'用日历的方式直观的展示任务',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/12.png'
                 },
                 {
                     zujian:'工时',
                     beizhu:'用于项目管理中的工时查看、统计与导出',
-                    pingtai:'',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                     imgpath:'imgs/13.png'
                 }
             ]
@@ -161,6 +193,14 @@ export default {
                     top: 7px;
                 }
                 span:hover{
+                    color: #22d7bb;
+                }
+                i{
+                    margin-right: 3px;
+                    margin-left: 3px;
+                    color: #cacaca!important;
+                }
+                i:hover{
                     color: #22d7bb;
                 }
             }

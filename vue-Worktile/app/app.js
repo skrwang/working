@@ -83,6 +83,33 @@ const r = [
     name:'项目',
     children: [
       {
+        path:'/xiangmu/wode',
+        name:'我的项目',
+        component: require('./components/xiangmu/wode/wode.vue').default,
+        children:[
+          {
+            path:'/xiangmu/wode/fuze',
+            name:'我负责的',
+            component: require('./components/xiangmu/wode/fuze/fuze.vue').default,
+          },
+          {
+            path:'/xiangmu/wode/fenpei',
+            name:'我分配的',
+            component: require('./components/xiangmu/wode/fenpei/fenpei.vue').default,
+          },
+          {
+            path:'/xiangmu/wode/canyu',
+            name:'我参与的',
+            component: require('./components/xiangmu/wode/canyu/canyu.vue').default,
+          },
+          {
+            path:'/xiangmu/wode/chuangjian',
+            name:'我创建的',
+            component: require('./components/xiangmu/wode/chuangjian/chuangjian.vue').default,
+          }
+        ]
+      },
+      {
         path: '/xiangmu/peizhi',
         name: '配置中心',
         component: require('./components/xiangmu/peizhi/peizhi.vue').default,
@@ -194,6 +221,13 @@ const r = [
             path: '/xiangmu/peizhi/quanju',
             name: '全局',
             component: require('./components/xiangmu/peizhi/quanju/quanju.vue').default,
+            children:[
+              {
+                path: '/xiangmu/peizhi/quanju/gongzuo',
+                name: '工作组件',
+                component: require('./components/xiangmu/peizhi/quanju/gongzuo/gongzuo.vue').default,
+              }
+            ]
           }
         ]
       },
@@ -201,6 +235,11 @@ const r = [
         path: '/xiangmu/huishou',
         name: '回收站',
         component: require('./components/xiangmu/huishou/huishou.vue').default,
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path: '*',
+        redirect: '/xiangmu/wode/'
       }
     ]
   },

@@ -1,39 +1,35 @@
 <template>
-    <div style="padding:15px;box-sizing: border-box;">
+    <div style="padding:15px;">
         <div class="module">
         <div class="left">
-             <i class="iconfont icon-icon-"></i>
-            <input type="text" placeholder="搜索任务事件" >
+            <i class="iconfont icon-icon-"></i>
+            <input type="text" placeholder="搜索工作组件" >
         </div>
         <div class="pad">
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">任务事件</th>
+                        <th style="width:20%">组件名称</th>
                         <th>备注</th>
-                        <th>分组</th>
-                        <th>类型</th>
+                        <th>支持平台</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                           {{item.renwu}}
+                            <img :src="item.i" alt="">
+                            {{item.zujian}}
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
                         <td >
-                            {{item.fenzu}}
+                            <i v-for="(tre,index)  of item.pingtai" :class="tre"></i>
                         </td>
-                        <td >
-                            {{item.leixing}}
+                        <td>
+                            <span>删除</span>
                         </td>
-                        <td >
-                            {{item.caozuo}}
-                        </td>
-                        
                     </tr>
                 </tbody>
             </table>
@@ -47,40 +43,24 @@ export default {
         return{
             arr:[
                 {
-                    renwu:'创建任务',
-                    beizhu:'创建任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
+                    zujian:'下载任务',
+                    beizhu:'下载任务',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ]
                 },
                 {
-                    renwu:'删除任务',
-                    beizhu:'删除任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
-                },
-                {
-                    renwu:'归档任务',
-                    beizhu:'归档任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
-                },
-                {
-                    renwu:'评论任务',
-                    beizhu:'评论任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
-                },
-                {
-                    renwu:'点赞任务',
-                    beizhu:'点赞任务',
-                    fenzu:'基本事件',
-                    caozuo:'——',
-                    leixing:'系统'
-                },
+                    zujian:'我的任务',
+                    beizhu:'我的任务',
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ]
+                }
+                
             ]
         }
     }
@@ -152,20 +132,10 @@ export default {
             img{
                 vertical-align: -6px;
             }
-            span{
-                padding: 5px 10px;
-            }
-            .wancheng{
-                background: rgb(232, 251, 248);
-            }
-            .weikaishi{
-                background: rgb(254, 238, 238);
-            }
-            .jinxingzhong{
-                background: rgb(255, 245, 231);
-            }
-            .guanbi{
-                background: rgb(235, 248, 238);
+            i{
+                margin-right: 3px;
+                margin-left: 3px;
+                color: #cacaca!important;
             }
         }
     }
