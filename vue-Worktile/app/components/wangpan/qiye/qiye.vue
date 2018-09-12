@@ -148,11 +148,11 @@
                 }
                 if (file.type.indexOf("image") == -1) {
                     
-                    this.$store.dispatch("ADD",this.imgList);
+                    this.$store.dispatch("XADD",this.imgList);
                 } else {
                     let reader = new FileReader();
                     reader.readAsDataURL(file);
-                    this.$store.dispatch("ADD",this.imgList);
+                    this.$store.dispatch("XADD",this.imgList);
                 }
             },
             fileDel(index) {
@@ -183,7 +183,7 @@
         },
         created(){
             // 发送action异步请求数据
-            this.$store.dispatch('GETALL');
+            this.$store.dispatch('XGETALL');
         },
     }
 </script>

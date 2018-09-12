@@ -569,8 +569,11 @@ const store =  new Vuex.Store({
     corporator:[]
   },
   mutations:{
-    GETALL(state,payload){
+    XGETALL(state,payload){
       state.wangpan = payload;
+    },
+    XADD(state,payload){
+      state.wangpan.push(payload);
     },
     CGETALL(state,payload){
       state.corporator = payload;
@@ -580,10 +583,22 @@ const store =  new Vuex.Store({
     }
   },
   actions:{
-    async GETALL(context,payload){
+    async XGETALL(context,payload){
       // 请求数据
       var data = await fetch('/XCC/').then(res => res.json());
-      context.commit('GETALL',data);
+      context.commit('XGETALL',data);
+    },
+    async XADD({commit},payload){
+      // 上传数据
+      var data = await fetch('XCC/',{
+          "method":"POST",
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+
+      commit('XADD',data);
     },
     async CGETALL(context,payload){
       // 请求数据
