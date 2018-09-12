@@ -20,28 +20,28 @@ const r = [
   {
     path:'/xiaoxi/',
     component:xiaoxi.default,
-    // name:'消息',
+    name:'消息',
     children:[
       //配置孙子路由
       {
         path:'/xiaoxi/qygg/',
         component:require('./components/xiaoxi/qygg/qygg.vue').default,
-        // name:"企业公告",
+        name:"企业公告",
         children:[
           {
             path:'/xiaoxi/qygg/xx/',
             component:require('./components/xiaoxi/qygg/xx/xx.vue').default,
-            // name:'消息'
+            name:'消息'
           },
           {
             path:'/xiaoxi/qygg/file',
             component:require('./components/xiaoxi/qygg/file/file.vue').default,
-            // name:'文件'
+            name:'文件'
           },
           {
             path:'/xiaoxi/qygg/gdxx',
             component:require('./components/xiaoxi/qygg/gdxx/gdxx.vue').default,
-            // name:'固定消息'
+            name:'固定消息'
           },
           {
             //如果用户随便输入地址，转到首页
@@ -53,110 +53,22 @@ const r = [
       {
         path:'/xiaoxi/xtjqr',
         component:require('./components/xiaoxi/xtjqr/xtjqr.vue').default,
-        // name:"小特机器人",
-        children:[
-          {
-            path:'/xiaoxi/xtjqr/xx/',
-            component:require('./components/xiaoxi/xtjqr/xx/xx.vue').default,
-            // name:'消息'
-          },
-          {
-            path:'/xiaoxi/xtjqr/file',
-            component:require('./components/xiaoxi/xtjqr/file/file.vue').default,
-            // name:'文件'
-          },
-          {
-            path:'/xiaoxi/xtjqr/gdxx',
-            component:require('./components/xiaoxi/xtjqr/gdxx/gdxx.vue').default,
-            // name:'固定消息'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/xtjqr/xx/'
-          }
-        ]
+        name:"小特机器人"
       },
       {
         path:'/xiaoxi/rczs',
         component:require('./components/xiaoxi/rczs/rczs.vue').default,
-        // name:"日程助手",
-        children:[
-          {
-            path:'/xiaoxi/rczs/wd/',
-            component:require('./components/xiaoxi/rczs/wd/wd.vue').default,
-            // name:'未读'
-          },
-          {
-            path:'/xiaoxi/rczs/yd',
-            component:require('./components/xiaoxi/rczs/yd/yd.vue').default,
-            // name:'已读'
-          },
-          {
-            path:'/xiaoxi/rczs/dcl',
-            component:require('./components/xiaoxi/rczs/dcl/dcl.vue').default,
-            // name:'待处理'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/rczs/wd/'
-          }
-        ]
+        name:"日程助手"
       },
       {
-        path:'/xiaoxi/wpzs',
-        component:require('./components/xiaoxi/wpzs/wpzs.vue').default,
-        // name:"网盘助手",
-        children:[
-          {
-            path:'/xiaoxi/wpzs/wd/',
-            component:require('./components/xiaoxi/wpzs/wd/wd.vue').default,
-            // name:'未读'
-          },
-          {
-            path:'/xiaoxi/wpzs/yd',
-            component:require('./components/xiaoxi/wpzs/yd/yd.vue').default,
-            // name:'已读'
-          },
-          {
-            path:'/xiaoxi/wpzs/dcl',
-            component:require('./components/xiaoxi/wpzs/dcl/dcl.vue').default,
-            // name:'待处理'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/wpzs/wd/'
-          }
-        ]
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"网盘助手"
       },
       {
-        path:'/xiaoxi/xmzs',
-        component:require('./components/xiaoxi/xmzs/xmzs.vue').default,
-        // name:"项目助手",
-        children:[
-          {
-            path:'/xiaoxi/xmzs/wd/',
-            component:require('./components/xiaoxi/xmzs/wd/wd.vue').default,
-            // name:'未读'
-          },
-          {
-            path:'/xiaoxi/xmzs/yd',
-            component:require('./components/xiaoxi/xmzs/yd/yd.vue').default,
-            // name:'已读'
-          },
-          {
-            path:'/xiaoxi/xmzs/dcl',
-            component:require('./components/xiaoxi/xmzs/dcl/dcl.vue').default,
-            // name:'待处理'
-          },
-          {
-            //如果用户随便输入地址，转到首页
-            path:'*',
-            redirect:'/xiaoxi/xmzs/wd/'
-          }
-        ]
+        path:'/xiaoxi/rczs',
+        component:require('./components/xiaoxi/rczs/rczs.vue').default,
+        name:"项目助手"
       },
       {
         //如果用户随便输入地址，转到首页
@@ -170,6 +82,94 @@ const r = [
     component:xiangmu.default,
     name:'项目',
     children: [
+      {
+        path:'/xiangmu/wode',
+        name:'我的项目',
+        component: require('./components/xiangmu/wode/wode.vue').default,
+        children:[
+          {
+            path:'/xiangmu/wode/fuze',
+            name:'我负责的',
+            component: require('./components/xiangmu/wode/fuze/fuze.vue').default,
+            children:[
+              {
+                path:'/xiangmu/wode/fuze/hdrw',
+                name:'活动任务',
+                component:require('./components/xiangmu/wode/fuze/hdrw/hdrw.vue').default
+              },{
+                path:'/xiangmu/wode/fuze/wcrw',
+                name:'完成任务',
+                component:require('./components/xiangmu/wode/fuze/wcrw/wcrw.vue').default
+              },{
+                path: '*',
+                redirect: '/xiangmu/wode/fuze/hdrw'
+              }
+            ]
+          },
+          {
+            path:'/xiangmu/wode/fenpei',
+            name:'我分配的',
+            component: require('./components/xiangmu/wode/fenpei/fenpei.vue').default,
+            children: [
+              {
+                path: '/xiangmu/wode/fenpei/hdrw',
+                name: '活动任务',
+                component: require('./components/xiangmu/wode/fenpei/hdrw/hdrw.vue').default
+              }, {
+                path: '/xiangmu/wode/fenpei/wcrw',
+                name: '完成任务',
+                component: require('./components/xiangmu/wode/fenpei/wcrw/wcrw.vue').default
+              }, {
+                path: '*',
+                redirect: '/xiangmu/wode/fenpei/hdrw'
+              }
+            ]
+          },
+          {
+            path:'/xiangmu/wode/canyu',
+            name:'我参与的',
+            component: require('./components/xiangmu/wode/canyu/canyu.vue').default,
+            children: [
+              {
+                path: '/xiangmu/wode/canyu/hdrw',
+                name: '活动任务',
+                component: require('./components/xiangmu/wode/canyu/hdrw/hdrw.vue').default
+              }, {
+                path: '/xiangmu/wode/canyu/wcrw',
+                name: '完成任务',
+                component: require('./components/xiangmu/wode/canyu/wcrw/wcrw.vue').default
+              }, {
+                path: '*',
+                redirect: '/xiangmu/wode/canyu/hdrw'
+              }
+            ]
+          },
+          {
+            path:'/xiangmu/wode/chuangjian',
+            name:'我创建的',
+            component: require('./components/xiangmu/wode/chuangjian/chuangjian.vue').default,
+            children: [
+              {
+                path: '/xiangmu/wode/chuangjian/hdrw',
+                name: '活动任务',
+                component: require('./components/xiangmu/wode/chuangjian/hdrw/hdrw.vue').default
+              }, {
+                path: '/xiangmu/wode/chuangjian/wcrw',
+                name: '完成任务',
+                component: require('./components/xiangmu/wode/chuangjian/wcrw/wcrw.vue').default
+              }, {
+                path: '*',
+                redirect: '/xiangmu/wode/chuangjian/hdrw'
+              }
+            ]
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path: '*',
+            redirect: '/xiangmu/wode/fuze/'
+          }
+        ]
+      },
       {
         path: '/xiangmu/peizhi',
         name: '配置中心',
@@ -194,6 +194,11 @@ const r = [
                 path: '/xiangmu/peizhi/xiangmu/baobiao',
                 name: '报表',
                 component: require('./components/xiangmu/peizhi/xiangmu/baobiao/baobiao.vue').default,
+              },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/xiangmu/xiangmu'
               }
             ]
           },
@@ -231,6 +236,11 @@ const r = [
                 path: '/xiangmu/peizhi/renwu/youxianji',
                 name: '优先级管理',
                 component: require('./components/xiangmu/peizhi/renwu/youxianji/youxianji.vue').default,
+              },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/renwu/renwu'
               }
             ]
           },
@@ -254,6 +264,11 @@ const r = [
                 name: '权限管理',
                 component: require('./components/xiangmu/peizhi/anquan/quanxian/quanxian.vue').default,
               },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/anquan/juese'
+              }
             ]
           },
           {
@@ -276,12 +291,34 @@ const r = [
                 name: '事件管理',
                 component: require('./components/xiangmu/peizhi/gaoji/shijian/shijian.vue').default,
               },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/gaoji/tixing'
+              }
             ]
           },
           {
             path: '/xiangmu/peizhi/quanju',
             name: '全局',
             component: require('./components/xiangmu/peizhi/quanju/quanju.vue').default,
+            children:[
+              {
+                path: '/xiangmu/peizhi/quanju/gongzuo',
+                name: '工作组件',
+                component: require('./components/xiangmu/peizhi/quanju/gongzuo/gongzuo.vue').default,
+              },
+              {
+                //如果用户随便输入地址，转到首页
+                path: '*',
+                redirect: '/xiangmu/peizhi/quanju/gongzuo'
+              }
+            ]
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path: '*',
+            redirect:'/xiangmu/peizhi/xiangmu/xiangmu'
           }
         ]
       },
@@ -289,6 +326,11 @@ const r = [
         path: '/xiangmu/huishou',
         name: '回收站',
         component: require('./components/xiangmu/huishou/huishou.vue').default,
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path: '*',
+        redirect: '/xiangmu/wode/fuze/'
       }
     ]
   },
@@ -353,6 +395,21 @@ const r = [
         path:'/wangpan/huishouzhan',
         component:require('./components/wangpan/huishouzhan/huishouzhan.vue').default,
         name:"回收站"
+      },
+      {
+        path:'/wangpan/ziliao',
+        component:require('./components/wangpan/ziliao/ziliao.vue').default,
+        name:"资料共享",
+      },
+      {
+        path:'/wangpan/zhaopian',
+        component:require('./components/wangpan/zhaopian/zhaopian.vue').default,
+        name:"公司照片",
+      },
+      {
+        path:'/wangpan/zhidu',
+        component:require('./components/wangpan/zhidu/zhidu.vue').default,
+        name:"公司制度",
       },
       {
         //如果用户随便输入地址，转到首页
@@ -420,11 +477,18 @@ const router = new VueRouter({
 const store =  new Vuex.Store({
   state:{
     count:1,
-    wangpan:[]
+    wangpan:[],
+    xiaoxi:[],
   },
   mutations:{
     GETALL(state,payload){
       state.wangpan = payload;
+    },
+    FADD(state,payload){
+      state.xiaoxi.push(payload);
+    },
+    FGETALL(state,payload){
+      state.xiaoxi = payload;
     },
   },
   actions:{
@@ -433,6 +497,23 @@ const store =  new Vuex.Store({
       var data = await fetch('/XCC/').then(res => res.json());
       context.commit('GETALL',data);
     },
+    async FGETALL(context,payload){
+      // 请求数据
+      var data = await fetch('/FXY/').then(res => res.json());
+      context.commit('FGETALL',data);
+    },
+    async FADD({commit},payload){
+      // 上传数据
+      var data = await fetch('FXY/',{
+          "method":"POST",
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+
+      commit('FADD',data);
+  }
   }
 })
 

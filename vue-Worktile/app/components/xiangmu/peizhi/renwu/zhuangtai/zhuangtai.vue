@@ -8,38 +8,31 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">项目模板</th>
+                        <th style="width:20%">任务状态</th>
                         <th>备注</th>
                         <th>类型</th>
-                        <th>状态</th>
+                        <th>分组</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                            <img :src="item.imgpath" alt="">
-                            {{item.xiangmu}}
+                            <span :class="[{wancheng:item.leixing=='已完成'},{weikaishi:item.leixing=='未开始'},{jinxingzhong:item.leixing=='进行中'}]">
+                                {{item.xiangmu}}
+                            </span>
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
-                        <td style="text-align:left">
+                        <td >
                             {{item.leixing}}
                         </td>
-                        <td style="">
-                            <span style="background: #22d7bb;padding: 5px 10px;font-size: 12px;border-radius: 3px;color: #fff;box-sizing: border-box;">
-                                {{item.zhuangtai}}
-                            </span>
+                        <td style="text-align:left">
+                            {{item.zhuangtai}}
                         </td>
                         <td>
-                            <span style="color:#22d7bb;">
-                                <i class="iconfont icon-gongxiangtubiaozhuangtaileicaozuolei34"></i>
-                                配置
-                            </span>
-                            <span>配置</span>
-                            <span>修改</span>
-                            <span>删除</span>
+                            ----
                         </td>
                     </tr>
                 </tbody>

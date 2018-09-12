@@ -8,39 +8,27 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width:20%">项目模板</th>
+                        <th style="width:20%">标签模式</th>
                         <th>备注</th>
-                        <th>类型</th>
-                        <th>状态</th>
+                        <th>标签数</th>
                         <th>操作</th>
                     </tr>
                 </thead>
                 <tbody >
                     <tr v-for="item of arr">
                         <td style="text-align:left">
-                            <img :src="item.imgpath" alt="">
-                            {{item.xiangmu}}
+                           {{item.biaoqian}}
                         </td>
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
-                        <td style="text-align:left">
-                            {{item.leixing}}
+                        <td >
+                            {{item.shu}}
                         </td>
-                        <td style="">
-                            <span style="background: #22d7bb;padding: 5px 10px;font-size: 12px;border-radius: 3px;color: #fff;box-sizing: border-box;">
-                                {{item.zhuangtai}}
-                            </span>
+                        <td >
+                            {{item.caozuo}}
                         </td>
-                        <td>
-                            <span style="color:#22d7bb;">
-                                <i class="iconfont icon-gongxiangtubiaozhuangtaileicaozuolei34"></i>
-                                配置
-                            </span>
-                            <span>配置</span>
-                            <span>修改</span>
-                            <span>删除</span>
-                        </td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -53,39 +41,22 @@ export default {
         return{
             arr:[
                 {
-                    xiangmu:'事物',
-                    beizhu:'适用于最简单的事务管理',
-                    leixing:'通用',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/6.png'
+                    biaoqian:'通用标签模式',
+                    beizhu:'通用标签模式',
+                    shu:'3',
+                    caozuo:'配置'
                 },
                 {
-                    xiangmu:'项目',
-                    beizhu:'适用于通用的项目管理',
-                    leixing:'通用',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/1.png'
+                    biaoqian:'敏捷开发标签模式',
+                    beizhu:'敏捷开发标签模式',
+                    shu:'4',
+                    caozuo:'配置'
                 },
                 {
-                    xiangmu:'敏捷',
-                    beizhu:'适用于敏捷研发管理，包括迭代、需求和缺陷',
-                    leixing:'软件',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/2.png'
-                },
-                {
-                    xiangmu:'缺陷',
-                    beizhu:'适用于缺陷管理',
-                    leixing:'软件',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/3.png'
-                },
-                {
-                    xiangmu:'测试',
-                    beizhu:'适用于测试用例管理',
-                    leixing:'软件',
-                    zhuangtai:'已启用',
-                    imgpath:'imgs/4.png'
+                    biaoqian:'缺陷管理标签模式',
+                    beizhu:'缺陷管理标签模式',
+                    shu:'2',
+                    caozuo:'配置'
                 },
             ]
         }

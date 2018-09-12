@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul>
-            <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur : item.title==$route.name}">{{item.title}}</li>
+            <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">{{item.title}}</li>
         </ul>
         <router-view></router-view>
     </div>

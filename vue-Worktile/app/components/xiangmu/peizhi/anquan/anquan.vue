@@ -1,11 +1,8 @@
 <template>
     <div>
         <ul>
-            <li v-for="item of tabNav" :class="{cur : item.title==$route.name}">
-                <router-link :to='item.url'>
-                    {{item.title}}
-                </router-link>
-            </li>
+            
+            <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">{{item.title}}</li>
         </ul>
         <router-view></router-view>
     </div>
@@ -26,6 +23,13 @@ export default {
                 title:"权限管理"
                 }
             ]
+        }
+    },
+    methods:{
+        routerGo(url){
+        // 路由跳转
+        this.$router.push({path:url});
+        // console.log(this.$route)
         }
     }
 }

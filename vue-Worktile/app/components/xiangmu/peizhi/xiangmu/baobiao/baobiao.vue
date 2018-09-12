@@ -22,8 +22,8 @@
                         <td style="text-align:left">
                             {{item.beizhu}}
                         </td>
-                        <td style="text-align:left">
-                            {{item.leixing}}
+                        <td>
+                            <i v-for="(tre,index)  of item.pingtai" :class="tre"></i>
                         </td>
                         <td>
                             <span class="iconfont icon-huishouzhan"></span>
@@ -42,7 +42,11 @@ export default {
                 {
                     xiangmu:'项目概要报表',
                     beizhu:'展示项目中的基本统计，类型的分布等',
-                    leixing:'通用'
+                    pingtai:[
+                        'iconfont icon-diannao-tianchong',
+                        'iconfont icon-pingguo',
+                        'iconfont icon-anzhuo'
+                    ],
                 }
             ]
         }
@@ -115,6 +119,14 @@ export default {
                 span:hover{
                     color: red;
                 }
+            }
+            i{
+                margin-right: 3px;
+                margin-left: 3px;
+                color: #cacaca!important;
+            }
+            i:hover{
+                color: #22d7bb;
             }
         }
     }
