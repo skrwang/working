@@ -98,7 +98,7 @@
         },
         created(){
             // 发送action异步请求数据
-            this.$store.dispatch('GETALL');
+            this.$store.dispatch('XGETALL');
         },
     }
 </script>

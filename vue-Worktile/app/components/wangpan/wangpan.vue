@@ -11,7 +11,7 @@
             </div>
             <!-- 文件夹 -->
             <div class="toc-section file-section">
-                <ul class="qiyewangpan">
+                <ul class="qiyewangpan" @click="all">
                     <li>
                         <router-link :to="wList[0].url" class="txt" :class="{cur : $route.path.indexOf(wList[0].url) != -1}">
                             <i class="iconfont jiantou" :class="wList[0].icon" @click="isshow = !isshow"></i>
@@ -19,10 +19,22 @@
                             {{wList[0].title}}
                         </router-link>
                         <ul class="ng-scope" :class="!isshow ? 'show' : ''">
-                            <li v-for="(item,index) of list2">
-                                <router-link :to="item.url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
-                                    <i class="iconfont" :class="item.icon"></i>
-                                    {{item.title}}
+                            <li @click="ziliao">
+                                <router-link :to="list2[0].url" class="txt" :class="{cur : $route.path.indexOf(list2[0].url) != -1}">
+                                    <i class="iconfont" :class="list2[0].icon"></i>
+                                    {{list2[0].title}}
+                                </router-link>
+                            </li>
+                            <li @click="zhaopian">
+                                <router-link :to="list2[1].url" class="txt" :class="{cur : $route.path.indexOf(list2[1].url) != -1}">
+                                    <i class="iconfont" :class="list2[1].icon"></i>
+                                    {{list2[1].title}}
+                                </router-link>
+                            </li>
+                            <li @click="zhidu">
+                                <router-link :to="list2[2].url" class="txt" :class="{cur : $route.path.indexOf(list2[2].url) != -1}">
+                                    <i class="iconfont" :class="list2[2].icon"></i>
+                                    {{list2[2].title}}
                                 </router-link>
                             </li>
                         </ul>
@@ -139,8 +151,38 @@
         methods:{
             checkItem(index){
                 this.active = index;
-            }
-        }
+            },
+            all(){
+              this.state = 'all'  
+            },
+            ziliao(){
+              this.state = 'ziliao'  
+            },
+            zhaopian(){
+              this.state = 'zhaopian'  
+            },
+            zhidu(){
+              this.state = 'zhidu'  
+            },
+        },
+        computed:{
+            list(){
+                // 此处向vuex中state拿取数据
+                if(this.state == "all"){
+					return this.$store.state.wangpan
+				}else if(this.state == "ziliao"){
+					return this.$store.getters.ziliao
+				}else if(this.state == "zhaopian"){
+					return this.$store.getters.zhaopian
+				}else if(this.state == "zhidu"){
+					return this.$store.getters.zhidu
+				}
+            },
+        },
+        created(){
+            // 发送action异步请求数据
+            this.$store.dispatch('XGETALL');
+        },
     }
 </script>
 

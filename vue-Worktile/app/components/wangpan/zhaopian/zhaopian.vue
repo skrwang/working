@@ -55,13 +55,14 @@
                     </p>
                 </div>
                 <ul>
-                    <li class="file-item" v-for="item of list">
+                    <li class="file-item" v-for="item of list" v-if="item.judge == 'zhaopian'">
                         <div class="file-name">
                             <i class="iconfont" :class="item.icon"></i>
                             {{item.title}}
                         </div>
                         <div class="file-size">
-                            <span>{{bytesToSize(item.size)}}</span>
+                            <span v-if="item.size == '-'">{{item.size}}</span>
+                            <span v-else="item.size != '-'">{{bytesToSize(item.size)}}</span>
                         </div>
                         <div class="file-updated-by">
                             <span class="portrait">SK</span>
@@ -69,6 +70,11 @@
                         </div>
                         <div class="file-time">
                             {{item.time}}
+                            <div class="file-action">
+                                <i class="iconfont icon-unie122"></i>
+                                &nbsp;&nbsp;
+                                <i class="iconfont icon-transverse"></i>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -133,12 +139,11 @@
                 //总大小
                 this.size = this.size + file.size;
                 //判断是否为图片文件
-                var shijian = file.lastModifiedDate.getTime();
-                var nian = file.lastModifiedDate;
-                var m = nian.getMonth()+1;
-                var d = nian.getDate();
-                var h = Math.floor(shijian/1000/60/60%24);
-                var s = Math.floor(shijian/1000/60%60);
+                var time = new Date();
+                var m = time.getMonth()+1;
+                var d = time.getDate();
+                var h = time.getHours();
+                var s = time.getMinutes();
                 this.imgList = {
                     title:file.name,
                     icon:"icon-fq_changxieguanli",
@@ -149,11 +154,11 @@
                 }
                 if (file.type.indexOf("image") == -1) {
                     
-                    this.$store.dispatch("ADD",this.imgList);
+                    this.$store.dispatch("XADD",this.imgList);
                 } else {
                     let reader = new FileReader();
                     reader.readAsDataURL(file);
-                    this.$store.dispatch("ADD",this.imgList);
+                    this.$store.dispatch("XADD",this.imgList);
                 }
             },
             fileDel(index) {
@@ -171,14 +176,21 @@
         computed:{
             list(){
                 // 此处向vuex中state拿取数据
-                if(this.state == 'all'){
-                    return this.$store.state.wangpan;
-                }
+                // 此处向vuex中state拿取数据
+                if(this.state == "all"){
+					return this.$store.state.wangpan
+				}else if(this.state == "ziliao"){
+					return this.$store.getters.ziliao
+				}else if(this.state == "zhaopian"){
+					return this.$store.getters.zhaopian
+				}else if(this.state == "zhidu"){
+					return this.$store.getters.zhidu
+				}
             },
         },
         created(){
             // 发送action异步请求数据
-            this.$store.dispatch('GETALL');
+            this.$store.dispatch('XGETALL');
         },
     }
 </script>
@@ -396,6 +408,23 @@
                     width: 170px;
                     cursor: pointer;
                 }
+                .file-action {
+                    width: 75px;
+                    text-align: right;
+                    visibility: visible;
+                    display: none;
+                    i {
+                        color: #22d7bb;
+                    }
+                }
+                
+            }
+            .file-item:hover {
+                box-shadow: 0 0 8px 2px #eee;
+                background: 0 0;
+            }
+            .file-item:hover .file-action {
+                display: inline-block;
             }
         }
     }

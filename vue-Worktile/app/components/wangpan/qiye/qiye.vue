@@ -69,8 +69,9 @@
                         <div class="file-time">
                             {{item.time}}
                             <div class="file-action">
-                                <i class="iconfont icon-star"></i>
-                                <i class="iconfont icon-star"></i>
+                                <i class="iconfont icon-unie122"></i>
+                                &nbsp;&nbsp;
+                                <i class="iconfont icon-transverse"></i>
                             </div>
                         </div>
                         
@@ -92,6 +93,7 @@
             }
         },
         methods:{
+            
             fileClick(){
                 document.getElementById('upload_file').click();
             },
@@ -132,12 +134,11 @@
                 //总大小
                 this.size = this.size + file.size;
                 //判断是否为图片文件
-                var shijian = file.lastModifiedDate.getTime();
-                var nian = file.lastModifiedDate;
-                var m = nian.getMonth()+1;
-                var d = nian.getDate();
-                var h = Math.floor(shijian/1000/60/60%24);
-                var s = Math.floor(shijian/1000/60%60);
+                var time = new Date();
+                var m = time.getMonth()+1;
+                var d = time.getDate();
+                var h = time.getHours();
+                var s = time.getMinutes();
                 this.imgList = {
                     title:file.name,
                     icon:"icon-fq_changxieguanli",
