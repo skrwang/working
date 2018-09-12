@@ -4,8 +4,7 @@
             <div class="header">
                 <span class="title">通讯录</span>
                 <div class="dropdown">
-                    <a href="javascript:;" class="btn iconfont icon-yaoqingchengyuan
-">
+                    <a href="javascript:;" class="btn iconfont icon-yaoqingchengyuan" @click="bh = true">
                     </a>
                 </div>
             </div>
@@ -140,6 +139,76 @@
         <div class="zs">
             <router-view></router-view>
         </div>
+
+
+        <!-- 添加成员 -->
+        <div class="modal" :class="{out:!bh}">
+            
+        </div>
+        <div class="zz" :class="{out:!bh}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header ng-scope">
+                        <h3 class="modal-title ng-scope">添加成员</h3>
+                        <a href="javascript:;" class="modal-close" @click="bh = false">
+                            <i class="iconfont icon-close"></i>
+                        </a>
+                    </div>
+                    <div class="modal-body ng-scope">
+                        <div class="frame min-h-600 form-horizontal ng-scope">
+                            <div class="thy-nav nav-thirdly justify-content-center ng-scope">
+                                <a href="javascript:;" class="nav-link ng-scope active">快速添加成员</a>
+                                <a href="javascript:;" class="nav-link ng-scope">通过邮件邀请</a>
+                                <a href="javascript:;" class="nav-link ng-scope">通过链接注册</a>
+                            </div>
+                            <div class="ng-scope">
+                                <p class="p-20 ng-scope">快速添加成员帐号，设置默认密码，首次登录时需要修改默认密码。</p>
+                                <form action="">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label label-required ng-scope">姓名</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="请输入对方真实姓名">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label label-required ng-scope">登录用户名</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="请输入对方用户名，如Lily">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label label-required ng-scope">邮箱或者手机号</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" placeholder="输入邮箱地址或者手机号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label label-required ng-scope">默认密码</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" placeholder="输入默认密码">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label label-required ng-scope">员工编号</label>
+                                        <div class="col-sm-9">
+                                            <input type="password" class="form-control" placeholder="输入员工编号">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6 offset-sm-3">
+                                            <button class="tjcy">添加成员</button>
+                                        </div>
+                                        <div class="col-sm-3 text-right p-t-10">
+                                            <a href="javascript:;" style="color: #22d7bb;">批量导入</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -151,6 +220,7 @@ export default {
             jt:true,
             jt1:true,
             jt2:true,
+            bh:false,
             qz:[
                 {
                     title:"企业公告",
@@ -574,5 +644,191 @@ export default {
         color: #666;
         font-size: 14px;
         text-decoration: none;
+    }
+    /* 保护层 */
+    .modal-dialog{
+        position: relative;
+        width: auto;
+        margin: .5rem;
+        pointer-events: none;
+        max-width: 660px;
+        margin: 3.75rem auto;
+    }
+    .modal-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 0 solid rgba(0,0,0,.2);
+        border-radius: .3rem;
+        outline: 0;
+        box-shadow: 0 0 1.5rem rgba(0,0,0,.5);
+    }
+    .modal.out,.zz.out{
+        display: none;
+    }
+    .modal{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        outline: 0;
+        display: block;
+        opacity: 0.6;
+        overflow-x: hidden;
+        overflow-y: auto;
+        background: #1d1c1c;
+    }
+    .zz{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        outline: 0;
+        z-index: 9999;
+    }
+    .model.out{
+        display: none;
+    }
+    .modal-header {
+        padding: 0 1.875rem;
+        align-items: center;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        border-top-left-radius: .3rem;
+        border-top-right-radius: .3rem;
+    }
+    .modal-close {
+        color: #ddd;
+        line-height: 50px;
+    }
+    .modal-header h3 {
+        font-size: 1rem;
+        font-weight: 500;
+        margin-bottom: 0;
+        line-height: 1.5;
+    }
+    .modal-body {
+        position: relative;
+        flex: 1 1 auto;
+        padding: 1.25rem 1.875rem 1.875rem;
+    }
+    .thy-nav {
+        flex-wrap: wrap;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        display: flex;
+        justify-content: center!important;
+    }
+    .nav-link {
+        display: block;
+        transform: translateY(1px);
+        text-align: center;
+        padding: .532rem 0;
+        margin-right: 40px;
+        position: relative;
+        border-bottom: none;
+        color: #888;
+    }
+    .nav-link.active{
+        color: #22d7bb;
+    }
+    .p-20 {
+        padding: 20px!important;
+    }
+    .form-group {
+        margin-right: -15px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -15px;
+        margin-bottom: 1rem;
+    }
+    .label-required::before {
+        content: '*';
+        color: #ff5b57;
+        margin-right: 3px;
+        position: relative;
+        top: 3px;
+    }
+    .control-label {
+        padding-right: 0;
+        padding-left: 0;
+        color: #888;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: right;
+        margin-bottom: 0;
+        padding-top: 6px;
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+    .col-sm-9 {
+        flex: 0 0 75%;
+        max-width: 70%;
+        padding-left: 20px;
+    }
+    .form-control {
+        display: block;
+        width: 91%;
+        line-height: 1.5;
+        color: #333;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #eee;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        padding: .469rem .875rem;
+        font-size: .875rem;
+    }
+    .form-control:focus, .form-control:not(:disabled):hover {
+        border-color: #22d7bb;
+    }
+    .offset-sm-3 {
+        margin-left: 25%;
+        flex: 0 0 50%;
+        max-width: 50%;
+        position: relative;
+        width: 100%;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .p-t-10 {
+        padding-top: 10px!important;
+    }
+    .text-right {
+        text-align: right!important;
+    }
+    .tjcy{
+        display: inline-block;
+        white-space: nowrap;
+        vertical-align: middle;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: .469rem 26px;
+        font-size: .875rem;
+        line-height: 1.5;
+        min-width: 106px;
+        border-radius: 1.25rem;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        color: #fff;
+        background-color: #22d7bb;
+        border-color: #22d7bb;
+    }
+    .tjcy:hover {
+        box-shadow: 0 2px 5px 1px rgba(34,215,187,.6);
     }
 </style>
