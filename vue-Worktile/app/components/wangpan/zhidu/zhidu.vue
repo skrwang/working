@@ -4,7 +4,9 @@
             <div class="qiyeL">
                 <a href="javascript:">
                     <i class="iconfont icon-weibiaoti5"></i>
-                    企业网盘
+                    <router-link :to="qiye.url">企业网盘</router-link>
+                    <i class="iconfont icon-jiantou2"></i>
+                    公司制度
                     <i class="iconfont icon-jiantouarrow483"></i>
                 </a>
             </div>
@@ -53,14 +55,13 @@
                     </p>
                 </div>
                 <ul>
-                    <li class="file-item" v-for="(item,index) of list" :class="{cur : file == item.index}">
+                    <li class="file-item" v-for="item of list">
                         <div class="file-name">
                             <i class="iconfont" :class="item.icon"></i>
                             {{item.title}}
                         </div>
                         <div class="file-size">
-                            <span v-if="item.size == '-'">{{item.size}}</span>
-                            <span v-else="item.size != '-'">{{bytesToSize(item.size)}}</span>
+                            <span>{{bytesToSize(item.size)}}</span>
                         </div>
                         <div class="file-updated-by">
                             <span class="portrait">SK</span>
@@ -68,12 +69,7 @@
                         </div>
                         <div class="file-time">
                             {{item.time}}
-                            <div class="file-action">
-                                <i class="iconfont icon-star"></i>
-                                <i class="iconfont icon-star"></i>
-                            </div>
                         </div>
-                        
                     </li>
                 </ul>
             </div>
@@ -88,7 +84,12 @@
                 state:'all',
                 shangchuan:true,
                 imgList:{},
-                file:-1,
+                qiye:{
+                    icon:"icon-jiantou",
+                    wangpan:"icon-weibiaoti5",
+                    title:"企业网盘",
+                    url:"/wangpan/qiye/"
+                },
             }
         },
         methods:{
@@ -144,7 +145,7 @@
                     size:file.size,
                     updated:"skrwang",
                     time:m + '月' + d + '日' + h + ":"+s,
-                    judge:"all"
+                    judge:"zhidu"
                 }
                 if (file.type.indexOf("image") == -1) {
                     
@@ -170,15 +171,9 @@
         computed:{
             list(){
                 // 此处向vuex中state拿取数据
-                if(this.state == "all"){
-					return this.$store.state.wangpan
-				}else if(this.state == "ziliao"){
-					return this.$store.getters.ziliao
-				}else if(this.state == "zhaopian"){
-					return this.$store.getters.zhaopian
-				}else if(this.state == "zhidu"){
-					return this.$store.getters.zhidu
-				}
+                if(this.state == 'all'){
+                    return this.$store.state.wangpan;
+                }
             },
         },
         created(){
@@ -372,9 +367,7 @@
             background: #fdfdfd;
             font-size: 14px;
             height: 100%;
-            .cur {
-                background: #22d7bb;
-            }
+
             .file-list-header,.file-item {
                 line-height: 27px;
                 color: #666;
@@ -382,7 +375,6 @@
                 flex-direction: row;    
                 position: relative;
                 padding: 14px 35px;
-                border-bottom: 1px solid #eee;
                 .file-name{
                     -webkit-box-flex: 1;
                     -ms-flex: 1 1 0px;
@@ -404,22 +396,6 @@
                     width: 170px;
                     cursor: pointer;
                 }
-                .file-action {
-                    width: 75px;
-                    text-align: right;
-                    visibility: visible;
-                    display: none;
-                    i {
-                        color: #22d7bb;
-                    }
-                }
-            }
-            .file-item:hover {
-                box-shadow: 0 0 8px 2px #eee;
-                background: 0 0;
-            }
-            .file-item:hover .file-action {
-                display: inline-block;
             }
         }
     }
