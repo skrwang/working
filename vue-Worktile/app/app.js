@@ -566,18 +566,18 @@ const store =  new Vuex.Store({
   state:{
     count:1,
     wangpan:[],
-    xiaoxi:[],
+    corporator:[]
   },
   mutations:{
     GETALL(state,payload){
       state.wangpan = payload;
     },
-    FADD(state,payload){
-      state.xiaoxi.push(payload);
+    CGETALL(state,payload){
+      state.corporator = payload;
     },
-    FGETALL(state,payload){
-      state.xiaoxi = payload;
-    },
+    CADD(state,payload){
+      state.corporator.push(payload);
+    }
   },
   actions:{
     async GETALL(context,payload){
@@ -585,14 +585,15 @@ const store =  new Vuex.Store({
       var data = await fetch('/XCC/').then(res => res.json());
       context.commit('GETALL',data);
     },
-    async FGETALL(context,payload){
+    async CGETALL(context,payload){
       // 请求数据
-      var data = await fetch('/FXY/').then(res => res.json());
-      context.commit('FGETALL',data);
+      var data = await fetch('/corporator/').then(res => res.json());
+      console.log(data,'woshidata');
+      context.commit('CGETALL',data);
     },
-    async FADD({commit},payload){
+    async CADD({commit},payload){
       // 上传数据
-      var data = await fetch('FXY/',{
+      var data = await fetch('/corporator/',{
           "method":"POST",
           "headers":{
               "Content-Type":"application/json"
@@ -600,7 +601,7 @@ const store =  new Vuex.Store({
           "body":JSON.stringify(payload)
       }).then(res => res.json());
 
-      commit('FADD',data);
+      commit('CADD',data);
   }
   }
 })

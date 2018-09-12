@@ -25,12 +25,37 @@
       "time": "9月11日14:35"
     }
   ],
-  "FXY": [
+  "corporator": [
     {
-      "title": "asd\n",
-      "id": "wcfucpn5",
-      "time": "22:3"
+      "name": "skrwang",
+      "id": "1315dsfsdf",
+      "phone": "18335651552",
+      "title": "S",
+      "color": "rgb(44, 204, 218)"
     },
+    {
+      "name": "刑聪聪",
+      "id": "9896sdfegrv",
+      "phone": "18235950405",
+      "title": "X",
+      "color": "rgb(153, 215, 90)"
+    },
+    {
+      "name": "skrma",
+      "id": "c6117ln2",
+      "color": "rgb(158,75,95)",
+      "phone": "3856400",
+      "title": "S"
+    },
+    {
+      "name": "anpengyu",
+      "id": "drsivxs2",
+      "color": "rgb(3,134,89)",
+      "phone": "1266626262",
+      "title": "A"
+    }
+  ],
+  "FXY":[
     {
       "title": "ad\n",
       "id": "dq4p5p4y",
