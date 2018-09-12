@@ -459,12 +459,19 @@ const router = new VueRouter({
 const store =  new Vuex.Store({
   state:{
     count:1,
-    wangpan:[]
+    wangpan:[],
+    corporator:[]
   },
   mutations:{
     GETALL(state,payload){
       state.wangpan = payload;
     },
+    CGETALL(state,payload){
+      state.corporator = payload;
+    },
+    CADD(state,payload){
+      state.corporator.push(payload);
+    }
   },
   actions:{
     async GETALL(context,payload){
@@ -472,6 +479,24 @@ const store =  new Vuex.Store({
       var data = await fetch('/XCC/').then(res => res.json());
       context.commit('GETALL',data);
     },
+    async CGETALL(context,payload){
+      // 请求数据
+      var data = await fetch('/corporator/').then(res => res.json());
+      console.log(data,'woshidata');
+      context.commit('CGETALL',data);
+    },
+    async CADD({commit},payload){
+      // 上传数据
+      var data = await fetch('/corporator/',{
+          "method":"POST",
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+
+      commit('CADD',data);
+  }
   }
 })
 

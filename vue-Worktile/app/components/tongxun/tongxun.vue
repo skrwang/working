@@ -99,6 +99,27 @@
                         </ul>
                     </div>
                     <!-- 联系人列表 -->
+                    <div class="contact-list-warpper">
+                        <ul class="ng-scope" v-for="item of ps">
+                            <li class="group-char">{{item}}</li>
+                            <li class="lc-item--no-underline" v-for="item of peop(item)">
+                                <a href="javascript:;" class="contact-list-item">
+                                    <div class="lc-avatar">
+                                        <div class="lc-avatar-24">
+                                            <span class="lc-avatar-def ng-scope" :style="{background:item.color}">
+                                                <div>{{item.title}}</div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <span class="name">{{item.name}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+
 
                 </div>
                 <div class="department-list" v-else="filter">
@@ -163,7 +184,7 @@
                             </div>
                             <div class="ng-scope">
                                 <p class="p-20 ng-scope">快速添加成员帐号，设置默认密码，首次登录时需要修改默认密码。</p>
-                                <form action="">
+                                <form action="" ref="form">
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label label-required ng-scope">姓名</label>
                                         <div class="col-sm-9">
@@ -173,13 +194,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label label-required ng-scope">登录用户名</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="请输入对方用户名，如Lily">
+                                            <input type="text" class="form-control" placeholder="请输入对方用户名，如Lily" ref="name">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label label-required ng-scope">邮箱或者手机号</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" placeholder="输入邮箱地址或者手机号">
+                                            <input type="text" class="form-control" placeholder="输入邮箱地址或者手机号" ref="phone">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -196,7 +217,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 offset-sm-3">
-                                            <button class="tjcy">添加成员</button>
+                                            <button class="tjcy" @click="addPeople">添加成员</button>
                                         </div>
                                         <div class="col-sm-3 text-right p-t-10">
                                             <a href="javascript:;" style="color: #22d7bb;">批量导入</a>
@@ -221,6 +242,7 @@ export default {
             jt1:true,
             jt2:true,
             bh:false,
+            upe:[],
             qz:[
                 {
                     title:"企业公告",
@@ -268,6 +290,60 @@ export default {
                     url:"/tongxun/wzy"
                 }
             ]
+        }
+    },
+    created() {
+        // 发送默认 GETALL
+        this.$store.dispatch("CGETALL")
+    },
+    computed:{
+        ps(){
+            var ar = [];
+            for(var i = 0; i < this.$store.state.corporator.length; i ++){
+                if(ar.join('').indexOf(this.$store.state.corporator[i].title) == -1){
+                    ar.push(this.$store.state.corporator[i].title);
+                }
+            }
+            console.log(ar);
+            return ar;
+        },
+        peop(){
+            return function(value) {
+                console.log(value,'aaaraaaaaaaaaa');
+                var arr = [];
+                for(var i = 0; i < this.$store.state.corporator.length; i ++ ){
+                    console.log(this.$store.state.corporator[i].title == value,this.$store.state.corporator[i].title,value)
+                    if(this.$store.state.corporator[i].title == value){
+                        arr.push(this.$store.state.corporator[i]);
+                    }
+                }
+                return arr;
+            } 
+        }
+    },
+    methods:{
+        addPeople(){
+            var id = '';
+            var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 200);
+            var b = Math.floor(Math.random() * 100);
+            var color = 'rgb('+r+','+g+','+b+')';
+            for(var i = 0; i < 8; i++) {
+                //~~ 相当于parseInt
+                id+= str[~~(Math.random() * str.length)]
+            }
+            var title = this.$refs.name.value.substr(0,1).toUpperCase();
+            // 发送add 新增命令
+            this.$store.dispatch("CADD",{
+                name:this.$refs.name.value,
+                id : id,
+                color : color,
+                phone : this.$refs.phone.value,
+                title:title
+            });
+            this.bh = false;
+            this.$refs.form.getElementsByTagName('input').value = "";
         }
     }
 }
@@ -830,5 +906,63 @@ export default {
     }
     .tjcy:hover {
         box-shadow: 0 2px 5px 1px rgba(34,215,187,.6);
+    }
+
+    /* 联系人列表 */
+    .contact-list-warpper ul li {
+        display: block;
+        margin-bottom: 2px;
+        padding: 0 20px;
+        border-right: 3px solid transparent;
+    }
+    .contact-list-warpper ul li.group-char {
+        margin: 3px 20px;
+        padding: 10px 0;
+        line-height: 1;
+        color: #888;
+        border-bottom: solid 1px #eee;
+        cursor: default;
+    }
+    .lc-item--no-underline {
+        border-bottom: 0;
+    }
+    .contact-list-warpper ul li .contact-list-item {
+        display: block;
+        line-height: 48px;
+        color: #666;
+        font-size: 14px;
+        text-decoration: none;
+    }
+    .contact-list-item .lc-avatar {
+        vertical-align: middle;
+        margin-right: 5px;
+    }
+    .lc-avatar .lc-avatar-def {
+        font-size: 12px;
+        text-align: center!important;
+        overflow: hidden;
+        zoom: 1;
+        vertical-align: middle;
+        color: #fff!important;
+        text-shadow: transparent 0 0 0;
+        padding: 0!important;
+    }
+    .lc-avatar-24 .lc-avatar-def, .lc-avatar-24 img {
+        display: block;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        border-radius: 24px;
+        position: relative;
+        top: 6px;
+    }
+    .contact-list-item .name {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 150px;
+        display: inline-block;
+        vertical-align: middle;
     }
 </style>
