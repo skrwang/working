@@ -11,18 +11,18 @@
             </div>
             <!-- 文件夹 -->
             <div class="toc-section file-section">
-                <ul class="qiyewangpan" :class="!isshow ? 'show' : ''">
+                <ul class="qiyewangpan">
                     <li>
-                        <router-link :to="wList[0].url" class="txt" :class="{cur : $route.name == wList[0].title}" >
+                        <router-link :to="wList[0].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
                             <i class="iconfont jiantou" :class="wList[0].icon" @click="isshow = !isshow"></i>
                             <i class="iconfont pan" :class="wList[0].wangpan"></i>
                             {{wList[0].title}}
                         </router-link>
-                        <ul class="ng-scope" :class="!isshow ? 'show' : '' ">
+                        <ul class="ng-scope" :class="!isshow ? 'show' : ''">
                             <li v-for="(item,index) of list2">
-                                <a href="javascript:" :class="{cur : !index }"> 
+                                <a href="javascript:" @click="checkItem(index)" :class="{cur : index == active}"> 
                                     <i class="iconfont" :class="item.icon"></i>
-                                    <span>{{item.title}}</span>
+                                    {{item.title}}
                                 </a>
                             </li>
                         </ul>
@@ -30,7 +30,7 @@
                 </ul>
                 <ul class="gerenwangpan">
                     <li>
-                        <router-link :to="wList[1].url" class="txt" :class="{cur : $route.name == wList[1].title}">
+                        <router-link :to="wList[1].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
                             <i class="iconfont jiantou" :class="wList[1].icon" @click="isshow = !isshow"></i>
                             <i class="iconfont pan" :class="wList[1].wangpan"></i>
                             {{wList[1].title}}
@@ -56,14 +56,14 @@
              </div>
              <!-- 与我共享 -->
              <div class="toc-section selectable">
-                 <router-link :to="wList[4].url" class="txt" :class="{cur : $route.name == wList[4].title}">
+                 <router-link :to="wList[4].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
                     <i class="iconfont jiantou" :class="wList[4].icon" @click="isshow = !isshow"></i>
                     {{wList[4].title}}
                 </router-link>
              </div>
              <!-- 回收站 -->
              <div class="toc-section selectable">
-                 <router-link :to="wList[5].url" class="txt" :class="{cur : $route.name == wList[5].title}">
+                 <router-link :to="wList[5].url" class="txt" :class="{cur : $route.path.indexOf(item.url) != -1}">
                     <i class="iconfont jiantou" :class="wList[5].icon" @click="isshow = !isshow"></i>
                     {{wList[5].title}}
                 </router-link>
@@ -80,6 +80,7 @@
         data(){
             return {
                 isshow:true,
+                active:-1,
                 wList:[
                     {
                         icon:"icon-jiantou",
@@ -130,6 +131,11 @@
                         icon:"icon-weibiaoti5"
                     }
                 ]
+            }
+        },
+        methods:{
+            checkItem(index){
+                this.active = index;
             }
         }
     }
@@ -194,20 +200,22 @@
         .toc-section {
             margin-bottom: 2px;
             width: 240px;
+            .qiyewangpan .pan {
+                color: rgb(34, 215, 187);
+            }
+            .gerenwangpan .pan {
+                color: rgb(249, 105, 170);
+            }
             ul li .cur {
                 color: #22d7bb;
+                background: rgb(231,249,246);
                 border-right: 4px solid #22d7bb;
             }
             ul li {
                 position: relative;
                 .ng-scope {
-                    position: absolute;
-                    top: 41px;
-                    left: 0;
                     width: 100%;
                     font-size: 14px;
-                    transition: all 0.2s;
-                    height: 0;
                     display: none;
                     a {
                         display: -webkit-box;
@@ -221,15 +229,28 @@
                         cursor: pointer;
                         color: #666;
                         transition: all .2s;
-                        padding-left: 40px !important;
+                        padding-left: 80px !important;
                         margin-bottom: 2px;
                         .iconfont {
-                            margin: 6px;
+                            margin-right: 5px;
                         }
+                    }
+                    a .cur {
+                        color: #22d7bb;
+                        background: rgb(231,249,246);
+                        border-right: 4px solid #22d7bb;
+                    }
+                    li:nth-child(1) a .iconfont{
+                        color: rgb(34, 215, 187);
+                    }
+                    li:nth-child(2) a .iconfont{
+                        color: rgb(112, 118, 250);
+                    }
+                    li:nth-child(3) a .iconfont{
+                        color: rgb(249, 105, 170);
                     }
                 }
                 .show{
-                    height: 200px;
                     display: block;
                 }
             }
@@ -271,84 +292,9 @@
             &:hover,.ng-scope a:hover{
                 box-shadow: 0 0 8px 2px #eee;
                 background: 0 0!important;
-                color: #333;
+                /* color: #333; */
             }
         }
-        /* .panList {
-            width: 240px;
-            list-style: none;
-            position: relative;
-            .ng-scope {
-                position: absolute;
-                left: 0;
-                top: 40px;
-                width: 100%;
-                li a{
-                    display: -webkit-box;
-                    display: flex;
-                    display: -ms-flexbox;
-                    display: -webkit-flex;
-                    -ms-flex-direction: row;
-                    flex-direction: row;
-                    padding: 8px 10px 8px 18px;
-                    line-height: 24px;
-                    cursor: pointer;
-                    color: #666;
-                    transition: all .2s;
-                    padding-left: 40px;
-                    margin-bottom: 2px;
-                }
-            }
-        }
-        .panList li .txt{
-            text-decoration: none;
-            color: #666;
-            cursor: pointer;
-            padding: 8px 10px 8px 18px;
-            line-height: 24px;
-            transition: all .2s;
-            display: -webkit-box;
-            display: flex;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            -ms-flex-direction: row;
-            flex-direction: row;
-            font-size: 14px;
-            position: relative;
-        }
-        .panList li .txt .jiantou {
-            padding-left: 20px;
-            margin-right: 6px;
-        }
-        .panList li .txt:hover,
-        .panList .ng-scope li a:hover{
-            box-shadow: 0 0 8px 2px #eee;
-            background: 0 0!important;
-            color: #333;
-        }
-        .panList li .cur{
-            color: #22d7bb;
-            border-right: 4px solid #22d7bb;
-        }
-        .panList li:nth-child(1) .txt .pan {
-            color: rgb(34, 215, 187);
-        }
-        .panList li:nth-child(2) .txt .pan {
-            color: rgb(249, 105, 170);
-        }
-        .panList li .txt .pan {
-            margin-right: 4px;
-        }
-        .panList li .txt .tianjia {
-            position: absolute;
-            top: 8px;
-            right: 10px;
-            display: none;
-            transition: all .2s;
-        }
-        .panList li:hover .txt .tianjia {
-            display: block;
-        } */
     }
     .zs {
         float: left;

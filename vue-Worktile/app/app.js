@@ -20,28 +20,28 @@ const r = [
   {
     path:'/xiaoxi/',
     component:xiaoxi.default,
-    name:'消息',
+    // name:'消息',
     children:[
       //配置孙子路由
       {
         path:'/xiaoxi/qygg/',
         component:require('./components/xiaoxi/qygg/qygg.vue').default,
-        name:"企业公告",
+        // name:"企业公告",
         children:[
           {
             path:'/xiaoxi/qygg/xx/',
             component:require('./components/xiaoxi/qygg/xx/xx.vue').default,
-            name:'消息'
+            // name:'消息'
           },
           {
             path:'/xiaoxi/qygg/file',
             component:require('./components/xiaoxi/qygg/file/file.vue').default,
-            name:'文件'
+            // name:'文件'
           },
           {
             path:'/xiaoxi/qygg/gdxx',
             component:require('./components/xiaoxi/qygg/gdxx/gdxx.vue').default,
-            name:'固定消息'
+            // name:'固定消息'
           },
           {
             //如果用户随便输入地址，转到首页
@@ -53,22 +53,110 @@ const r = [
       {
         path:'/xiaoxi/xtjqr',
         component:require('./components/xiaoxi/xtjqr/xtjqr.vue').default,
-        name:"小特机器人"
+        // name:"小特机器人",
+        children:[
+          {
+            path:'/xiaoxi/xtjqr/xx/',
+            component:require('./components/xiaoxi/xtjqr/xx/xx.vue').default,
+            // name:'消息'
+          },
+          {
+            path:'/xiaoxi/xtjqr/file',
+            component:require('./components/xiaoxi/xtjqr/file/file.vue').default,
+            // name:'文件'
+          },
+          {
+            path:'/xiaoxi/xtjqr/gdxx',
+            component:require('./components/xiaoxi/xtjqr/gdxx/gdxx.vue').default,
+            // name:'固定消息'
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path:'*',
+            redirect:'/xiaoxi/xtjqr/xx/'
+          }
+        ]
       },
       {
         path:'/xiaoxi/rczs',
         component:require('./components/xiaoxi/rczs/rczs.vue').default,
-        name:"日程助手"
+        // name:"日程助手",
+        children:[
+          {
+            path:'/xiaoxi/rczs/wd/',
+            component:require('./components/xiaoxi/rczs/wd/wd.vue').default,
+            // name:'未读'
+          },
+          {
+            path:'/xiaoxi/rczs/yd',
+            component:require('./components/xiaoxi/rczs/yd/yd.vue').default,
+            // name:'已读'
+          },
+          {
+            path:'/xiaoxi/rczs/dcl',
+            component:require('./components/xiaoxi/rczs/dcl/dcl.vue').default,
+            // name:'待处理'
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path:'*',
+            redirect:'/xiaoxi/rczs/wd/'
+          }
+        ]
       },
       {
-        path:'/xiaoxi/rczs',
-        component:require('./components/xiaoxi/rczs/rczs.vue').default,
-        name:"网盘助手"
+        path:'/xiaoxi/wpzs',
+        component:require('./components/xiaoxi/wpzs/wpzs.vue').default,
+        // name:"网盘助手",
+        children:[
+          {
+            path:'/xiaoxi/wpzs/wd/',
+            component:require('./components/xiaoxi/wpzs/wd/wd.vue').default,
+            // name:'未读'
+          },
+          {
+            path:'/xiaoxi/wpzs/yd',
+            component:require('./components/xiaoxi/wpzs/yd/yd.vue').default,
+            // name:'已读'
+          },
+          {
+            path:'/xiaoxi/wpzs/dcl',
+            component:require('./components/xiaoxi/wpzs/dcl/dcl.vue').default,
+            // name:'待处理'
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path:'*',
+            redirect:'/xiaoxi/wpzs/wd/'
+          }
+        ]
       },
       {
-        path:'/xiaoxi/rczs',
-        component:require('./components/xiaoxi/rczs/rczs.vue').default,
-        name:"项目助手"
+        path:'/xiaoxi/xmzs',
+        component:require('./components/xiaoxi/xmzs/xmzs.vue').default,
+        // name:"项目助手",
+        children:[
+          {
+            path:'/xiaoxi/xmzs/wd/',
+            component:require('./components/xiaoxi/xmzs/wd/wd.vue').default,
+            // name:'未读'
+          },
+          {
+            path:'/xiaoxi/xmzs/yd',
+            component:require('./components/xiaoxi/xmzs/yd/yd.vue').default,
+            // name:'已读'
+          },
+          {
+            path:'/xiaoxi/xmzs/dcl',
+            component:require('./components/xiaoxi/xmzs/dcl/dcl.vue').default,
+            // name:'待处理'
+          },
+          {
+            //如果用户随便输入地址，转到首页
+            path:'*',
+            redirect:'/xiaoxi/xmzs/wd/'
+          }
+        ]
       },
       {
         //如果用户随便输入地址，转到首页
@@ -82,6 +170,33 @@ const r = [
     component:xiangmu.default,
     name:'项目',
     children: [
+      {
+        path:'/xiangmu/wode',
+        name:'我的项目',
+        component: require('./components/xiangmu/wode/wode.vue').default,
+        children:[
+          {
+            path:'/xiangmu/wode/fuze',
+            name:'我负责的',
+            component: require('./components/xiangmu/wode/fuze/fuze.vue').default,
+          },
+          {
+            path:'/xiangmu/wode/fenpei',
+            name:'我分配的',
+            component: require('./components/xiangmu/wode/fenpei/fenpei.vue').default,
+          },
+          {
+            path:'/xiangmu/wode/canyu',
+            name:'我参与的',
+            component: require('./components/xiangmu/wode/canyu/canyu.vue').default,
+          },
+          {
+            path:'/xiangmu/wode/chuangjian',
+            name:'我创建的',
+            component: require('./components/xiangmu/wode/chuangjian/chuangjian.vue').default,
+          }
+        ]
+      },
       {
         path: '/xiangmu/peizhi',
         name: '配置中心',
@@ -194,6 +309,13 @@ const r = [
             path: '/xiangmu/peizhi/quanju',
             name: '全局',
             component: require('./components/xiangmu/peizhi/quanju/quanju.vue').default,
+            children:[
+              {
+                path: '/xiangmu/peizhi/quanju/gongzuo',
+                name: '工作组件',
+                component: require('./components/xiangmu/peizhi/quanju/gongzuo/gongzuo.vue').default,
+              }
+            ]
           }
         ]
       },
@@ -201,6 +323,11 @@ const r = [
         path: '/xiangmu/huishou',
         name: '回收站',
         component: require('./components/xiangmu/huishou/huishou.vue').default,
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path: '*',
+        redirect: '/xiangmu/wode/'
       }
     ]
   },

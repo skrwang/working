@@ -22,7 +22,7 @@
                     <button class="btn btn_primary" @click="fileClick">
                         <i class="iconfont icon-shangchuan"></i>
                         上传文件
-                        <input type="file" id="upload_file">
+                        <input type="file" id="upload_file" @change="fileChange($event)">
                     </button>
                     <button class="btn btn_toggle">
                         <i class="iconfont icon-jiantouarrow486"></i>
@@ -42,6 +42,7 @@
                 </div>
                 <ul>
                     <li class="file-item" v-for="item of list">
+                        <!-- {{list}} -->
                         <div class="file-name">
                             <i class="iconfont" :class="item.icon"></i>
                             {{item.title}}
@@ -73,7 +74,118 @@
         methods:{
             fileClick(){
                 document.getElementById('upload_file').click();
-            }
+            },
+            add() {
+				// 如果为空 就 return 掉 什么都不做
+				if(this.txt == '') return
+				// 随机一个8位id
+ 				var id = '';
+				var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+				for(var i = 0; i < 8; i++) {
+					//~~ 相当于parseInt
+					id+= str[~~(Math.random() * str.length)]
+				}
+				// 发送add 新增命令
+				this.$store.dispatch("ADD",{
+					title:this.txt,
+					id : id,
+					done : false,
+					time:new Date().getTime()
+				});
+				// 点击后 清空 文本框
+				this.txt = ''
+            },
+            fileChange(el) {
+              if (!el.target.files[0].size) return;
+              this.fileList(el.target);
+              console.log(el.target);
+              el.target.value = ''
+          },
+          fileList(fileList) {
+              let files = fileList.files;
+              console.log(files);
+              for (let i = 0; i < files.length; i++) {
+                  //判断是否为文件夹
+                  if (files[i].type != '') {
+                      this.fileAdd(files[i]);
+                  } else {
+                      //文件夹处理
+                      this.folders(fileList.items[i]);
+                  }
+              }
+          },
+          //文件夹处理
+          folders(files) {
+              let _this = this;
+              //判断是否为原生file
+              if (files.kind) {
+                  files = files.webkitGetAsEntry();
+              }
+              files.createReader().readEntries(function (file) {
+                  for (let i = 0; i < file.length; i++) {
+                      if (file[i].isFile) {
+                          _this.foldersAdd(file[i]);
+                      } else {
+                          _this.folders(file[i]);
+                      }
+                  }
+              })
+          },
+          foldersAdd(entry) {
+              let _this = this;
+              entry.file(function (file) {
+                  _this.fileAdd(file)
+              })
+          },
+          fileAdd(file) {
+              //总大小
+              this.size = this.size + file.size;
+              //判断是否为图片文件
+              console.log(file);
+              if (file.type.indexOf('image') == -1) {
+                  file.src = 'wenjian.png';
+                  this.$store.dispatch("ADD",{
+                        icon: "icon-weibiaoti5",
+                        size: "-",
+                        title: "资料共享",
+                        updated: "skrwang",
+                        time: "9月11日14:35"
+                  });
+                  console.log(file);
+              } else {
+                  let reader = new FileReader();
+                  reader.vue = this;
+                  reader.readAsDataURL(file);
+                    file.src = this.result;
+                    this.$store.dispatch("ADD",{
+                        file
+                    });
+              }
+          },
+          fileDel(index) {
+              this.size = this.size - this.list[index].file.size;//总大小
+              this.list.splice(index, 1);
+          },
+          bytesToSize(bytes) {
+              if (bytes === 0) return '0 B';
+              let k = 1000, // or 1024
+                  sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                  i = Math.floor(Math.log(bytes) / Math.log(k));
+              return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+          },
+          dragenter(el) {
+              el.stopPropagation();
+              el.preventDefault();
+          },
+          dragover(el) {
+              el.stopPropagation();
+              el.preventDefault();
+          },
+          drop(el) {
+              el.stopPropagation();
+              el.preventDefault();
+              this.fileList(el.dataTransfer);
+          }
         },
         computed:{
             list(){

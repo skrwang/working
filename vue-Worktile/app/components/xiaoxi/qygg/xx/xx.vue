@@ -20,20 +20,22 @@ export default {
 
 <style lang = 'scss' scoped>
     .box{
-        margin-top: 15px;
-        float: left;
+        margin: 13px;
+        width: 98%;
+        height: 84%;
         box-sizing: border-box;
-        width: 99%;
         background-color: #fdfdfd;
-        height: 581px;
     }
     .box .top{
         overflow:scroll; 
         width: 100%;
-        height: 411px;
+        padding: 20px 25px;
     }
     .box .bottom{
+        position: absolute;
+        bottom: 0;
         border-top: solid 1px #eee;
+        overflow:scroll; 
         height: 170px;
         width: 100%;
     }

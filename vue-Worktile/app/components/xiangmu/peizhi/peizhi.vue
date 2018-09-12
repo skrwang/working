@@ -3,7 +3,7 @@
         <div class="header">
             <span><i class="iconfont icon-gongxiangtubiaozhuangtaileicaozuolei34"></i> 配置中心</span>
             <ul>
-               <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur : item.title==$route.name}">{{item.title}}</li>
+               <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur : $route.name.indexOf(item.title) != -1}">{{item.title}}</li>
             </ul>
         </div>
         <div class="body">
