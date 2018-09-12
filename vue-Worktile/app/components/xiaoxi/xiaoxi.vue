@@ -10,8 +10,8 @@
                 <input type="text" placeholder="搜索成员、消息">
             </p>
             <ul>
-                <li v-for="item of vList" :class="{cur : $route.name == item.title}">
-                    <router-link :to='item.url' :class="{cur : $route.name == item.title}">
+                <li v-for="item of vList" :class="{cur : $route.path.indexOf(item.url) != -1}">
+                    <router-link :to='item.url' :class="{cur : $route.path.indexOf(item.url) != -1}">
                         <img :src="item.img">
                          {{item.title}}
                     </router-link>
@@ -36,22 +36,22 @@ export default {
                 },
                 {
                     title:'小特机器人',
-                    url:'/xiaoxi/xtjqr',
+                    url:'/xiaoxi/xtjqr/',
                     img:'app/components/xiaoxi/imgs/xtjqr.png'
                 },
                 {
                     title:'日程助手',
-                    url:'/xiaoxi/rczs',
+                    url:'/xiaoxi/rczs/',
                     img:'app/components/xiaoxi/imgs/rczs.png'
                 },
                 {
                     title:'网盘助手',
-                    url:'/xiaoxi/rczs',
+                    url:'/xiaoxi/wpzs/',
                     img:'app/components/xiaoxi/imgs/wpzs.png'
                 },
                 {
                     title:'项目助手',
-                    url:'/xiaoxi/rczs',
+                    url:'/xiaoxi/xmzs/',
                     img:'app/components/xiaoxi/imgs/xmzs.png'
                 }
             ]

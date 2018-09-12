@@ -1,11 +1,11 @@
 <template>
     <div class="box">
         <div class="top">
-            <div>123</div>
+            <div>qwe</div>
         </div>
         <div class="bottom">
             <div>
-                345
+                asd
             </div>
         </div>
     </div>

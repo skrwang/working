@@ -1,11 +1,8 @@
 <template>
     <div class="box">
-        <div class="top">
-            <span>固定消息</span>
-        </div>
         <div class="bottom">
             <img src="../../imgs/wjds.png">
-            <p>没有固定的消息!</p>
+            <p>没有未读消息!</p>
         </div>
     </div>
 </template>
@@ -24,22 +21,6 @@ export default {
         height: 84%;
         box-sizing: border-box;
         background-color: #fdfdfd;
-    }
-    .box .top{
-        padding: 10px 20px 0;
-        height: 30px;
-        line-height: 30px;
-        font-size: 14px;
-        box-sizing: border-box;
-        border-bottom: none;
-        span{
-            display: inline-block;
-            padding-left: 8px;
-            line-height: 1;
-            color: #333;
-            font-size: 14px;
-            border-left: solid 3px #22d7bb;
-        }
     }
     .box .bottom{
         margin-top: 180px;

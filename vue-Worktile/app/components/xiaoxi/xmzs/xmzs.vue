@@ -3,13 +3,12 @@
         <div class="header">
             <div class="head">
                 <span>
-                    <img src="../imgs/qygg.png">
-                    企业公告
+                    <img src="../imgs/xmzs.png">
+                    项目助手
                     <i class="iconfont icon-jiantouarrow483"></i>
-                    <b>用于全企业成员发布公告</b>
                 </span>
                 <span>
-                    <img src="../imgs/cy.png">
+                    <a href="#">全部标记为已读</a>
                     <img src="../imgs/sz.png">
                 </span>
             </div>
@@ -31,16 +30,16 @@ export default {
         return{
             DataLis:[
                 {
-                title:'消息',
-                url:'/xiaoxi/qygg/xx',
+                title:'未读',
+                url:'/xiaoxi/xmzs/wd',
                 },
                 {
-                title:'文件',
-                url:'/xiaoxi/qygg/file',
+                title:'已读',
+                url:'/xiaoxi/xmzs/yd',
                 },
                 {
-                title:'固定消息',
-                url:'/xiaoxi/qygg/gdxx',
+                title:'待处理',
+                url:'/xiaoxi/xmzs/dcl',
                 },
             ]
         }
@@ -81,21 +80,25 @@ export default {
     .head span:nth-child(2){
         float: right;
         margin-right: 20px;
+        a{
+            margin: 0 10px;
+            position: relative;
+            top: 2px;
+            color: #22d7bb;
+            font-size: 14px;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
     }
     .head span:nth-child(1) img{
         position: relative;
-        left: -2px;
-        top: -3px;
+        left: 0px;
+        top: -2px;
     }
     .head span:nth-child(2) img{
         margin: 0 10px;
         padding: 0 10px;
-    }
-    .head span:nth-child(1) b{
-        padding: 0 10px;
-        color: #aaa;
-        font-weight: normal;
-        font-size: 14px;
     }
     .head span img{
         vertical-align: middle;
