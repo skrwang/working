@@ -571,17 +571,14 @@ const store =  new Vuex.Store({
   state:{
     count:1,
     wangpan:[],
-<<<<<<< HEAD
     corporator:[],
     todos:[],
     apy:[],
     apy1:[],
     apy2:[],
     apy3:[],
-=======
     xiaoxi:[],
     corporator:[]
->>>>>>> e6b8c07493fba709daad508a346571d75397e76e
   },
   mutations:{
     XGETALL(state,payload){
@@ -733,7 +730,6 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
 
       commit('CADD',data);
-<<<<<<< HEAD
     },
     async YGETALL(context, payload) {
       //请求数据
@@ -865,10 +861,8 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
       commit("YU3ADD", data)
     },
-=======
     }
->>>>>>> e6b8c07493fba709daad508a346571d75397e76e
-  }
+  
 })
 
 
