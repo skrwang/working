@@ -3,7 +3,7 @@
         <div class='wdrc-nav'>
             <div class='title'>
                 <i class='iconfont icon-rili1'></i>
-                <span>我的日程</span>
+                <span>团队日程</span>
             </div>
             <div class='secondary-text'>
                <p class="jianting">
@@ -68,7 +68,7 @@
                         <div class='group button-bar'>
                            <span></span>
                            <button>确定</button>
-                           <a @@click='ads'>取消</a>
+                           <a @click='ads'>取消</a>
                       </div>
                       </form>
                   </div>
