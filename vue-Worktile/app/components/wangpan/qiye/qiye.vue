@@ -71,7 +71,38 @@
                             <div class="file-action">
                                 <i class="iconfont icon-unie122"></i>
                                 &nbsp;&nbsp;
-                                <i class="iconfont icon-transverse"></i>
+                                <i class="iconfont icon-transverse" @click="delShow(index)"></i>
+                                <div class="pop-menu" v-show="!delshow">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:">新建文件夹</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">设置权限</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="javascript:">公开链接</a>
+                                        </li> -->
+                                        <!-- <li>
+                                            <a href="javascript:">移动</a>
+                                        </li> -->
+                                        <li>
+                                            <a href="javascript:">复制</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">下载</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">重命名</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="javascript:">修改颜色</a>
+                                        </li> -->
+                                        <li @click="del(item.id)">
+                                            <a href="javascript:">删除</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         
@@ -90,10 +121,20 @@
                 shangchuan:true,
                 imgList:{},
                 file:-1,
+                delshow:true,
             }
         },
         methods:{
-            
+            delShow(index){
+                this.delshow = !this.delshow
+            },
+            // 删除
+			del(id){
+				// 只需要一个id就行了
+				this.$store.dispatch("XDEL",{
+					id : id
+				})
+			},
             fileClick(){
                 document.getElementById('upload_file').click();
             },
@@ -404,6 +445,43 @@
                 .file-time {
                     width: 170px;
                     cursor: pointer;
+                    position: relative;
+                    .pop-menu {
+                        padding: 5px 0;
+                        min-width: 203px;
+                        position: absolute;
+                        right: -36px;
+                        top: 20px;
+                        background: #fff;
+                        z-index: 9999;
+                        text-align: left;
+                        ul li{
+                            display: block;
+                            padding: 0;
+                            margin: 0 0 2px;
+                            cursor: pointer;
+                            -webkit-transition: background .2s;
+                            transition: background .2s;
+                            a {
+                                display: block;
+                                padding: 5px 18px;
+                                line-height: 30px;
+                                color: #666;
+                                text-decoration: none;
+                                -webkit-box-sizing: border-box;
+                                box-sizing: border-box;
+                                -webkit-transition: padding-left .2s;
+                                transition: padding-left .2s;
+                            }
+                            &:hover {
+                                box-shadow: 0 0 8px 2px #eee;
+                            }
+                            &:hover a {
+                                color: #333;
+                                padding-left: 26px;
+                            }
+                        }
+                    }
                 }
                 .file-action {
                     width: 75px;

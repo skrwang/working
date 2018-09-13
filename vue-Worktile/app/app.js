@@ -488,6 +488,11 @@ const store =  new Vuex.Store({
     XADD(state,payload){
       state.wangpan.push(payload);
     },
+    XDEL(state,payload){
+      state.wangpan = state.wangpan.filter(item => {
+          return item.id != payload.id;
+      })
+    },
     FADD(state,payload){
       state.xiaoxi.push(payload);
     },
@@ -518,6 +523,13 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
 
       commit('XADD',data);
+    },
+    async XDEL({commit},payload){
+      // 发送delete请求到json-server服务器。自动帮我们删除这条数据，操作data.json文件
+      var data = await fetch('/XCC/'+payload.id,{
+          "method":"DELETE"
+      }).then(res => res.json());
+      commit('XDEL',payload);
     },
     async FGETALL(context,payload){
       // 请求数据
