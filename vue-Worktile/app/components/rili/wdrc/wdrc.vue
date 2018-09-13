@@ -3,7 +3,7 @@
         <div class='wdrc-nav'>
         	<div class='title'>
         		<i class='iconfont icon-rili1'></i>
-        		<span>我的日程</span>
+        		<span>团队日程</span>
         	</div>
         	<div class='secondary-text'>
     		   <p class="jianting">
@@ -18,15 +18,15 @@
         		 	新建日历
         		</button>
         		 <div class='wd-group'>
-        		 	<button class='month'>月</button>
-        		 	<button class='week'>周</button>
-        		 	<button class='day'>日</button>
+               <button v-for='(item,index) of datewmd' :class='{cs: active == index}' @click='wek(index)'>
+                  {{item.m}}
+                </button>
         		 </div>
         	</div>
         </div>
-        <div class='flex-wrp' v-if='isxian'>
+        <div class='flex-wrp' v-show='isxian'>
             <transition name="fade">
-               <div class='flex-mt' v-if='isxian'>
+               <div class='flex-mt' v-show='isxian'>
                   <div class='model-header'>
                      <i @click='ads'></i>
                      <h3>新建日程</h3>
@@ -34,7 +34,7 @@
                   <div class='model-body'>
                       <form action="">
                         <div class='group input'>
-                              <input type="text" placeholder="日程安排，如下午2:00例会"> 
+                              <input type="text" v-model='titles'placeholder="日程安排，如下午2:00例会"> 
                         </div>
                         <div class='group rili'>
                             <label for="">日历</label>
@@ -45,11 +45,11 @@
                         <div class='group kaishi'>
                              <div class='ri-left'>
                                  <label for="">开始日期</label>
-                                  <input type="date">
+                                  <input type="date" v-model='starts'>
                              </div>
                              <div class='ri-right'>
                                  <label for="">结束日期</label>
-                                  <input type="date">
+                                  <input type="date" v-model="ends">
                              </div>
                         </div>
                         <div class='group quanxuan'>
@@ -111,7 +111,7 @@
                         </div>
                         <div class='group button-bar'>
                            <span></span>
-                           <button>确定</button>
+                           <button  @click="add">确定</button>
                            <a @click='ads'>取消</a>
                       </div>
                       </form>
@@ -119,7 +119,7 @@
                </div>
              </transition>
          </div>
-        <div class='wdrc-main'>
+        <div class='wdrc-main' v-show='active==0'>
         	<div class='calender'>
                 <table>
                     <thead>
@@ -134,7 +134,7 @@
                     <tbody>
                       <!-- index从0开始，i从1开始 -->
                        <tr v-for='(item,index) of calender.length /7'>
-                         <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].fullDay}}</td>
+                         <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].day}}</td>
                        </tr>
                     </tbody>
                 </table>
@@ -149,6 +149,72 @@
 	             </div>
              </div>
         </div>
+        <div class='wdrc-main' v-show='active==1'>
+          <div class='calender calsde'>
+                <table>
+                    <thead>
+                        <th>周日9/9</th>
+                        <th>周一9/10</th>
+                        <th>周二9/11</th>
+                        <th>周三9/12</th>
+                        <th>周四9/13</th>
+                        <th>周五9/14</th>
+                        <th>周六9/15</th>
+                        <tr class='ding'>
+                         <td>全天</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                    </thead>
+                    <hr>
+                    <tbody>
+                        <tr class='ding-main'>
+                          <td>12am时</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                       </tr>
+                       <tr v-for='i of 12' class='ding-main'>
+                         <td>{{i}}am时</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                        <tr v-for='i of 12' class='ding-main'>
+                         <td>{{i}}am时</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class='wdrc-main' v-show='active==2'>
+            <div class='calender'>
+              <div class='mhead'>周三 2018年9月12日</div>
+              <div class='nering'><ul>
+                <li><span>11:03</span><i>公司正式启用Worktile</i></li>
+              </ul></div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -161,34 +227,32 @@ export default {
             isxian:false,
             isShow1:false,
             active:0,
-            things:[
-                    {
-                        title:"这是一个事务",
-                        start:20180903,
-                        end:20180905
-                    },
-                    {
-                        title:"这是一个事务1",
-                        start:20180907,
-                        end:20180909
-                    },
-                    {
-                        title:"这是一个事务3",
-                        start:20180910,
-                        end:20180915
-                    }
-            ],
+            titles:'',
+            starts:'',
+            ends:'',
             tabs:[
                 {name:'团队'},
                 {name:'部门'}
-              ]
+              ],
+            datewmd:[
+             {m:'月'},
+             {m:'周'},
+             {m:'日'},
+            ]  ,
+            state:"all"
         }
     },
     computed:{
+       rilis(){
+          if(this.state == "all"){
+            console.log(this.$store.state.rili,"123333333333")
+            return this.$store.state.rili
+
+          }
+         },
         calender(){
               var arr=[];
-               
-                var nowMonthLength=new Date(this.year,this.month,0).getDate();
+                 var nowMonthLength=new Date(this.year,this.month,0).getDate();
                 var nowMonthFirstWeek=new Date(this.year,this.month-1).getDay();
                 var lastMonthLength=new Date(this.year,this.month-1,0).getDate();  
                 var pmonth = this.month == 1 ? 12 : this.month - 1;
@@ -245,12 +309,14 @@ export default {
                         }
                     }
                     //处理事务  things
-                    this.things.forEach(item => {
+                    console.log(this.rilis);
+                    this.rilis.forEach(item => {
                         //开始日期时间戳
-                        // console.log(item);
+                        console.log(item.start,item,"itemSTART");
                         var start=new Date(item.start.toString().substr(0,4),item.start.toString().substr(4,2)-1,item.start.toString().substr(6,2))
                         // console.log(start)
                         //结束时间的时间戳
+                        console.log(item.end,"itemend");
                         var end=new Date(item.end.toString().substr(0,4),item.end.toString().substr(4,2)-1,item.end.toString().substr(6,2))
                         // console.log(end)
                         //结束时间减去开始时间计算经历了几天
@@ -324,6 +390,10 @@ export default {
             return str.toUpperCase()
         }
     },
+    created() {
+    // 发送默认 GETALL
+       this.$store.dispatch("MJD")
+    },
     methods:{
         jian(){
             this.month--
@@ -332,6 +402,7 @@ export default {
             this.month++
         },
         ads(){
+          console.log(123);
           this.isxian = !this.isxian;  
         },
         xuanze(){
@@ -339,7 +410,30 @@ export default {
         },
         tabclick(index){
           this.active = index;
-         }
+         },
+        wek(index){
+          this.active = index;
+        },
+        add(){
+          var id = '';
+          var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+          for(var i = 0; i < 8; i++) {
+            //~~ 相当于parseInt
+            id+= str[~~(Math.random() * str.length)]
+          }
+          var obj={
+            title:this.titles,
+            start:parseInt(this.starts.split('-').join('')),
+            end:parseInt(this.ends.split('-').join('')),
+            id : id
+          }
+          console.log(obj)
+           this.$store.dispatch("MADD",obj);
+            this.titles='';
+            this.starts='';
+            this.ends='';
+            this.isxian = !this.isxian; 
+        }
     }
 }
 </script>
@@ -399,8 +493,6 @@ export default {
 	    cursor: pointer;
     }
     .wd-group{
-	     border: 1px solid #ccc;
-	    border-radius: 6px;
 	    width: 208px;
 	    height: 28px;
 	    line-height: 5px;
@@ -411,24 +503,57 @@ export default {
 	    width: calc(100% /3);
 	    height: 28px;
 	    border: none;
-	    border-right: 1px solid #ccc;
-	    background-color: transparent;
+      border: 1px solid #ccc;
+ 	    background-color: transparent;
 	    box-sizing: border-box;
 	    float: left;
+      outline: none;
+      &:nth-child(1){
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+      &:nth-child(3){
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+    }
+    .wd-group button.cs{
+       border:1px solid #22d7bb;
     }
     .wdrc-main{
     	position: relative;
-        width: 100%;
-        overflow-y: auto;
+      width: 100%;
+      overflow-y: auto;
 	    overflow-x: auto;
 	    padding: 15px 15px 0;
 	    height: 553px;
+      .mhead{
+        color: #333;
+        font-weight: 700;
+        padding: 20px;
+        border-bottom:1px solid #ccc;
+      }
+      .nering{
+        height:55px;
+         ul li span{
+            padding-left: 35px;
+            line-height: 55px;
+            padding-right:35px;
+            color:#888;
+         }
+      }
     }
     .wdrc-main .calender{
     	background-color: #fdfdfd;
     	height: 553px;
     	position: relative;
-    }
+      overflow-y:scroll;
+      overflow-x:hidden;
+     }
+   .wdrc-main .calender hr{
+    height:83px;
+   }
     .wdrc-main .calender table{
     	width: 100%;
         font-size: 1em;
@@ -438,6 +563,7 @@ export default {
         line-height: 40px;
         font-size: 12px;
         text-align: center;
+        width: calc(1041px / 7);
     }
 
     .wdrc-main  .calender table,
@@ -791,6 +917,32 @@ export default {
         }
       }
    }
+   .calsde .ding{
+     height:42px;
+     width:100%;
+     border-bottom:2px solid #ccc;
+     td{
+      height:42px;
+     }
+     td:nth-child(1){
+       width:59px;
+       display: inline-block;
+      text-align: right;
+      line-height: 30px;
+     }
+    }
+    .calsde thead{
+      display: block;
+      position: fixed;
+      background-color: #fff;
+     }
+     .calsde .ding-main td{
+       height:44px;
+       text-align: right;
+     }
+     .calsde .ding-main td:nth-child(1){
+       width:59px;
+     }
 </style>
 
 

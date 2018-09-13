@@ -5,17 +5,25 @@
                 <div class="thy-group-header draggable">
                     <div class="thy-group-header-content">
                         <div class="thy-group-title">收件箱</div>
-                        <div class="thy-group-count finished">0</div>
+                        <div class="thy-group-count finished">"{{this.$store.state.apy.length}}"</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count unfinished">0</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count">0</div>
                     </div>
                 </div>
-                <div class="thy-group-body">
+                <div class="ht"></div>
+                <ul class="rwlie">
+                    <li v-for="item of this.$store.state.apy">
+                        <span>{{item.name}}</span>
+                        <span>{{item.id}}</span>
+                        <span @click="del(item.id)">{{item.shanchu}}</span>
+                    </li>
+                </ul>
+                <div class="thy-group-body" v-show="isShow">
                     <div class="thy-group-list" id="000000000000000000000000">
-                        <mission-board-add-task class="thy-group-list-item-add">
-                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle"></textarea>
+                        <div class="thy-group-list-item-add">
+                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle" id="name"></textarea>
                             <div class="thy-group-card-add-aside"><!---->
                                 <span class="select-task-type cursor-pointer">
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
@@ -29,15 +37,16 @@
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
-                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm">确定</button>
-                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm">取消</a>
+                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm" @click="add">确定</button>
+                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm" @click="showToggle">取消</a>
                                 </div>
                                 <div class="thy-group-card-add-aside-right"></div>
                             </div>
-                        </mission-board-add-task>
+                        </div>
                     </div>
                 </div>
-                <div class="thy-group-footer"><!---->
+
+                <div class="thy-group-footer" @click="showToggle"><!---->
                     <a class="thy-group-footer-action" href="javascript:;">
                         <i class="iconfont icon-jiahao thy-group-footer-action-icon"></i> 添加新任务 
                     </a>
@@ -48,18 +57,26 @@
             <div class="thy-group">
                 <div class="thy-group-header draggable">
                     <div class="thy-group-header-content">
-                        <div class="thy-group-title">今天要做</div>
-                        <div class="thy-group-count finished">0</div>
+                        <div class="thy-group-title">收件箱</div>
+                        <div class="thy-group-count finished">"{{this.$store.state.apy1.length}}"</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count unfinished">0</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count">0</div>
                     </div>
                 </div>
-                <div class="thy-group-body">
+                <div class="ht"></div>
+                <ul class="rwlie">
+                    <li v-for="item of this.$store.state.apy1">
+                        <span>{{item.name}}</span>
+                        <span>{{item.id}}</span>
+                        <span @click="del1(item.id)">{{item.shanchu}}</span>
+                    </li>
+                </ul>
+                <div class="thy-group-body" v-show="isShow1">
                     <div class="thy-group-list" id="000000000000000000000000">
-                        <mission-board-add-task class="thy-group-list-item-add">
-                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle"></textarea>
+                        <div class="thy-group-list-item-add">
+                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle" id="name2"></textarea>
                             <div class="thy-group-card-add-aside"><!---->
                                 <span class="select-task-type cursor-pointer">
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
@@ -73,15 +90,16 @@
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
-                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm">确定</button>
-                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm">取消</a>
+                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm" @click="add1">确定</button>
+                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm" @click="showToggle1">取消</a>
                                 </div>
                                 <div class="thy-group-card-add-aside-right"></div>
                             </div>
-                        </mission-board-add-task>
+                        </div>
                     </div>
                 </div>
-                <div class="thy-group-footer"><!---->
+
+                <div class="thy-group-footer" @click="showToggle1"><!---->
                     <a class="thy-group-footer-action" href="javascript:;">
                         <i class="iconfont icon-jiahao thy-group-footer-action-icon"></i> 添加新任务 
                     </a>
@@ -92,18 +110,26 @@
             <div class="thy-group">
                 <div class="thy-group-header draggable">
                     <div class="thy-group-header-content">
-                        <div class="thy-group-title">下一步要做</div>
-                        <div class="thy-group-count finished">0</div>
+                        <div class="thy-group-title">收件箱</div>
+                        <div class="thy-group-count finished">"{{this.$store.state.apy2.length}}"</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count unfinished">0</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count">0</div>
                     </div>
                 </div>
-                <div class="thy-group-body">
+                <div class="ht"></div>
+                <ul class="rwlie">
+                    <li v-for="item of this.$store.state.apy2">
+                        <span>{{item.name}}</span>
+                        <span>{{item.id}}</span>
+                        <span @click="del2(item.id)">{{item.shanchu}}</span>
+                    </li>
+                </ul>
+                <div class="thy-group-body" v-show="isShow2">
                     <div class="thy-group-list" id="000000000000000000000000">
-                        <mission-board-add-task class="thy-group-list-item-add">
-                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle"></textarea>
+                        <div class="thy-group-list-item-add">
+                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle" id="name3"></textarea>
                             <div class="thy-group-card-add-aside"><!---->
                                 <span class="select-task-type cursor-pointer">
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
@@ -117,15 +143,16 @@
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
-                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm">确定</button>
-                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm">取消</a>
+                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm" @click="add2">确定</button>
+                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm" @click="showToggle2">取消</a>
                                 </div>
                                 <div class="thy-group-card-add-aside-right"></div>
                             </div>
-                        </mission-board-add-task>
+                        </div>
                     </div>
                 </div>
-                <div class="thy-group-footer"><!---->
+
+                <div class="thy-group-footer" @click="showToggle2"><!---->
                     <a class="thy-group-footer-action" href="javascript:;">
                         <i class="iconfont icon-jiahao thy-group-footer-action-icon"></i> 添加新任务 
                     </a>
@@ -136,18 +163,26 @@
             <div class="thy-group">
                 <div class="thy-group-header draggable">
                     <div class="thy-group-header-content">
-                        <div class="thy-group-title">以后再做</div>
-                        <div class="thy-group-count finished">0</div>
+                        <div class="thy-group-title">收件箱</div>
+                        <div class="thy-group-count finished">"{{this.$store.state.apy3.length}}"</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count unfinished">0</div>
                         <div class="thy-group-count">/</div>
                         <div class="thy-group-count">0</div>
                     </div>
                 </div>
-                <div class="thy-group-body">
+                <div class="ht"></div>
+                <ul class="rwlie">
+                    <li v-for="item of this.$store.state.apy3">
+                        <span>{{item.name}}</span>
+                        <span>{{item.id}}</span>
+                        <span @click="del3(item.id)">{{item.shanchu}}</span>
+                    </li>
+                </ul>
+                <div class="thy-group-body" v-show="isShow3">
                     <div class="thy-group-list" id="000000000000000000000000">
-                        <mission-board-add-task class="thy-group-list-item-add">
-                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle"></textarea>
+                        <div class="thy-group-list-item-add">
+                            <textarea class="thy-group-card-add-name form-control ng-pristine ng-valid ng-touched" name="taskTitle" id="name4"></textarea>
                             <div class="thy-group-card-add-aside"><!---->
                                 <span class="select-task-type cursor-pointer">
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
@@ -161,15 +196,16 @@
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
-                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm">确定</button>
-                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm">取消</a>
+                                    <button thybutton="primary" thysize="sm" class="btn btn-primary btn-sm" @click="add3">确定</button>
+                                    <a thybutton="link-secondary" thysize="sm" class="btn btn-link btn-link-info btn-sm" @click="showToggle3">取消</a>
                                 </div>
                                 <div class="thy-group-card-add-aside-right"></div>
                             </div>
-                        </mission-board-add-task>
+                        </div>
                     </div>
                 </div>
-                <div class="thy-group-footer"><!---->
+
+                <div class="thy-group-footer" @click="showToggle3"><!---->
                     <a class="thy-group-footer-action" href="javascript:;">
                         <i class="iconfont icon-jiahao thy-group-footer-action-icon"></i> 添加新任务 
                     </a>
@@ -182,9 +218,149 @@
 export default {
     data(){
         return{
-            
+            isShow:false,
+            isShow1:false,
+            isShow2:false,
+            isShow3:false,
         }
-    }
+    }, 
+    created() {
+        // 发送默认 GETALL
+        this.$store.dispatch("YUGETALL");
+    },
+    methods:{
+        showToggle:function(){
+            this.isShow = !this.isShow
+        },
+        showToggle1:function(){
+            this.isShow1 = !this.isShow1
+        },
+        showToggle2:function(){
+            this.isShow2 = !this.isShow2
+        },
+        showToggle3:function(){
+            this.isShow3 = !this.isShow3
+        },
+        del(id) {
+
+          // 只需要一个id就行了
+          this.$store.dispatch("YUDEL", {
+            id:id
+          });
+        },
+        add() {
+          // 如果为空 就 return 掉 什么都不做
+          if (this.txt == "") return;
+          // 随机一个8位id
+          var id = "";
+          var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+          for (var i = 0; i < 8; i++) {
+            //~~ 相当于parseInt
+            id += str[~~(Math.random() * str.length)];
+          }
+          // 发送add 新增命令
+          var name=document.getElementById('name');
+          this.$store.dispatch("YUADD", {
+            name: name.value,
+            id: id,
+            shanchu: '删除',
+          });
+          // 点击后 清空 文本框
+          name.value = "";
+          
+          this.isShow = !this.isShow;
+
+        },
+        del1(id) {
+
+          // 只需要一个id就行了
+          this.$store.dispatch("YU1DEL", {
+            id:id
+          });
+        },
+        add1() {
+          // 如果为空 就 return 掉 什么都不做
+          if (this.txt == "") return;
+          // 随机一个8位id
+          var id = "";
+          var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+          for (var i = 0; i < 8; i++) {
+            //~~ 相当于parseInt
+            id += str[~~(Math.random() * str.length)];
+          }
+          // 发送add 新增命令
+          var name2=document.getElementById('name2');
+          this.$store.dispatch("YU1ADD", {
+            name: name2.value,
+            id: id,
+            shanchu: '删除',
+          });
+          // 点击后 清空 文本框
+          name2.value = "";
+          
+          this.isShow1 = !this.isShow1;
+
+        },
+        del2(id) {
+
+          // 只需要一个id就行了
+          this.$store.dispatch("YU2DEL", {
+            id:id
+          });
+        },
+        add2() {
+          // 如果为空 就 return 掉 什么都不做
+          if (this.txt == "") return;
+          // 随机一个8位id
+          var id = "";
+          var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+          for (var i = 0; i < 8; i++) {
+            //~~ 相当于parseInt
+            id += str[~~(Math.random() * str.length)];
+          }
+          // 发送add 新增命令
+          var name3=document.getElementById('name3');
+          this.$store.dispatch("YU2ADD", {
+            name: name3.value,
+            id: id,
+            shanchu: '删除',
+          });
+          // 点击后 清空 文本框
+          name3.value = "";
+          
+          this.isShow2 = !this.isShow2;
+
+        },
+        del3(id) {
+
+          // 只需要一个id就行了
+          this.$store.dispatch("YU3DEL", {
+            id:id
+          });
+        },
+        add3() {
+          // 如果为空 就 return 掉 什么都不做
+          if (this.txt == "") return;
+          // 随机一个8位id
+          var id = "";
+          var str = "741852qwertyuioplkjhgfdszxcvbnm0963";
+          for (var i = 0; i < 8; i++) {
+            //~~ 相当于parseInt
+            id += str[~~(Math.random() * str.length)];
+          }
+          // 发送add 新增命令
+          var name4=document.getElementById('name4');
+          this.$store.dispatch("YU3ADD", {
+            name: name4.value,
+            id: id,
+            shanchu: '删除',
+          });
+          // 点击后 清空 文本框
+          name4.value = "";
+          this.isShow3 = !this.isShow3;
+
+        },
+    },
 }
 </script>
 <style lang="scss" scoped >
@@ -232,6 +408,27 @@ export default {
                             color: #ffc442;
                         }
                     }
+                }
+            }
+        }
+        .ht{
+            width: 95%;
+            margin: 0 auto;
+            height: 5px;
+            border-radius: 10%;
+            background-color: #eee;
+            margin-bottom: 15px;
+        }
+        .rwlie{
+            width: 95%;
+            margin: 0 auto;
+            li{
+                list-style: none;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                span {
+                    margin-right: 10px;
                 }
             }
         }
