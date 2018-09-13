@@ -2,7 +2,7 @@
   <div>
     <header>
         <div class="top-area">
-          <a href="javascript:;" class="logo">
+          <a href="javascript:;" class="logo" @click="Back = !Back">
             <img src="https://s3.cn-north-1.amazonaws.com.cn/lclogo/team_logo_default.png" alt="">
           </a>
         </div>
@@ -38,6 +38,21 @@
     <router-view class="right">
 
     </router-view>
+
+
+    <div class="Backstage" v-if="Back">
+      <div class="pop-box-content">
+        <div class="action-menu">
+            <a href="javascript:;" class="action-menu-item" v-for="item of Backstage">
+                <span class="icon">
+                    <i class="iconfont ic" :class="item.icon"></i>
+                </span>
+                <span class="name">{{item.title}}</span>
+            </a>
+        </div>
+      </div>
+    </div>  
+
   </div>
 </template>
 
@@ -46,32 +61,63 @@ export default {
   name: 'app',
   data () {
     return {
-      tabNav:[
-        {
-          title:'消息',
-          icon:"icon-xiaoxi",
-          icon1:"icon-xiaoxi2",
-          url:'/xiaoxi/'
-        },
-        {
-          title:'项目',
-          icon:"icon-wangpan",
-          icon1:"icon-project-o",
-          url:'/xiangmu'
-        },
-        {
-          title:'日历',
-          icon:"icon-rili",
-          icon1:"icon-rili2",
-          url:'/rili'
-        },
-        {
-          title:'网盘',
-          icon:"icon-folder_icon",
-          icon1:"icon-wenjianjia",
-          url:'/wangpan/'
-        }
-      ],
+        Back:false,
+        Backstage:[
+            {
+                icon : "icon-48dashboard",
+                title:"进入企业后台"
+            },
+            {
+                icon : "icon-useradd",
+                title:"管理企业成员"
+            },
+            {
+                icon : "icon-viewlistalt",
+                title:"应用管理"
+            },
+            {
+                icon : "icon-banshouwrenches",
+                title:"配置服务集成"
+            },
+            {
+                icon : "icon-setting",
+                title:"企业设置"
+            },
+            {
+                icon : "icon-exchange4jiaohuan",
+                title:"登录另一个企业"
+            },
+            {
+                icon : "icon-exit",
+                title:"登出当前企业"
+            }
+        ],
+        tabNav:[
+            {
+                title:'消息',
+                icon:"icon-xiaoxi",
+                icon1:"icon-xiaoxi2",
+                url:'/xiaoxi/'
+            },
+            {
+                title:'项目',
+                icon:"icon-wangpan",
+                icon1:"icon-project-o",
+                url:'/xiangmu'
+            },
+            {
+                title:'日历',
+                icon:"icon-rili",
+                icon1:"icon-rili2",
+                url:'/rili'
+            },
+            {
+                title:'网盘',
+                icon:"icon-folder_icon",
+                icon1:"icon-wenjianjia",
+                url:'/wangpan/'
+            }
+        ],
       bottom_area:[
           {
             title:'通讯录',
@@ -283,5 +329,58 @@ export default {
       width: calc(100% - 70px);
       background: gray;
       height: 100%;
+    }
+
+    // 后台列表
+    .Backstage{
+        z-index: 1080;
+        position: absolute;
+        left: 70px;
+    }
+    .Backstage .pop-box-content {
+        min-width: 240px;
+        background: #fff;
+        box-shadow: 0 0 24px rgba(0,0,0,.18);
+        margin-top: 4px;
+    }
+    .action-menu {
+      padding: 5px 0;
+      display: block;
+      width: 240px;
+      background: #fff;
+  }
+    .Backstage .action-menu-item {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px 20px;
+        position: relative;
+        line-height: 20px;
+        color: #666;
+        align-items: center;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all .2s;
+    }
+    .Backstage .action-menu-item .icon {
+        margin-right: 5px;
+        color: #888;
+        transition: margin-left .2s;
+    }
+    .Backstage .action-menu-item .name {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: margin-left .2s;
+    }
+    .Backstage .action-menu-item .ic:before{
+        color: #888;
+        font-size: 15px;
+        font-weight: 100;
+    }
+    .action-menu-item:hover{
+        margin-left: 8px;
+        background: #f3f3f3;
+        color: #333
     }
 </style>

@@ -644,7 +644,6 @@ const store =  new Vuex.Store({
     async CGETALL(context,payload){
       // 请求数据
       var data = await fetch('/corporator/').then(res => res.json());
-      console.log(data,'woshidata');
       context.commit('CGETALL',data);
     },
     async CADD({commit},payload){
