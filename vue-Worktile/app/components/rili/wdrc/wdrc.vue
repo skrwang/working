@@ -112,7 +112,7 @@
                         <div class='group button-bar'>
                            <span></span>
                            <button>确定</button>
-                           <a @@click='ads'>取消</a>
+                           <a @click='ads'>取消</a>
                       </div>
                       </form>
                   </div>
