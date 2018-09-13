@@ -15,10 +15,10 @@
                     <i class="iconfont icon-jiantouarrow483 i1" @click="Fdel">
                         <ul class="ej" v-show="isShow">
                             <li><i class="iconfont icon-star i2"></i>收藏</li>
-                            <li><i class="iconfont icon-star i2"></i>创建为任务</li>
-                            <li><i class="iconfont icon-star i2"></i>固定</li>
-                            <li><i class="iconfont icon-star i2"></i>编辑</li>
-                            <li @click="Fdelete(item.id)"><i class="iconfont icon-star i2"></i>删除</li>
+                            <li><i class="iconfont icon-renwuwanchengqingkuangyujing i2"></i>创建为任务</li>
+                            <li><i class="iconfont icon-guding i2"></i>固定</li>
+                            <li><i class="iconfont icon-bianji i2"></i>编辑</li>
+                            <li @click="Fdelete(item.id)"><i class="iconfont icon-shanchu i2"></i>删除</li>
                         </ul>
                     </i>
                     <br>
@@ -185,6 +185,7 @@ export default {
                         padding: 9px 29px;
                         border-radius: 20px;
                         margin-right: 20px;
+                        cursor: pointer;
                     }
                     a{
                         color: #22d7bb;
@@ -278,7 +279,7 @@ export default {
                             .i2{
                                 display: inline-block;
                                 width: 27px;
-                                font-size: 20px;
+                                font-size: 15px;
                                 position: relative;
                                 top: 2px;
                                 transition: all .2s;
