@@ -60,7 +60,10 @@ export default {
                 //~~ 相当于parseInt
                 id+= str[~~(Math.random() * str.length)]
             }
-            var time = new Date().getHours()+':'+new Date().getMinutes();
+           function buling(n){
+                return n.toString().length > 1?n.toString():'0'+n.toString();
+            }
+            var time = new Date().getHours()+':'+buling(new Date().getMinutes());
             // 发送add 新增命令
             this.$store.dispatch("FADD",{
                 title:this.content,
