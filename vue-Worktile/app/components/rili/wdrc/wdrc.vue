@@ -2,7 +2,7 @@
     <div>
         <div class='wdrc-nav'>
         	<div class='title'>
-        		<i>123</i>
+        		<i class='iconfont icon-rili1'></i>
         		<span>我的日程</span>
         	</div>
         	<div class='secondary-text'>
@@ -13,10 +13,10 @@
                 </p>
         	</div>
         	<div class='flex-panel'>
-        		 <button class='wd-btn'>
+        		<button class='wd-btn' @click='ads'>
         		 	<i>+</i>
         		 	新建日历
-        		 </button>
+        		</button>
         		 <div class='wd-group'>
         		 	<button class='month'>月</button>
         		 	<button class='week'>周</button>
@@ -24,6 +24,101 @@
         		 </div>
         	</div>
         </div>
+        <div class='flex-wrp' v-if='isxian'>
+            <transition name="fade">
+               <div class='flex-mt' v-if='isxian'>
+                  <div class='model-header'>
+                     <i @click='ads'></i>
+                     <h3>新建日程</h3>
+                  </div>
+                  <div class='model-body'>
+                      <form action="">
+                        <div class='group input'>
+                              <input type="text" placeholder="日程安排，如下午2:00例会"> 
+                        </div>
+                        <div class='group rili'>
+                            <label for="">日历</label>
+                             <select name="" id="">
+                               <option value="0">会议安排</option>
+                              </select>
+                        </div>
+                        <div class='group kaishi'>
+                             <div class='ri-left'>
+                                 <label for="">开始日期</label>
+                                  <input type="date">
+                             </div>
+                             <div class='ri-right'>
+                                 <label for="">结束日期</label>
+                                  <input type="date">
+                             </div>
+                        </div>
+                        <div class='group quanxuan'>
+                            <input type="checkbox"></input>全天
+                        </div>
+                        <div class='group canxuan'>
+                            <label for="">参选人</label>
+                            <ul><li>sk</li> <li @click='xuanze()' class="last">+</li></ul>
+                        </div>
+                        <div class='xuancy' v-show="isShow1">
+                          <div class='model-header'>
+                           <i @click='xuanze'></i>
+                           <h3>选择成员</h3>
+                          </div>
+                          <div class='tab-wrap'>
+                             <div class='tabs'>
+                                <ul>
+                                  <li v-for='(itemss,index) of tabs' :class='{active1: active == index}' @click='tabclick(index)'>{{itemss.name}}</li>
+                                </ul>
+                                <div class='tab-1' v-show='active==0'>
+                                    <div class='los'>
+                                       <input type="text"placeholder='搜索成员'>
+                                       <i class='iconfont  icon-icon-' ></i>
+                                    </div>
+                                    <ul>
+                                      <li style='font-size: 14px;'>全部联系人</li>
+                                      <li style='font-size: 14px; color:black'><span class='icons'>聪聪</span>   聪聪</li>
+                                    </ul>
+                                </div>
+                                <div class='tab-2' v-show='active==1'>
+                                     <ul>
+                                       <li class='iconfont icon-jiantou'><i class='iconfont icon-qiyeguanli'></i>王氏集团<span>(2人)</span></li>
+                                     </ul>
+                                </div>
+                                <p class='button-bar' style='margin-top:10px;display: inline-block;'>
+                                   <button>确定</button>
+                                   <a @click='xuanze'>取消</a>
+                               </p>
+                             </div>
+                             <div class='tab-right'>
+                                 <div class='tabrt-header'>
+                                  <p><span>已选择成员</span><i>(1)</i></p>
+                                 </div>
+                                 <div class='tabrt-main'>
+                                 <ul>
+                                    <li><span class='icons'>sk</span>   skrwang</li>
+                                 </ul>
+                                   
+                                 </div>
+                                
+                             </div>
+                          </div>
+                        </div>
+                         <div class='group quanxuan'>
+                            <input type="checkbox"></input>参与人反馈
+                        </div>
+                        <div class='group quanxuan' style="color:#22d7bb">
+                           <span style='margin-left:20px'></span> 添加更过选项
+                        </div>
+                        <div class='group button-bar'>
+                           <span></span>
+                           <button>确定</button>
+                           <a @@click='ads'>取消</a>
+                      </div>
+                      </form>
+                  </div>
+               </div>
+             </transition>
+         </div>
         <div class='wdrc-main'>
         	<div class='calender'>
                 <table>
@@ -63,6 +158,9 @@ export default {
         return {
             year:2018,
             month:9,
+            isxian:false,
+            isShow1:false,
+            active:0,
             things:[
                     {
                         title:"这是一个事务",
@@ -79,7 +177,11 @@ export default {
                         start:20180910,
                         end:20180915
                     }
-            ]
+            ],
+            tabs:[
+                {name:'团队'},
+                {name:'部门'}
+              ]
         }
     },
     computed:{
@@ -228,7 +330,16 @@ export default {
         },
         jia(){
             this.month++
-        }
+        },
+        ads(){
+          this.isxian = !this.isxian;  
+        },
+        xuanze(){
+            this.isShow1 = !this.isShow1;
+        },
+        tabclick(index){
+          this.active = index;
+         }
     }
 }
 </script>
@@ -248,6 +359,9 @@ export default {
 	    position: relative;
 	    line-height: 50px;
 	    background: rgba(253,253,253,.95);
+    }
+    .wdrc-nav .icon-rili1{
+        color:#4cd9bf;
     }
     .title, .secondary-text , .flex-panel{
     	width:calc(100% / 3);
@@ -370,6 +484,313 @@ export default {
         background-color: #f3dce1;
         font-size:12px;
     }
+    .flex-wrp{
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,.4);
+        position: absolute;
+        z-index: 44;
+        left:0;
+        top:0;
+    }
+    .fade-enter-active,.fade-leave-active{
+      transition: all 0.5s ease-out;
+    }
+    /* 进入开始 */
+    .fade-enter{
+      transform: translateY(-500px);
+      opacity: 0;
+    }
+    /* 出去终点 */
+    .fade-leave-active{
+      transform: translateY(-500px);
+      opacity: 0;
+    }
+    .flex-mt{
+        width: 660px;
+        height: 483px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        position: absolute;
+        top: 62px;
+        left: 350px;
+        z-index: 50;
+        border-radius: 6px;
+        box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+           .model-header {
+              display: flex;
+              padding: 0 1.875rem;
+              align-items: center;
+              justify-content: space-between;
+              height: 50px;
+              line-height: 50px;
+              border:1px solid #ccc;
+             }
+            .model-header i{
+               order: 1;
+               &::before {
+                content:'×';
+                color:#ccc;
+                font-size: 30px;
+                };
+            }
+            .model-header h3{
+               font-size: 1rem;
+               font-weight: 500;
+            }
+            .model-body {
+                position: relative;
+                flex: 1 1 auto;
+                padding: 1.25rem 1.875rem 1.875rem;
+                width:600px;
+                height:383px;
+                .group{
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-left: -15px;
+                    margin-bottom:15px;
+                    input{
+                            display: block;
+                            width: 100%;
+                            line-height: 1.5;
+                            color: #333;
+                            background-color: #fff;
+                            background-clip: padding-box;
+                            border: 1px solid #eee;
+                            border-radius: .25rem;
+                            padding: .469rem .875rem;
+                            font-size: .875rem;
+                            outline: none;
+                            &:hover{
+                                border:1px solid #22d7bb;
+                            }
+                     }
+               }
+               .rili label{
+                margin-left:60px;
+                line-height: 40px;
+                font-size: 13px;
+               }
+               .rili select{
+                  width: 82%;
+                  line-height: 1.5;
+                  color: black;
+                  background-color: #fff;
+                  background-clip: padding-box;
+                  border: 1px solid #eee;
+                  border-radius: .25rem;
+                  padding: .469rem .875rem;
+                  font-size: .875rem;
+                  outline: none;
+                  margin-left: 16px;
+                  option{
+                    color:#ccc;
+                  }
+               }
+               .kaishi div{
+                   width:calc(100% / 2);
+                   float:left;
+                   display: flex;
+                   label{
+                    margin-left:30px;
+                    width:109px;
+                    margin-right: 10px;
+                    font-size: 13px;
+                    line-height: 40px;
+                   }
+               }
+               .quanxuan{
+                    padding-left: 72px;
+                    font-size: 13px;
+                    vertical-align: middle;
+                   input{
+                      width: 16px;
+                      height: 16px;
+                      /* -webkit-appearance: none; */
+                      border: 1px solid #ccc;
+                      position: relative;
+                      margin-left::30px;
+                      vertical-align: middle;
+                      &:hover{
+                        border:1px solid #22d7bb;
+                      }
+                   }
+               }
+               .canxuan label{
+                padding-left: 33px;
+                color: #888888;
+                font-size: 13px;
+                line-height: 33px;
+               }
+               .canxuan ul{
+                display: inline-block;
+                vertical-align: middle;
+                 margin-left: 11px;
+                  li{
+                    width: 30px;
+                    height: 30px;
+                    background-color: #2cccdc;
+                    border-radius: 50%;
+                    line-height: 30px;
+                    color: #fff;
+                    text-align: center;
+                    float:left;
+                    margin-right: 5px;
+                 }
+                  li.last {
+                    border: 1px dotted #ccc;
+                    color: #d4d5d4;
+                    background-color: transparent;
+                 }
+               }
+               .button-bar span{
+                 width:105px;
+                 height:38px;
+                 display: inline-block;
+               }
+               .button-bar button{
+                  width:106px;
+                  height:38px;
+                  border-radius: 10px;
+                  background-color:#22d7bb;
+                  color:#fff; 
+                  border:none;
+                  outline: none;
+               }
+               .button-bar a{
+                margin-left: 10px;
+                line-height: 40px;
+               }
+            }
+     }
+    .xuancy{
+      width:660px;
+      height:552px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      position: absolute;
+      top: -53px;
+      left: 0px;
+      z-index: 50;
+      border-radius: 6px;
+      box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+
+      .tab-wrap{
+        padding: 20px 30px;
+      }
+      
+      .tab-wrap{
+          .tabs{
+            width:280px;
+            height: 360px;
+            float:left;
+          }
+          .tab-right{
+            width:280px;
+            height: 360px;
+            float:left;
+            margin-left: 35px;
+            .tabrt-header p{
+              line-height: 45px;
+            }
+          }
+      }
+      .tabs ul {
+        width:280px;
+        height:45px;
+      }
+      .tabs ul li{
+        display: inline-block;
+        font-size:15px;
+        width:calc(280px / 2);
+        text-align: center;
+        line-height: 45px;
+      }
+      .tabs ul li.active1{
+          color:#62d7c1;
+        }
+      .tab-1{
+        width:280px;
+        height:360px;
+        border:1px solid #ccc;
+        .los{
+            width: 280px;
+            height: 40px;
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+          input{
+              border-radius: 40px;
+              height: 40px;
+              outline: none;
+              border: 1px solid #ccc;
+              padding-left: 30px;
+          }
+          i{
+              position: absolute;
+              left: 53px;
+              top: 14px;
+          }
+        }
+        ul{
+          height:71px;
+          font-size: 14px;
+          color:#ccc;
+        }
+        ul li span.icons{
+          height: 25px;
+          width: 25px;
+          display: inline-block;
+          color: #fff;
+          border-radius: 50%;
+          background-color: lime;
+          text-align: center;
+          font-size: 12px;
+          line-height: 25px;
+        }
+      }
+      .tab-2{
+        width:280px;
+        height:360px;
+        border:1px solid #ccc;
+        ul li:hover{
+           box-shadow: -4px -2px 14px #ccc;
+        }
+        ul li{
+          width: 100%;
+          text-align: left;
+          box-sizing: border-box;
+          margin-top: 15px;
+          padding-left: 15px;
+          i{
+            color:#ccc;
+          }
+        }
+      }
+      .tabrt-main{
+        width:280px;
+        height:360px;
+        border:1px solid #ccc;
+        ul li{
+          font-size: 14px; 
+          color:black;
+          margin-top: 18px;
+          margin-left: 15px;
+        }
+        ul li span{
+          height: 25px;
+          width: 25px;
+          display: inline-block;
+          color: #fff;
+          border-radius: 50%;
+          background-color: #22d7bb;
+          text-align: center;
+          font-size: 12px;
+          line-height: 25px;
+        }
+      }
+   }
 </style>
 
 
