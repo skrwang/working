@@ -1,28 +1,56 @@
 {
-    "XCC":[
-      {
-        "id":"rq8mjy6j",
-        "icon":"icon-weibiaoti5",
-        "size":"-",
-        "title":"资料共享",
-        "updated":"skrwang",
-        "time":"9月11日14:35"
-      },
-      {
-        "id":"sadw2132",
-        "icon":"icon-weibiaoti5",
-        "size":"-",
-        "title":"资料共享",
-        "updated":"skrwang",
-        "time":"9月11日14:35"
-      },
-      {
-        "id":"fdf3255r",
-        "icon":"icon-weibiaoti5",
-        "size":"-",
-        "title":"资料共享",
-        "updated":"skrwang",
-        "time":"9月11日14:35"
-      }
-    ]
-  }
+  "XCC": [
+    {
+      "id": "rq8mjy6j",
+      "icon": "icon-weibiaoti5",
+      "size": "-",
+      "title": "资料共享",
+      "updated": "skrwang",
+      "time": "9月11日14:35",
+      "judge": "all"
+    },
+    {
+      "id": "sadw2132",
+      "icon": "icon-weibiaoti5",
+      "size": "-",
+      "title": "资料共享",
+      "updated": "skrwang",
+      "time": "9月11日14:35",
+      "judge": "all"
+    },
+    {
+      "id": "fdf3255r",
+      "icon": "icon-weibiaoti5",
+      "size": "-",
+      "title": "资料共享",
+      "updated": "skrwang",
+      "time": "9月11日14:35"
+    },
+    {
+      "title": "购物车.html",
+      "icon": "icon-fq_changxieguanli",
+      "size": 2115,
+      "updated": "skrwang",
+      "time": "1月25日10:57",
+      "judge": "all",
+      "id": "RLorf_z"
+    }
+  ],
+  "FXY": [
+    {
+      "title": "asd\n",
+      "id": "7nv8frcp",
+      "time": "20:50"
+    },
+    {
+      "title": "asd\n",
+      "id": "x3pe1ret",
+      "time": "8:10"
+    },
+    {
+      "title": "asd\n",
+      "id": "unpmvx1e",
+      "time": "8:34"
+    }
+  ]
+}

@@ -22,11 +22,23 @@
                     <button class="btn btn_primary" @click="fileClick">
                         <i class="iconfont icon-shangchuan"></i>
                         上传文件
-                        <input type="file" id="upload_file">
+                        <input type="file" id="upload_file" @change="fileChange($event)">
                     </button>
-                    <button class="btn btn_toggle">
+                    <button class="btn btn_toggle" @click="shangchuan = !shangchuan">
                         <i class="iconfont icon-jiantouarrow486"></i>
                     </button>
+                    <div class="pbox" :class="!shangchuan ? 'show' : ''">
+                        <div class="pop-menu">
+                            <ul>
+                                <li>
+                                    <a href="javascript:" @click="fileClick">上传文件</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:" @click="fileClick">上传文件夹</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,13 +53,14 @@
                     </p>
                 </div>
                 <ul>
-                    <li class="file-item" v-for="item of list">
+                    <li class="file-item" v-for="(item,index) of list" :class="{cur : file == item.index}">
                         <div class="file-name">
                             <i class="iconfont" :class="item.icon"></i>
                             {{item.title}}
                         </div>
                         <div class="file-size">
-                            <span>{{item.size}}</span>
+                            <span v-if="item.size == '-'">{{item.size}}</span>
+                            <span v-else="item.size != '-'">{{bytesToSize(item.size)}}</span>
                         </div>
                         <div class="file-updated-by">
                             <span class="portrait">SK</span>
@@ -55,7 +68,13 @@
                         </div>
                         <div class="file-time">
                             {{item.time}}
+                            <div class="file-action">
+                                <i class="iconfont icon-unie122"></i>
+                                &nbsp;&nbsp;
+                                <i class="iconfont icon-transverse"></i>
+                            </div>
                         </div>
+                        
                     </li>
                 </ul>
             </div>
@@ -67,25 +86,105 @@
     export default {
         data(){
             return{
-                state:'全部',
+                state:'all',
+                shangchuan:true,
+                imgList:{},
+                file:-1,
             }
         },
         methods:{
+            
             fileClick(){
                 document.getElementById('upload_file').click();
+            },
+            fileChange(el) {
+                if (!el.target.files[0].size) return;
+                this.fileList(el.target);
+                el.target.value = "";
+            },
+            fileDel(index) {
+                this.imgList.splice(index, 1);
+            },
+            fileList(fileList) {
+                let files = fileList.files;
+                for (let i = 0; i < files.length; i++) {
+                    //判断是否为文件夹
+                    if (files[i].type != "") {
+                        this.fileAdd(files[i]);
+                    } else {
+                    //文件夹处理
+                        this.folders(fileList.items[i]);
+                    }
+                }
+            },
+                //文件夹处理
+            fileList(fileList) {
+                let files = fileList.files;
+                for (let i = 0; i < files.length; i++) {
+                    //判断是否为文件夹
+                    if (files[i].type != "") {
+                        this.fileAdd(files[i]);
+                    } else {
+                    //文件夹处理
+                        this.folders(fileList.items[i]);
+                    }
+                }
+            },
+            fileAdd(file) {
+                //总大小
+                this.size = this.size + file.size;
+                //判断是否为图片文件
+                var time = new Date();
+                var m = time.getMonth()+1;
+                var d = time.getDate();
+                var h = time.getHours();
+                var s = time.getMinutes();
+                this.imgList = {
+                    title:file.name,
+                    icon:"icon-fq_changxieguanli",
+                    size:file.size,
+                    updated:"skrwang",
+                    time:m + '月' + d + '日' + h + ":"+s,
+                    judge:"all"
+                }
+                if (file.type.indexOf("image") == -1) {
+                    
+                    this.$store.dispatch("XADD",this.imgList);
+                } else {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    this.$store.dispatch("XADD",this.imgList);
+                }
+            },
+            fileDel(index) {
+                this.size = this.size - this.list[index].file.size;//总大小
+                this.list.splice(index, 1);
+            },
+            bytesToSize(bytes) {
+                if (bytes === 0) return '0 B';
+                let k = 1000, // or 1024
+                    sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+                    i = Math.floor(Math.log(bytes) / Math.log(k));
+                return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
             }
         },
         computed:{
             list(){
                 // 此处向vuex中state拿取数据
-                if(this.state == '全部'){
-                    return this.$store.state.wangpan;
-                }
+                if(this.state == "all"){
+					return this.$store.state.wangpan
+				}else if(this.state == "ziliao"){
+					return this.$store.getters.ziliao
+				}else if(this.state == "zhaopian"){
+					return this.$store.getters.zhaopian
+				}else if(this.state == "zhidu"){
+					return this.$store.getters.zhidu
+				}
             },
         },
         created(){
             // 发送action异步请求数据
-            this.$store.dispatch('GETALL');
+            this.$store.dispatch('XGETALL');
         },
     }
 </script>
@@ -138,7 +237,7 @@
         }
         .qiyeR {
             float: right;
-            overflow: hidden;
+            // overflow: hidden;
             margin-top: 10px;
             .btn-group {
                 line-height: 20px;
@@ -182,7 +281,8 @@
             }
             .shangchuan {
                 float: left;
-                overflow: hidden;
+                // overflow: hidden;
+                position: relative;
                 .btn {
                     padding: 3px 10px;
                     color: #fff;
@@ -211,6 +311,52 @@
                 .btn_toggle{
                     border-bottom-left-radius: 0;
                     border-top-left-radius: 0;
+                    position: relative;
+                }
+                .pbox {
+                    position: absolute;
+                    display: none;
+                    text-align: left;
+                    font-size: 14px;
+                    background: #FFF;
+                    box-shadow: 0 0 24px rgba(0,0,0,.18);
+                    border-radius: 0;
+                    border: 0;
+                    min-width: 230px;
+                    z-index: 1100;
+                    top: 31px;
+                    right: 7.0156px;
+                    &.show{
+                        display: block;
+                    }
+                    .pop-menu {
+                        display: block;
+                        padding: 5px 0;
+                        min-width: 240px;
+                        ul li {
+                            display: block;
+                            padding: 0;
+                            margin: 0 0 2px;
+                            cursor: pointer;
+                            transition: background .2s;
+                            &:hover {
+                                background: #f3f3f3;
+                            }
+                            &:hover a {
+                                color: #333;
+                                padding-left: 26px;
+                            }
+                            a {
+                                display: block;
+                                padding: 5px 18px;
+                                line-height: 30px;
+                                color: #666;
+                                text-decoration: none;
+                                box-sizing: border-box;
+                                transition: padding-left .2s;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -227,7 +373,9 @@
             background: #fdfdfd;
             font-size: 14px;
             height: 100%;
-
+            .cur {
+                background: #22d7bb;
+            }
             .file-list-header,.file-item {
                 line-height: 27px;
                 color: #666;
@@ -235,6 +383,7 @@
                 flex-direction: row;    
                 position: relative;
                 padding: 14px 35px;
+                border-bottom: 1px solid #eee;
                 .file-name{
                     -webkit-box-flex: 1;
                     -ms-flex: 1 1 0px;
@@ -256,6 +405,22 @@
                     width: 170px;
                     cursor: pointer;
                 }
+                .file-action {
+                    width: 75px;
+                    text-align: right;
+                    visibility: visible;
+                    display: none;
+                    i {
+                        color: #22d7bb;
+                    }
+                }
+            }
+            .file-item:hover {
+                box-shadow: 0 0 8px 2px #eee;
+                background: 0 0;
+            }
+            .file-item:hover .file-action {
+                display: inline-block;
             }
         }
     }

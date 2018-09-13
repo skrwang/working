@@ -9,7 +9,7 @@
         <div class="middle-area">
             <ul>
                 <!-- cur 样式要在点击的标题与路由中的挑剔匹配时展示 -->
-                <li v-for="item of tabNav" :class="{cur:item.title == $route.name}">
+                <li v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">
                     <!-- 做跳转 -->
                     <router-link :to='item.url' class="iconfont" :class="item.icon">
                         
@@ -19,7 +19,7 @@
         </div>
         <div class="bottom-area">
             <ul class="nav-apps">
-                <li v-for="item of bottom_area" :class="{cur:item.title == $route.name}">
+                <li v-for="item of bottom_area" :class="{cur:$route.path.indexOf(item.url) != -1}">
                     <router-link :to='item.url' class="iconfont" :class="item.icon">
                         
                     </router-link>
@@ -48,7 +48,7 @@ export default {
         {
           title:'消息',
           icon:"icon-xiaoxi",
-          url:'/xiaoxi'
+          url:'/xiaoxi/'
         },
         {
           title:'项目',

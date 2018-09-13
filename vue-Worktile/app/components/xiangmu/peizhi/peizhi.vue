@@ -3,7 +3,7 @@
         <div class="header">
             <span><i class="iconfont icon-gongxiangtubiaozhuangtaileicaozuolei34"></i> 配置中心</span>
             <ul>
-               <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur : item.title==$route.name}">{{item.title}}</li>
+               <li @click="routerGo(item.url)" v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">{{item.title}}</li>
             </ul>
         </div>
         <div class="body">
@@ -17,19 +17,19 @@ export default {
         return {
             tabNav:[
                 {
-                url:'/xiangmu/peizhi/xiangmu/xiangmu',
+                url:'/xiangmu/peizhi/xiangmu/',
                 title:"项目",
                 },{
-                url:'/xiangmu/peizhi/renwu',
+                url:'/xiangmu/peizhi/renwu/',
                 title:"任务"
                 },{
-                url:'/xiangmu/peizhi/anquan',
+                url:'/xiangmu/peizhi/anquan/',
                 title:"安全"
                 },{
-                url:'/xiangmu/peizhi/gaoji',
+                url:'/xiangmu/peizhi/gaoji/',
                 title:"高级"
                 },{
-                url:'/xiangmu/peizhi/quanju',
+                url:'/xiangmu/peizhi/quanju/',
                 title:"全局"
                 }
             ]

@@ -1,24 +1,26 @@
 <template>
     <div class="box">
-        <div class="head">
-            <span>
-                <img src="../imgs/qygg.png">
-                企业公告
-                <!-- <i class="icon icon-"></i> -->
-                <b>用于全企业成员发布公告</b>
-            </span>
-            <span>
-                <img src="../imgs/cy.png">
-                <img src="../imgs/sz.png">
-            </span>
-        </div>
-        <ul class="con">
-            <li v-for="item of DataLis" :class="{cur : $route.name == item.title}">
-                <router-link :to='item.url' :class="{cur : $route.name == item.title}">
-                {{item.title}}
-                </router-link>
-            </li>
-        </ul>    
+        <div class="header">
+            <div class="head">
+                <span>
+                    <img src="../imgs/qygg.png">
+                    企业公告
+                    <i class="iconfont icon-jiantouarrow483"></i>
+                    <b>用于全企业成员发布公告</b>
+                </span>
+                <span>
+                    <img src="../imgs/cy.png">
+                    <img src="../imgs/sz.png">
+                </span>
+            </div>
+            <ul class="con">
+                <li v-for="item of DataLis" :class="{cur : $route.path.indexOf(item.url) != -1}">
+                    <router-link :to='item.url' :class="{cur : $route.path.indexOf(item.url) != -1}">
+                    {{item.title}}
+                    </router-link>
+                </li>
+            </ul>   
+        </div> 
         <router-view></router-view>        
     </div>
 </template>
@@ -51,6 +53,12 @@ export default {
     .box{
         float: left;
         width: 100%;
+        height: 100%; 
+        position: relative;
+        background-color: rgb(238,238,238); 
+    }
+    .header{
+        width: 100%;
         height: 86px;
         padding: 0 0 0 15px;
         box-sizing: border-box;
@@ -76,7 +84,7 @@ export default {
     }
     .head span:nth-child(1) img{
         position: relative;
-        left: -2px;
+        left: 0px;
         top: -3px;
     }
     .head span:nth-child(2) img{
