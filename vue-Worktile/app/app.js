@@ -29,7 +29,7 @@ const r = [
         // name:"企业公告",
         children:[
           {
-            path:'/xiaoxi/qygg/xx/',
+            path:'/xiaoxi/qygg/xx',
             component:require('./components/xiaoxi/qygg/xx/xx.vue').default,
             // name:'消息'
           },
@@ -579,6 +579,11 @@ const store =  new Vuex.Store({
     FADD(state,payload){
       state.xiaoxi.push(payload);
     },
+    FDEL(state,payload){
+      state.xiaoxi = state.xiaoxi.filter(item => {
+          return item.id != payload.id;
+      })
+    },
     FGETALL(state,payload){
       state.xiaoxi = payload;
     },
@@ -624,6 +629,13 @@ const store =  new Vuex.Store({
 
       commit('FADD',data);
     },
+    async FDEL({commit},payload){
+      // 发送delete请求到json-server服务器。自动帮我们删除这条数据，操作data.json文件
+      var data = await fetch('/FXY/'+payload.id,{
+          "method":"DELETE"
+      }).then(res => res.json());
+      commit('FDEL',payload);
+  },
     async CGETALL(context,payload){
       // 请求数据
       var data = await fetch('/corporator/').then(res => res.json());
