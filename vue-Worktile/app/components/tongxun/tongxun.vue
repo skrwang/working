@@ -304,15 +304,12 @@ export default {
                     ar.push(this.$store.state.corporator[i].title);
                 }
             }
-            console.log(ar);
             return ar;
         },
         peop(){
             return function(value) {
-                console.log(value,'aaaraaaaaaaaaa');
                 var arr = [];
                 for(var i = 0; i < this.$store.state.corporator.length; i ++ ){
-                    console.log(this.$store.state.corporator[i].title == value,this.$store.state.corporator[i].title,value)
                     if(this.$store.state.corporator[i].title == value){
                         arr.push(this.$store.state.corporator[i]);
                     }
