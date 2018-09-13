@@ -479,6 +479,7 @@ const store =  new Vuex.Store({
     count:1,
     wangpan:[],
     xiaoxi:[],
+    corporator:[]
   },
   mutations:{
     XGETALL(state,payload){
