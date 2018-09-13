@@ -507,33 +507,33 @@ const r = [
     ]
   },
   {
-    path:"/tongxun",
+    path:"/tongxun/",
     component:tongxun.default,
     name:'通讯录',
     children:[
       //配置子路由
       {
-        path:'/tongxun/qygg/',
+        path:'/tongxun/qygg',
         component:require('./components/tongxun/qygg/qygg.vue').default,
         name:"企业公告"
       },
       {
-        path:'/tongxun/imTime/',
+        path:'/tongxun/imTime',
         component:require('./components/tongxun/imTime/imTime.vue').default,
         name:"日程助手"
       },
       {
-        path:'/tongxun/wpzs/',
+        path:'/tongxun/wpzs',
         component:require('./components/tongxun/wpzs/wpzs.vue').default,
         name:"网盘助手"
       },
       {
-        path:'/tongxun/xmzs/',
+        path:'/tongxun/xmzs',
         component:require('./components/tongxun/xmzs/xmzs.vue').default,
         name:"项目助手"
       },
       {
-        path:'/tongxun/xtjqr/',
+        path:'/tongxun/xtjqr',
         component:require('./components/tongxun/xtjqr/xtjqr.vue').default,
         name:"小特机器人"
       },
@@ -543,9 +543,14 @@ const r = [
         name:"刑聪聪"
       },
       {
-        path:'/tongxun/wzy/',
+        path:'/tongxun/wzy',
         component:require('./components/tongxun/wzy/wzy.vue').default,
         name:"王梓烨"
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path:'*',
+        redirect:'/tongxun/xcc/'
       }
     ]
   },

@@ -70,7 +70,7 @@ export default {
           {
             title:'通讯录',
             icon:"icon-tongxunlu",
-            url:'/tongxun'
+            url:'/tongxun/'
           }
       ]
     }
