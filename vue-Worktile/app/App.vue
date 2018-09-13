@@ -11,8 +11,9 @@
                 <!-- cur 样式要在点击的标题与路由中的挑剔匹配时展示 -->
                 <li v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">
                     <!-- 做跳转 -->
-                    <router-link :to='item.url' class="iconfont" :class="item.icon">
-                        
+                    <router-link :to='item.url' class="app-item"  >
+                        <i class="iconfont item-icon" :class="$route.path.indexOf(item.url) != -1 ? item.icon1 : item.icon"></i>
+                        <span class="name">{{item.title}}</span>
                     </router-link>
                 </li>
             </ul>
@@ -20,8 +21,9 @@
         <div class="bottom-area">
             <ul class="nav-apps">
                 <li v-for="item of bottom_area" :class="{cur:$route.path.indexOf(item.url) != -1}">
-                    <router-link :to='item.url' class="iconfont" :class="item.icon">
-                        
+                    <router-link :to='item.url' class="app-item">
+                        <i class="iconfont item-icon" :class="$route.path.indexOf(item.url) != -1 ? item.icon1 : item.icon"></i>
+                        <span class="name">{{item.title}}</span>
                     </router-link>
                 </li>
             </ul>
@@ -48,28 +50,33 @@ export default {
         {
           title:'消息',
           icon:"icon-xiaoxi",
+          icon1:"icon-xiaoxi2",
           url:'/xiaoxi/'
         },
         {
           title:'项目',
-          icon:"icon-jijinxiangmu",
+          icon:"icon-wangpan",
+          icon1:"icon-project-o",
           url:'/xiangmu'
         },
         {
           title:'日历',
           icon:"icon-rili",
+          icon1:"icon-rili2",
           url:'/rili'
         },
         {
           title:'网盘',
-          icon:"icon-yunyingpan",
-          url:'/wangpan'
+          icon:"icon-folder_icon",
+          icon1:"icon-wenjianjia",
+          url:'/wangpan/'
         }
       ],
       bottom_area:[
           {
             title:'通讯录',
             icon:"icon-tongxunlu",
+            icon1:"icon-51",
             url:'/tongxun/'
           }
       ]
@@ -119,6 +126,49 @@ export default {
     .middle-area ul li {
         cursor: pointer;
         position: relative;
+        overflow: hidden;
+        &:hover{
+          background: #18bfa4;
+        }
+        &:hover a.app-item{
+          box-shadow: 0 0 2px 2px #18bfa4;
+        }
+        &:hover a.app-item .item-icon {
+          opacity: 1;
+          -webkit-transform: translateY(-19px);
+          transform: translateY(-19px);
+        }
+        &:hover a.app-item .name{
+            height: auto;
+            -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+        }
+        .app-item {
+          .item-icon {
+              margin-top: 5px;
+              display: inline-block;
+              color: #fff;
+              font-size: 24px;
+              opacity: .8;
+              -webkit-transition: opacity .5s,-webkit-transform .5s;
+              transition: opacity .5s,-webkit-transform .5s;
+              transition: transform .5s,opacity .5s;
+              transition: transform .5s,opacity .5s,-webkit-transform .5s;
+          }
+          .name {
+              display: block;
+              height: 0;
+              overflow: hidden;
+              font-size: 12px;
+              color: #fff;
+              -webkit-transform: translateY(0);
+              transform: translateY(0);
+              -webkit-transition: height .5s,-webkit-transform .5s;
+              transition: height .5s,-webkit-transform .5s;
+              transition: height .5s,transform .5s;
+              transition: height .5s,transform .5s,-webkit-transform .5s;
+          }
+        }
     }
     .middle-area ul li > a,.bottom-area ul li > a{
         width: 70px;
@@ -127,6 +177,7 @@ export default {
         height: 70px;
         transition: box-shadow .3s,-webkit-box-shadow .3s;
         line-height: 70px;
+        font-weight: 400;
     }
     .middle-area ul li.cur > a,.bottom-area ul li.cur > a{
         background: #18bfa4;
@@ -147,6 +198,9 @@ export default {
         font-size: 23px;
          font-weight: bold;
     }
+    .icon-51::before {
+      font-size: 30px;
+    }
     .bottom-area {
         text-align: center;
         position: absolute;
@@ -156,6 +210,53 @@ export default {
     .bottom-area .nav-apps{
         margin-bottom: 10px;
         list-style: none;
+        li {
+          cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        &:hover{
+          background: #18bfa4;
+        }
+        &:hover a.app-item{
+          box-shadow: 0 0 2px 2px #18bfa4;
+        }
+        &:hover a.app-item .item-icon {
+          opacity: 1;
+          -webkit-transform: translateY(-19px);
+          transform: translateY(-19px);
+        }
+        &:hover a.app-item .name{
+            height: auto;
+            -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+        }
+        .app-item {
+          .item-icon {
+              margin-top: 5px;
+              display: inline-block;
+              color: #fff;
+              font-size: 24px;
+              opacity: .8;
+              -webkit-transition: opacity .5s,-webkit-transform .5s;
+              transition: opacity .5s,-webkit-transform .5s;
+              transition: transform .5s,opacity .5s;
+              transition: transform .5s,opacity .5s,-webkit-transform .5s;
+          }
+          .name {
+              display: block;
+              height: 0;
+              overflow: hidden;
+              font-size: 12px;
+              color: #fff;
+              -webkit-transform: translateY(0);
+              transform: translateY(0);
+              -webkit-transition: height .5s,-webkit-transform .5s;
+              transition: height .5s,-webkit-transform .5s;
+              transition: height .5s,transform .5s;
+              transition: height .5s,transform .5s,-webkit-transform .5s;
+          }
+        }
+        }
     }
     .user:hover{
         opacity: 0.7;
