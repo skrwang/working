@@ -90,12 +90,12 @@
                     <tbody>
                       <!-- index从0开始，i从1开始 -->
                        <tr v-for='(item,index) of calender.length /7'>
-                         <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].fullDay}}</td>
+                         <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].day}}</td>
                        </tr>
                     </tbody>
                 </table>
             </div>
-             <div class="schedule">
+             <!-- <div class="schedule">
                  <div class="box" v-for="item of schedule">
                     <table>
                         <tr v-for="child of item">
@@ -103,7 +103,7 @@
                         </tr>
                     </table>
                  </div>
-             </div>
+             </div> -->
         </div>
     </div>
 </template>
@@ -115,23 +115,23 @@ export default {
             year:2018,
             month:9,
             isxian:false,
-            things:[
-                    {
-                        title:"这是一个事务",
-                        start:20180903,
-                        end:20180905
-                    },
-                    {
-                        title:"这是一个事务1",
-                        start:20180907,
-                        end:20180909
-                    },
-                    {
-                        title:"这是一个事务3",
-                        start:20180910,
-                        end:20180915
-                    }
-            ]
+            // things:[
+            //         {
+            //             title:"这是一个事务",
+            //             start:20180903,
+            //             end:20180905
+            //         },
+            //         {
+            //             title:"这是一个事务1",
+            //             start:20180907,
+            //             end:20180909
+            //         },
+            //         {
+            //             title:"这是一个事务3",
+            //             start:20180910,
+            //             end:20180915
+            //         }
+            // ]
         }
     },
     computed:{
@@ -177,85 +177,85 @@ export default {
                 }
               return arr;
         },
-        schedule(){
-                    var arr = [];//里面放的是box
+        // schedule(){
+        //             var arr = [];//里面放的是box
                     
-                    for (var i=0;i<this.calender.length/7;i++){
-                        // console.log(this.calender.length);
-                        arr.push([]);//里面放tr
-                        for(var j=0;j<3;j++){
-                            arr[i].push([]);//td
-                            for(var k=0;k<7;k++){
-                                arr[i][j].push({
-                                    colspan:1,
-                                    fullDay:this.calender[i*7+k].fullDay,
-                                    week:k
-                                });
-                            }
-                        }
-                    }
-                    //处理事务  things
-                    this.things.forEach(item => {
-                        //开始日期时间戳
-                        // console.log(item);
-                        var start=new Date(item.start.toString().substr(0,4),item.start.toString().substr(4,2)-1,item.start.toString().substr(6,2))
-                        // console.log(start)
-                        //结束时间的时间戳
-                        var end=new Date(item.end.toString().substr(0,4),item.end.toString().substr(4,2)-1,item.end.toString().substr(6,2))
-                        // console.log(end)
-                        //结束时间减去开始时间计算经历了几天
-                        var during=(end-start)/86400000+1
-                        //一个信号量
-                        var flag=true;
-                        arr.forEach((week,weekidx)=>{
-                            //先遍历tr
-                            for(var i =0;i<3;i++){
-                                //遍历td
-                            for(var j=0;j<7;j++){
-                            if(week[i][j]){
-                            //如果这个对象被删除了，就不存在了
-                            if(week[i][j].fullDay==item.start&&flag&&!week[i][j].title){
-                                // 第一周持续的时间
-                                var nowWeekDuring=during + week[i][j].week <= 7 ? during : 7 - week[i][j].week;
-                                //设置title
-                                week[i][j].title=item.title;
-                                //设置持续时间
-                                week[i][j].colspan=nowWeekDuring;
-                                //删除后边的
-                                week[i].splice(j+1,nowWeekDuring-1);
-                                //上锁，防止出现3行
-                                flag=false;
-                                // 一下内容就是后边跨周持续时间的内容，跟第一周没有关系
-                                // 信号量，剩余的事务持续时间
-                                var rest=during - nowWeekDuring;
-                                var count =0;
-                                while(rest > 0){
-                                    count++;
-                                    var nextWeekDuring=rest >= 7 ? 7 :rest;
-                                    for(var n=0;n<3;n++){
-                                        // 判断如果当前行有标题就去下一行
-                                        if(arr[weekidx + count][n][0].title){
-                                            continue;
-                                        }
-                                        //weekidx 是起始周 
-                                        //count跨了几周
-                                        arr[weekidx + count][n][0].title=item.title;
-                                        arr[weekidx + count][n][0].colspan=nextWeekDuring;
-                                        arr[weekidx + count][n].splice(1,nextWeekDuring-1)
-                                        break;
-                                    }
-                                    rest-=7;
-                                }
-                            }
-                            }
-                            }
-                            }
-                        })
+        //             for (var i=0;i<this.calender.length/7;i++){
+        //                 // console.log(this.calender.length);
+        //                 arr.push([]);//里面放tr
+        //                 for(var j=0;j<3;j++){
+        //                     arr[i].push([]);//td
+        //                     for(var k=0;k<7;k++){
+        //                         arr[i][j].push({
+        //                             colspan:1,
+        //                             fullDay:this.calender[i*7+k].fullDay,
+        //                             week:k
+        //                         });
+        //                     }
+        //                 }
+        //             }
+        //             //处理事务  things
+        //             this.things.forEach(item => {
+        //                 //开始日期时间戳
+        //                 // console.log(item);
+        //                 var start=new Date(item.start.toString().substr(0,4),item.start.toString().substr(4,2)-1,item.start.toString().substr(6,2))
+        //                 // console.log(start)
+        //                 //结束时间的时间戳
+        //                 var end=new Date(item.end.toString().substr(0,4),item.end.toString().substr(4,2)-1,item.end.toString().substr(6,2))
+        //                 // console.log(end)
+        //                 //结束时间减去开始时间计算经历了几天
+        //                 var during=(end-start)/86400000+1
+        //                 //一个信号量
+        //                 var flag=true;
+        //                 arr.forEach((week,weekidx)=>{
+        //                     //先遍历tr
+        //                     for(var i =0;i<3;i++){
+        //                         //遍历td
+        //                     for(var j=0;j<7;j++){
+        //                     if(week[i][j]){
+        //                     //如果这个对象被删除了，就不存在了
+        //                     if(week[i][j].fullDay==item.start&&flag&&!week[i][j].title){
+        //                         // 第一周持续的时间
+        //                         var nowWeekDuring=during + week[i][j].week <= 7 ? during : 7 - week[i][j].week;
+        //                         //设置title
+        //                         week[i][j].title=item.title;
+        //                         //设置持续时间
+        //                         week[i][j].colspan=nowWeekDuring;
+        //                         //删除后边的
+        //                         week[i].splice(j+1,nowWeekDuring-1);
+        //                         //上锁，防止出现3行
+        //                         flag=false;
+        //                         // 一下内容就是后边跨周持续时间的内容，跟第一周没有关系
+        //                         // 信号量，剩余的事务持续时间
+        //                         var rest=during - nowWeekDuring;
+        //                         var count =0;
+        //                         while(rest > 0){
+        //                             count++;
+        //                             var nextWeekDuring=rest >= 7 ? 7 :rest;
+        //                             for(var n=0;n<3;n++){
+        //                                 // 判断如果当前行有标题就去下一行
+        //                                 if(arr[weekidx + count][n][0].title){
+        //                                     continue;
+        //                                 }
+        //                                 //weekidx 是起始周 
+        //                                 //count跨了几周
+        //                                 arr[weekidx + count][n][0].title=item.title;
+        //                                 arr[weekidx + count][n][0].colspan=nextWeekDuring;
+        //                                 arr[weekidx + count][n].splice(1,nextWeekDuring-1)
+        //                                 break;
+        //                             }
+        //                             rest-=7;
+        //                         }
+        //                     }
+        //                     }
+        //                     }
+        //                     }
+        //                 })
 
-                    });
-                    console.log(arr);
-                    return arr;
-        }
+        //             });
+        //             console.log(arr);
+        //             return arr;
+        // }
     },
     watch:{
           month(newVal,oldVal){

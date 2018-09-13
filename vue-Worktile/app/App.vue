@@ -61,6 +61,28 @@ export default {
   name: 'app',
   data () {
     return {
+      tabNav:[
+        {
+          title:'消息',
+          icon:"icon-xiaoxi",
+          url:'/xiaoxi/'
+        },
+        {
+          title:'项目',
+          icon:"icon-jijinxiangmu",
+          url:'/xiangmu'
+        },
+        {
+          title:'日历',
+          icon:"icon-rili",
+          url:'/rili/'
+        },
+        {
+          title:'网盘',
+          icon:"icon-yunyingpan",
+          url:'/wangpan'
+        }
+      ],
         Back:false,
         Backstage:[
             {
@@ -109,7 +131,7 @@ export default {
                 title:'日历',
                 icon:"icon-rili",
                 icon1:"icon-rili2",
-                url:'/rili'
+                url:'/rili/'
             },
             {
                 title:'网盘',

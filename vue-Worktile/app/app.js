@@ -578,7 +578,8 @@ const store =  new Vuex.Store({
     apy2:[],
     apy3:[],
     xiaoxi:[],
-    corporator:[]
+    corporator:[],
+    rili:[]
   },
   mutations:{
     XGETALL(state,payload){
@@ -609,8 +610,14 @@ const store =  new Vuex.Store({
     CADD(state,payload){
       state.corporator.push(payload);
     },
+    MJD(state, payload) {
+         state.rili = payload;
+    },
+    MADD(state, payload) {
+      state.rili.push(payload)
+    },
     YGETALL(state, payload) {
-      state.todos = payload;
+        state.todos = payload;
     },
     YDEL(state, payload) {
       state.todos = state.todos.filter(item => {
@@ -713,7 +720,7 @@ const store =  new Vuex.Store({
           "method":"DELETE"
       }).then(res => res.json());
       commit('FDEL',payload);
-  },
+    },
     async CGETALL(context,payload){
       // 请求数据
       var data = await fetch('/corporator/').then(res => res.json());
@@ -730,6 +737,23 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
 
       commit('CADD',data);
+    },
+    async MJD(context, payload) {
+            //请求数据
+             var data = await fetch('/MJL/').then(res => res.json());
+            context.commit('MJD',data);
+    },
+    async MADD({ commit }, payload) {
+            //上传数据
+           var data = await fetch('MJL/',{
+          "method":"POST",
+          "headers":{
+              'Content-Type': "application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+           console.log(data,"woshicommit请求");
+      commit('MADD',data);
     },
     async YGETALL(context, payload) {
       //请求数据
@@ -861,7 +885,8 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
       commit("YU3ADD", data)
     },
-    }
+  }
+  
   
 })
 
