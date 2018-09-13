@@ -29,7 +29,7 @@ const r = [
         // name:"企业公告",
         children:[
           {
-            path:'/xiaoxi/qygg/xx/',
+            path:'/xiaoxi/qygg/xx',
             component:require('./components/xiaoxi/qygg/xx/xx.vue').default,
             // name:'消息'
           },
@@ -507,33 +507,33 @@ const r = [
     ]
   },
   {
-    path:"/tongxun",
+    path:"/tongxun/",
     component:tongxun.default,
     name:'通讯录',
     children:[
       //配置子路由
       {
-        path:'/tongxun/qygg/',
+        path:'/tongxun/qygg',
         component:require('./components/tongxun/qygg/qygg.vue').default,
         name:"企业公告"
       },
       {
-        path:'/tongxun/imTime/',
+        path:'/tongxun/imTime',
         component:require('./components/tongxun/imTime/imTime.vue').default,
         name:"日程助手"
       },
       {
-        path:'/tongxun/wpzs/',
+        path:'/tongxun/wpzs',
         component:require('./components/tongxun/wpzs/wpzs.vue').default,
         name:"网盘助手"
       },
       {
-        path:'/tongxun/xmzs/',
+        path:'/tongxun/xmzs',
         component:require('./components/tongxun/xmzs/xmzs.vue').default,
         name:"项目助手"
       },
       {
-        path:'/tongxun/xtjqr/',
+        path:'/tongxun/xtjqr',
         component:require('./components/tongxun/xtjqr/xtjqr.vue').default,
         name:"小特机器人"
       },
@@ -543,9 +543,14 @@ const r = [
         name:"刑聪聪"
       },
       {
-        path:'/tongxun/wzy/',
+        path:'/tongxun/wzy',
         component:require('./components/tongxun/wzy/wzy.vue').default,
         name:"王梓烨"
+      },
+      {
+        //如果用户随便输入地址，转到首页
+        path:'*',
+        redirect:'/tongxun/xcc/'
       }
     ]
   },
@@ -566,16 +571,40 @@ const store =  new Vuex.Store({
   state:{
     count:1,
     wangpan:[],
+<<<<<<< HEAD
     corporator:[],
     todos:[],
     apy:[],
     apy1:[],
     apy2:[],
     apy3:[],
+=======
+    xiaoxi:[],
+    corporator:[]
+>>>>>>> e6b8c07493fba709daad508a346571d75397e76e
   },
   mutations:{
-    GETALL(state,payload){
+    XGETALL(state,payload){
       state.wangpan = payload;
+    },
+    XADD(state,payload){
+      state.wangpan.push(payload);
+    },
+    XDEL(state,payload){
+      state.wangpan = state.wangpan.filter(item => {
+          return item.id != payload.id;
+      })
+    },
+    FADD(state,payload){
+      state.xiaoxi.push(payload);
+    },
+    FDEL(state,payload){
+      state.xiaoxi = state.xiaoxi.filter(item => {
+          return item.id != payload.id;
+      })
+    },
+    FGETALL(state,payload){
+      state.xiaoxi = payload;
     },
     CGETALL(state,payload){
       state.corporator = payload;
@@ -640,15 +669,57 @@ const store =  new Vuex.Store({
     },
   },
   actions:{
-    async GETALL(context,payload){
+    async XGETALL(context,payload){
       // 请求数据
       var data = await fetch('/XCC/').then(res => res.json());
-      context.commit('GETALL',data);
+      context.commit('XGETALL',data);
     },
+    async XADD({commit},payload){
+      // 上传数据
+      var data = await fetch('XCC/',{
+          "method":"POST",
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+
+      commit('XADD',data);
+    },
+    async XDEL({commit},payload){
+      // 发送delete请求到json-server服务器。自动帮我们删除这条数据，操作data.json文件
+      var data = await fetch('/XCC/'+payload.id,{
+          "method":"DELETE"
+      }).then(res => res.json());
+      commit('XDEL',payload);
+    },
+    async FGETALL(context,payload){
+      // 请求数据
+      var data = await fetch('/FXY/').then(res => res.json());
+      context.commit('FGETALL',data);
+    },
+    async FADD({commit},payload){
+      // 上传数据
+      var data = await fetch('FXY/',{
+          "method":"POST",
+          "headers":{
+              "Content-Type":"application/json"
+          },
+          "body":JSON.stringify(payload)
+      }).then(res => res.json());
+
+      commit('FADD',data);
+    },
+    async FDEL({commit},payload){
+      // 发送delete请求到json-server服务器。自动帮我们删除这条数据，操作data.json文件
+      var data = await fetch('/FXY/'+payload.id,{
+          "method":"DELETE"
+      }).then(res => res.json());
+      commit('FDEL',payload);
+  },
     async CGETALL(context,payload){
       // 请求数据
       var data = await fetch('/corporator/').then(res => res.json());
-      console.log(data,'woshidata');
       context.commit('CGETALL',data);
     },
     async CADD({commit},payload){
@@ -662,6 +733,7 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
 
       commit('CADD',data);
+<<<<<<< HEAD
     },
     async YGETALL(context, payload) {
       //请求数据
@@ -793,6 +865,9 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
       commit("YU3ADD", data)
     },
+=======
+    }
+>>>>>>> e6b8c07493fba709daad508a346571d75397e76e
   }
 })
 
