@@ -39,7 +39,7 @@
                             </a>
                             <a href="javascript:;" class="title">群组</a>
                             <a href="javascript:;" class="action">
-                                <i class="iconfont sd">##</i>
+                                <i class="iconfont sd icon-other"></i>
                             </a>
                         </div>
                         <div class="section-body collapse" :class="!jt ?'in' : ''">
@@ -63,7 +63,7 @@
                             </a>
                             <a href="javascript:;" class="title">机器人</a>
                             <a href="javascript:;" class="action">
-                                <i class="iconfont sd">##</i>
+                                <i class="iconfont sd icon-other"></i>
                             </a>
                         </div>
                         <div class="section-body collapse" :class="!jt1 ?'down' : ''" :style="{width:people.length * 50}">
@@ -171,7 +171,7 @@
                 <div class="modal-content">
                     <div class="modal-header ng-scope">
                         <h3 class="modal-title ng-scope">添加成员</h3>
-                        <a href="javascript:;" class="modal-close" @click="bh = false">
+                        <a href="javascript:;" class="modal-close" @click="close">
                             <i class="iconfont icon-close"></i>
                         </a>
                     </div>
@@ -246,7 +246,7 @@ export default {
             qz:[
                 {
                     title:"企业公告",
-                    url:'/tongxun/qygg/'
+                    url:'/tongxun/qygg'
                 }
             ],
             people:[
@@ -275,7 +275,7 @@ export default {
                 {
                     photo:"聪聪",
                     name:"刑聪聪",
-                    url:"/tongxun/xcc"
+                    url:"/tongxun/xcc/"
                 }
             ],
             p_count:[
@@ -304,15 +304,12 @@ export default {
                     ar.push(this.$store.state.corporator[i].title);
                 }
             }
-            console.log(ar);
             return ar;
         },
         peop(){
             return function(value) {
-                console.log(value,'aaaraaaaaaaaaa');
                 var arr = [];
                 for(var i = 0; i < this.$store.state.corporator.length; i ++ ){
-                    console.log(this.$store.state.corporator[i].title == value,this.$store.state.corporator[i].title,value)
                     if(this.$store.state.corporator[i].title == value){
                         arr.push(this.$store.state.corporator[i]);
                     }
@@ -343,7 +340,16 @@ export default {
                 title:title
             });
             this.bh = false;
-            this.$refs.form.getElementsByTagName('input').value = "";
+            // this.$refs.form.getElementsByTagName('input').value = "";
+            for(var i =0;i <this.$refs.form.getElementsByTagName('input').length;i++ ){
+                this.$refs.form.getElementsByTagName('input')[i].value = ""
+            }
+        },
+        close(){
+            this.bh = false;
+            for(var i =0;i <this.$refs.form.getElementsByTagName('input').length;i++ ){
+                this.$refs.form.getElementsByTagName('input')[i].value = ""
+            }
         }
     }
 }

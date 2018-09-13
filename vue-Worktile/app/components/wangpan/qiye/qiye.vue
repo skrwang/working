@@ -53,7 +53,7 @@
                     </p>
                 </div>
                 <ul>
-                    <li class="file-item" v-for="(item,index) of list" :class="{cur : file == item.index}">
+                    <li class="file-item" v-for="(item,index) of list" :class="{cur : file == item.index}" v-if="item.judge != 'geren'">
                         <div class="file-name">
                             <i class="iconfont" :class="item.icon"></i>
                             {{item.title}}
@@ -71,10 +71,57 @@
                             <div class="file-action">
                                 <i class="iconfont icon-unie122"></i>
                                 &nbsp;&nbsp;
-                                <i class="iconfont icon-transverse"></i>
+                                <i class="iconfont icon-transverse" @click="delShow(index)"></i>
+                                <div class="pop-menu" v-show="!delshow">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:">新建文件夹</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">设置权限</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="javascript:">公开链接</a>
+                                        </li> -->
+                                        <!-- <li>
+                                            <a href="javascript:">移动</a>
+                                        </li> -->
+                                        <li>
+                                            <a href="javascript:">复制</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">下载</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:">重命名</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="javascript:">修改颜色</a>
+                                        </li> -->
+                                        <li >
+                                            <a href="javascript:" @click="tanToggle">删除</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                        
+                        <!-- 弹出删除 -->
+                        <div class="alertBox" v-show="alertShow">
+                            <div class="alertCon">
+                                <div class="Atop">
+                                    <h3>删除文件</h3>
+                                    <a href="javascript:" class="guanbi" @click="delToggle"><i class="iconfont icon-close"></i></a>
+                                </div>
+                                <div class="Abottom">
+                                    <p>
+                                        <span>确认要删除文件：</span>
+                                        <span class="delTxt">{{item.title}}</span>
+                                    </p>
+                                    <button class="delBtn" @click="del(item.id)">确认删除</button>
+                                    <a href="javascript:" class="quxiao" @click="delToggle">取消</a>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -90,10 +137,29 @@
                 shangchuan:true,
                 imgList:{},
                 file:-1,
+                delshow:true,
+                alertShow:false,
             }
         },
         methods:{
-            
+            tanToggle: function() {
+                this.alertShow = !this.alertShow;
+                this.delshow  = !this.delshow;
+            },
+            delToggle: function() {
+                this.alertShow = !this.alertShow;
+            },
+            delShow(index){
+                this.delshow = !this.delshow
+            },
+            // 删除
+			del(id){
+                // 只需要一个id就行了
+                this.alertShow = !this.alertShow;
+				this.$store.dispatch("XDEL",{
+					id : id
+				})
+			},
             fileClick(){
                 document.getElementById('upload_file').click();
             },
@@ -404,6 +470,43 @@
                 .file-time {
                     width: 170px;
                     cursor: pointer;
+                    position: relative;
+                    .pop-menu {
+                        padding: 5px 0;
+                        min-width: 203px;
+                        position: absolute;
+                        right: -36px;
+                        top: 20px;
+                        background: #fff;
+                        z-index: 9999;
+                        text-align: left;
+                        ul li{
+                            display: block;
+                            padding: 0;
+                            margin: 0 0 2px;
+                            cursor: pointer;
+                            -webkit-transition: background .2s;
+                            transition: background .2s;
+                            a {
+                                display: block;
+                                padding: 5px 18px;
+                                line-height: 30px;
+                                color: #666;
+                                text-decoration: none;
+                                -webkit-box-sizing: border-box;
+                                box-sizing: border-box;
+                                -webkit-transition: padding-left .2s;
+                                transition: padding-left .2s;
+                            }
+                            &:hover {
+                                box-shadow: 0 0 8px 2px #eee;
+                            }
+                            &:hover a {
+                                color: #333;
+                                padding-left: 26px;
+                            }
+                        }
+                    }
                 }
                 .file-action {
                     width: 75px;
@@ -419,8 +522,79 @@
                 box-shadow: 0 0 8px 2px #eee;
                 background: 0 0;
             }
+            .file-item:nth-child(1) .file-name .iconfont {
+                color: #22d7bb;
+            }
+            .file-item:nth-child(2) .file-name .iconfont {
+                color: #7076fa;
+            }
+            .file-item:nth-child(3) .file-name .iconfont {
+                color: #f969aa;
+            }
             .file-item:hover .file-action {
                 display: inline-block;
+            }
+            .alertBox {
+                width: 100%;
+                height: 100%;
+                background:rgba(0,0,0,.2);
+                position: fixed;
+                top: 0;
+                left: 0;
+                .alertCon {
+                        width: 660px;
+                        height: 185px;
+                        background-color: #fff;
+                        box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.3);
+                        border-radius: .3rem;
+                        position: absolute;
+                        top: 69px;
+                        left: 331px;
+                    .Atop {
+                        padding: 0 1.875rem;
+                        height: 50px;
+                        align-items: center;
+                        border-bottom: 1px solid #eee;
+                        position: relative;
+                        h3 {
+                            font-size: 18px;
+                            font-weight: 500;
+                            float: left;
+                            line-height: 50px;
+                        }
+                        i{
+                            float: right;
+                            font-size: 16px;
+                            color: #ddd;
+                            line-height: 50px;
+                        }
+                    }
+                    .Abottom {
+                        padding: 1.25rem 1.875rem 1.875rem;
+                        p {
+                            margin-bottom: 20px;
+                            .delTxt {
+                                color: #ff5b57;
+                            }
+                        }
+                        .delBtn{
+                            color: #fff;
+                            background-color: #ff5b57;
+                            border-color: #ff5b57;
+                            width: 115px;
+                            height: 40px;
+                            text-align: center;
+                            line-height: 40px;
+                            outline: none;
+                            border-radius: 40px;
+                            border: none;
+                        }
+                        a {
+                            color: #aaa;
+                            margin-left: 10px;
+                        }
+                    }
+                }
             }
         }
     }
