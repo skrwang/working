@@ -164,6 +164,9 @@
             zhidu(){
               this.state = 'zhidu'  
             },
+            geren(){
+              this.state = 'geren'  
+            },
         },
         computed:{
             list(){
@@ -176,6 +179,8 @@
 					return this.$store.getters.zhaopian
 				}else if(this.state == "zhidu"){
 					return this.$store.getters.zhidu
+				}else if(this.state == "geren"){
+					return this.$store.getters.geren
 				}
             },
         },
