@@ -566,7 +566,12 @@ const store =  new Vuex.Store({
   state:{
     count:1,
     wangpan:[],
-    corporator:[]
+    corporator:[],
+    todos:[],
+    apy:[],
+    apy1:[],
+    apy2:[],
+    apy3:[],
   },
   mutations:{
     GETALL(state,payload){
@@ -577,7 +582,62 @@ const store =  new Vuex.Store({
     },
     CADD(state,payload){
       state.corporator.push(payload);
-    }
+    },
+    YGETALL(state, payload) {
+      state.todos = payload;
+    },
+    YDEL(state, payload) {
+      state.todos = state.todos.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+    YADD(state, payload) {
+      state.todos.push(payload);
+    },
+    YUGETALL(state, payload) {
+      state.apy = payload;
+    },
+    YUDEL(state, payload) {
+      state.apy = state.apy.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+    YUADD(state, payload) {
+      state.apy.push(payload);
+    },
+    YU1GETALL(state, payload) {
+      state.apy1 = payload;
+    },
+    YU1DEL(state, payload) {
+      state.apy1 = state.apy1.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+    YU1ADD(state, payload) {
+      state.apy1.push(payload);
+    },
+    YU2GETALL(state, payload) {
+      state.apy2 = payload;
+    },
+    YU2DEL(state, payload) {
+      state.apy2 = state.apy2.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+    YU2ADD(state, payload) {
+      state.apy2.push(payload);
+    },
+    YU3GETALL(state, payload) {
+      state.apy3 = payload;
+    },
+    YU3DEL(state, payload) {
+      state.apy3 = state.apy3.filter(item => {
+        return item.id != payload.id;
+      })
+    },
+    YU3ADD(state, payload) {
+      state.apy3.push(payload);
+    },
   },
   actions:{
     async GETALL(context,payload){
@@ -602,7 +662,137 @@ const store =  new Vuex.Store({
       }).then(res => res.json());
 
       commit('CADD',data);
-  }
+    },
+    async YGETALL(context, payload) {
+      //请求数据
+      console.log(context,'lalalal');
+      var data = await fetch('/mapList/').then(res => res.json());
+      console.log(data);
+      context.commit('YGETALL', data);
+    },
+    async YUGETALL(context, payload) {
+      //请求数据
+      console.log(context,'lalalal');
+      var data = await fetch('/mapList1/').then(res => res.json());
+      console.log(data);
+      context.commit('YUGETALL', data);
+    },
+    async YU1GETALL(context, payload) {
+      //请求数据
+      console.log(context,'lalalal');
+      var data = await fetch('/mapList2/').then(res => res.json());
+      console.log(data);
+      context.commit('YU1GETALL', data);
+    },
+    async YU2GETALL(context, payload) {
+      //请求数据
+      console.log(context,'lalalal');
+      var data = await fetch('/mapList3/').then(res => res.json());
+      console.log(data);
+      context.commit('YU2GETALL', data);
+    },
+    async YU3GETALL(context, payload) {
+      //请求数据
+      console.log(context,'lalalal');
+      var data = await fetch('/mapList4/').then(res => res.json());
+      console.log(data);
+      context.commit('YU3GETALL', data);
+    },
+    async YDEL({ commit }, payload) {
+      console.log(payload,'wowowow');
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/mapList/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("YDEL", payload);
+    },
+    async YUDEL({ commit }, payload) {
+      console.log(payload,'wowowow');
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/mapList1/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("YUDEL", payload);
+    },
+    async YU1DEL({ commit }, payload) {
+      console.log(payload,'wowowow');
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/mapList2/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("YU1DEL", payload);
+    },
+    async YU2DEL({ commit }, payload) {
+      console.log(payload,'wowowow');
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/mapList3/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("YU2DEL", payload);
+    },
+    async YU3DEL({ commit }, payload) {
+      console.log(payload,'wowowow');
+      //发送delete请求到json-server服务器,自动帮我删除这条数据,操作 data.json文件
+      var data = await fetch('/mapList4/' + payload.id, {
+        "method": "DELETE"
+      }).then(res => res.json());
+      commit("YU3DEL", payload);
+    },
+    async YADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/mapList/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("YADD", data)
+    },
+    async YUADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/mapList1/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("YUADD", data)
+    },
+    async YU1ADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/mapList2/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("YU1ADD", data)
+    },
+    async YU2ADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/mapList3/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("YU2ADD", data)
+    },
+    async YU3ADD({ commit }, payload) {
+      //上传数据
+      var data = await fetch('/mapList4/', {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": JSON.stringify(payload)
+      }).then(res => res.json());
+      commit("YU3ADD", data)
+    },
   }
 })
 
