@@ -116,10 +116,6 @@ export default {
                 icon:"icon-folder_icon",
                 icon1:"icon-wenjianjia",
                 url:'/wangpan/'
-            },
-            {
-                path:'*',
-                redirect:'/xiaoxi/qygg/xx'
             }
         ],
       bottom_area:[
