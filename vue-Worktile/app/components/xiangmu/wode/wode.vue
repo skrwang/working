@@ -17,16 +17,16 @@ export default {
         return {
             tabNav:[
                 {
-                url:'/xiangmu/wode/fuze',
+                url:'/xiangmu/wode/fuze/',
                 title:"我负责的",
                 },{
-                url:'/xiangmu/wode/fenpei',
+                url:'/xiangmu/wode/fenpei/',
                 title:"我分配的"
                 },{
-                url:'/xiangmu/wode/canyu',
+                url:'/xiangmu/wode/canyu/',
                 title:"我参与的"
                 },{
-                url:'/xiangmu/wode/chuangjian',
+                url:'/xiangmu/wode/chuangjian/',
                 title:"我创建的"
                 }
             ]

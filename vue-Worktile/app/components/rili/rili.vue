@@ -27,7 +27,7 @@
                                 <tbody>
                                   <!-- index从0开始，i从1开始 -->
                                    <tr v-for='(item,index) of calender.length /7'>
-                                     <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].fullDay}}</td>
+                                     <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].day}}</td>
                                    </tr>
                                 </tbody>
                             </table>
@@ -36,8 +36,8 @@
                 </div>   
             </aside>
             <ul>
-                <li v-for="item of vRili" :class="{cur : $route.name == item.title}">
-                    <router-link :to='item.url' class='iconfont' :class='item.icon'>
+                <li v-for="(item,index) of vRili" :class="{cur : $route.name == item.title}" @click='slip(index)'>
+                     <router-link :to='item.url' class='iconfont' :class='item.icon'>
                         {{item.title}}
                     </router-link>
                 </li>
@@ -103,7 +103,7 @@
                                      </ul>
                                 </div>
                                 <p class='button-bar' style='margin-top:10px;display: inline-block;'>
-                                   <button>确定</button>
+                                   <button @click='xuanze'>确定</button>
                                    <a @click='xuanze'>取消</a>
                                </p>
                              </div>
@@ -203,29 +203,31 @@
             // 补充上个月的最后几天
             
               // this.month=parseInt(this.month);
-              
-              
-                function buling(n){
+                var pmonth = this.month == 1 ? 12 : this.month - 1;
+                var nmonth = this.month == 12 ? 1 : this.month + 1;
+                var pyear = this.month == 1 ? this.year - 1 : this.year;
+                var nyear = this.month == 12 ? this.year + 1 : this.year;
+                 function buling(n){
                   return n.toString().length> 1?n.toString():"0"+n.toString();
                 }
             while(nowMonthFirstWeek--){
               arr.unshift({
                 day:lastMonthLength,
                 cur:true,
-                    fullDay:`${buling(lastMonthLength)}`
+                fullDay:`${pyear}${buling(pmonth)}${buling(lastMonthLength)}`
               });
               lastMonthLength--
             }
                // 本月天数
             var _a=1;
            while (nowMonthLength--) {
-          arr.push({
-            day:_a,
-            cur:false,
-                    fullDay:`${buling(_a)}`
-          });
-          _a++;
-          }  
+            arr.push({
+              day:_a,
+              cur:false,
+              fullDay:`${this.year}${buling(this.month)}${buling(_a)}`
+            });
+            _a++;
+            }  
             // 下个月补全
             var nextLength=arr.length >35 ? 42 -arr.length : 35 - arr.length;
             _a=1;
@@ -233,7 +235,7 @@
               arr.push({
                 day:_a,
                 cur:true,
-                fullDay:`${buling(_a)}`
+                fullDay:`${nyear}${buling(nmonth)}${buling(_a)}`
               });
               _a++;
             }
@@ -276,6 +278,9 @@
           },
          tabclick(index){
           this.active = index;
+         },
+         slip(index){
+          this.active=index;
          }
       }
   }

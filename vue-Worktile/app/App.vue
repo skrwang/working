@@ -11,7 +11,7 @@
                 <!-- cur 样式要在点击的标题与路由中的挑剔匹配时展示 -->
                 <li v-for="item of tabNav" :class="{cur:$route.path.indexOf(item.url) != -1}">
                     <!-- 做跳转 -->
-                    <router-link :to='item.url' class="app-item"  >
+                    <router-link :to='item.url' class="app-item">
                         <i class="iconfont item-icon" :class="$route.path.indexOf(item.url) != -1 ? item.icon1 : item.icon"></i>
                         <span class="name">{{item.title}}</span>
                     </router-link>
@@ -61,6 +61,28 @@ export default {
   name: 'app',
   data () {
     return {
+      tabNav:[
+        {
+          title:'消息',
+          icon:"icon-xiaoxi",
+          url:'/xiaoxi/'
+        },
+        {
+          title:'项目',
+          icon:"icon-jijinxiangmu",
+          url:'/xiangmu'
+        },
+        {
+          title:'日历',
+          icon:"icon-rili",
+          url:'/rili/'
+        },
+        {
+          title:'网盘',
+          icon:"icon-yunyingpan",
+          url:'/wangpan'
+        }
+      ],
         Back:false,
         Backstage:[
             {
@@ -109,7 +131,7 @@ export default {
                 title:'日历',
                 icon:"icon-rili",
                 icon1:"icon-rili2",
-                url:'/rili'
+                url:'/rili/'
             },
             {
                 title:'网盘',

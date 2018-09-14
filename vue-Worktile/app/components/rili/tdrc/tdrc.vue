@@ -3,7 +3,7 @@
         <div class='wdrc-nav'>
             <div class='title'>
                 <i class='iconfont icon-rili1'></i>
-                <span>团队日程</span>
+                <span>我的日程</span>
             </div>
             <div class='secondary-text'>
                <p class="jianting">
@@ -18,9 +18,9 @@
                     新建日历
                 </button>
                  <div class='wd-group'>
-                    <button class='month'>月</button>
-                    <button class='week'>周</button>
-                    <button class='day'>日</button>
+               <button v-for='(item,index) of datewmd' :class='{cs: active == index}' @click='wek(index)'>
+                  {{item.m}}
+                </button>
                  </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                   <div class='model-body'>
                       <form action="">
                         <div class='group input'>
-                              <input type="text" placeholder="日程安排，如下午2:00例会"> 
+                              <input type="text" v-model='titles'placeholder="日程安排，如下午2:00例会"> 
                         </div>
                         <div class='group rili'>
                             <label for="">日历</label>
@@ -45,11 +45,11 @@
                         <div class='group kaishi'>
                              <div class='ri-left'>
                                  <label for="">开始日期</label>
-                                  <input type="date">
+                                  <input type="date" v-model='starts'>
                              </div>
                              <div class='ri-right'>
                                  <label for="">结束日期</label>
-                                  <input type="date">
+                                  <input type="date" v-model="ends">
                              </div>
                         </div>
                         <div class='group quanxuan'>
@@ -57,9 +57,53 @@
                         </div>
                         <div class='group canxuan'>
                             <label for="">参选人</label>
-                            <ul><li>sk</li> <li data-v-b0bed79c="" class="last">+</li></ul>
+                            <ul><li>sk</li> <li @click='xuanze()' class="last">+</li></ul>
                         </div>
-                        <div class='group quanxuan'>
+                        <div class='xuancy' v-show="isShow1">
+                          <div class='model-header'>
+                           <i @click='xuanze'></i>
+                           <h3>选择成员</h3>
+                          </div>
+                          <div class='tab-wrap'>
+                             <div class='tabs'>
+                                <ul>
+                                  <li v-for='(itemss,index) of tabs' :class='{active1: active == index}' @click='tabclick(index)'>{{itemss.name}}</li>
+                                </ul>
+                                <div class='tab-1' v-show='active==0'>
+                                    <div class='los'>
+                                       <input type="text"placeholder='搜索成员'>
+                                       <i class='iconfont  icon-icon-' ></i>
+                                    </div>
+                                    <ul>
+                                      <li style='font-size: 14px;'>全部联系人</li>
+                                      <li style='font-size: 14px; color:black'><span class='icons'>聪聪</span>   聪聪</li>
+                                    </ul>
+                                </div>
+                                <div class='tab-2' v-show='active==1'>
+                                     <ul>
+                                       <li class='iconfont icon-jiantou'><i class='iconfont icon-qiyeguanli'></i>王氏集团<span>(2人)</span></li>
+                                     </ul>
+                                </div>
+                                <p class='button-bar' style='margin-top:10px;display: inline-block;'>
+                                   <button @click="add">确定</button>
+                                   <a @click='xuanze'>取消</a>
+                               </p>
+                             </div>
+                             <div class='tab-right'>
+                                 <div class='tabrt-header'>
+                                  <p><span>已选择成员</span><i>(1)</i></p>
+                                 </div>
+                                 <div class='tabrt-main'>
+                                 <ul>
+                                    <li><span class='icons'>sk</span>   skrwang</li>
+                                 </ul>
+                                   
+                                 </div>
+                                
+                             </div>
+                          </div>
+                        </div>
+                         <div class='group quanxuan'>
                             <input type="checkbox"></input>参与人反馈
                         </div>
                         <div class='group quanxuan' style="color:#22d7bb">
@@ -75,7 +119,7 @@
                </div>
              </transition>
          </div>
-        <div class='wdrc-main'>
+        <div class='wdrc-main' v-show='active==0'>
             <div class='calender'>
                 <table>
                     <thead>
@@ -90,7 +134,7 @@
                     <tbody>
                       <!-- index从0开始，i从1开始 -->
                        <tr v-for='(item,index) of calender.length /7'>
-                         <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].fullDay}}</td>
+                         <td v-for='i of 7' :class="{'cur':calender[index * 7 + (i-1)].cur}">{{calender[index * 7 + (i-1)].day}}</td>
                        </tr>
                     </tbody>
                 </table>
@@ -105,6 +149,70 @@
                  </div>
              </div>
         </div>
+        <div class='wdrc-main' v-show='active==1'>
+          <div class='calender calsde'>
+                <table>
+                    <thead>
+                        <th>周日9/9</th>
+                        <th>周一9/10</th>
+                        <th>周二9/11</th>
+                        <th>周三9/12</th>
+                        <th>周四9/13</th>
+                        <th>周五9/14</th>
+                        <th>周六9/15</th>
+                        <tr class='ding'>
+                         <td>全天</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                    </thead>
+                    <hr>
+                    <tbody>
+                        <tr class='ding-main'>
+                          <td>12am时</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                       </tr>
+                       <tr v-for='i of 12' class='ding-main'>
+                         <td>{{i}}am时</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                        <tr v-for='i of 12' class='ding-main'>
+                         <td>{{i}}am时</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class='wdrc-main' v-show='active==2'>
+            <div class='calender null'>
+                 <i class='iconfont  icon-icon_wenjian'></i>
+                 没有日程安排
+            </div>
+        </div>
     </div>
 </template>
 
@@ -115,29 +223,37 @@ export default {
             year:2018,
             month:9,
             isxian:false,
+            isShow1:false,
+            active:0,
+            titles:'',
+            starts:'',
+            ends:'',
             things:[
-                    {
-                        title:"这是一个事务",
-                        start:20180903,
-                        end:20180905
-                    },
-                    {
-                        title:"这是一个事务1",
-                        start:20180907,
-                        end:20180909
-                    },
-                    {
-                        title:"这是一个事务3",
-                        start:20180910,
-                        end:20180915
-                    }
-            ]
+                   {
+                      title:"送我",
+                      start:20180904,
+                      end:20180912
+                   },
+                   {
+                      title:"11.03公司正式启用worktile",
+                      start:20180912,
+                      end:20180913
+                   }
+             ],
+            tabs:[
+                {name:'团队'},
+                {name:'部门'}
+              ],
+            datewmd:[
+             {m:'月'},
+             {m:'周'},
+             {m:'日'},
+            ]  
         }
     },
     computed:{
         calender(){
               var arr=[];
-               
                 var nowMonthLength=new Date(this.year,this.month,0).getDate();
                 var nowMonthFirstWeek=new Date(this.year,this.month-1).getDay();
                 var lastMonthLength=new Date(this.year,this.month-1,0).getDate();  
@@ -283,8 +399,26 @@ export default {
         },
         ads(){
           this.isxian = !this.isxian;  
+        },
+        xuanze(){
+            this.isShow1 = !this.isShow1;
+        },
+        tabclick(index){
+          this.active = index;
+         },
+        wek(index){
+          this.active = index;
+        },
+        add(){
+            this.things.push({
+                title: this.titles,
+                start: this.starts,
+                end:this.ends
+            });
+            this.titles='',
+            this.starts='',
+            this.ends=''
         }
-        
     }
 }
 </script>
@@ -344,8 +478,6 @@ export default {
         cursor: pointer;
     }
     .wd-group{
-         border: 1px solid #ccc;
-        border-radius: 6px;
         width: 208px;
         height: 28px;
         line-height: 5px;
@@ -356,24 +488,57 @@ export default {
         width: calc(100% /3);
         height: 28px;
         border: none;
-        border-right: 1px solid #ccc;
+      border: 1px solid #ccc;
         background-color: transparent;
         box-sizing: border-box;
         float: left;
+      outline: none;
+      &:nth-child(1){
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+      &:nth-child(3){
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+    }
+    .wd-group button.cs{
+       border:1px solid #22d7bb;
     }
     .wdrc-main{
         position: relative;
-        width: 100%;
-        overflow-y: auto;
+      width: 100%;
+      overflow-y: auto;
         overflow-x: auto;
         padding: 15px 15px 0;
         height: 553px;
+      .mhead{
+        color: #333;
+        font-weight: 700;
+        padding: 20px;
+        border-bottom:1px solid #ccc;
+      }
+      .nering{
+        height:55px;
+         ul li span{
+            padding-left: 35px;
+            line-height: 55px;
+            padding-right:35px;
+            color:#888;
+         }
+      }
     }
     .wdrc-main .calender{
         background-color: #fdfdfd;
         height: 553px;
         position: relative;
-    }
+      overflow-y:scroll;
+      overflow-x:hidden;
+     }
+   .wdrc-main .calender hr{
+    height:83px;
+   }
     .wdrc-main .calender table{
         width: 100%;
         font-size: 1em;
@@ -383,6 +548,7 @@ export default {
         line-height: 40px;
         font-size: 12px;
         text-align: center;
+        width: calc(1041px / 7);
     }
 
     .wdrc-main  .calender table,
@@ -608,7 +774,168 @@ export default {
                }
             }
      }
-    
+    .xuancy{
+      width:660px;
+      height:552px;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      position: absolute;
+      top: -53px;
+      left: 0px;
+      z-index: 50;
+      border-radius: 6px;
+      box-shadow: 0 0 1.5rem rgba(0, 0, 0, 0.5);
+
+      .tab-wrap{
+        padding: 20px 30px;
+      }
+      
+      .tab-wrap{
+          .tabs{
+            width:280px;
+            height: 360px;
+            float:left;
+          }
+          .tab-right{
+            width:280px;
+            height: 360px;
+            float:left;
+            margin-left: 35px;
+            .tabrt-header p{
+              line-height: 45px;
+            }
+          }
+      }
+      .tabs ul {
+        width:280px;
+        height:45px;
+      }
+      .tabs ul li{
+        display: inline-block;
+        font-size:15px;
+        width:calc(280px / 2);
+        text-align: center;
+        line-height: 45px;
+      }
+      .tabs ul li.active1{
+          color:#62d7c1;
+        }
+      .tab-1{
+        width:280px;
+        height:360px;
+        border:1px solid #ccc;
+        .los{
+            width: 280px;
+            height: 40px;
+            position: relative;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
+          input{
+              border-radius: 40px;
+              height: 40px;
+              outline: none;
+              border: 1px solid #ccc;
+              padding-left: 30px;
+          }
+          i{
+              position: absolute;
+              left: 53px;
+              top: 14px;
+          }
+        }
+        ul{
+          height:71px;
+          font-size: 14px;
+          color:#ccc;
+        }
+        ul li span.icons{
+          height: 25px;
+          width: 25px;
+          display: inline-block;
+          color: #fff;
+          border-radius: 50%;
+          background-color: lime;
+          text-align: center;
+          font-size: 12px;
+          line-height: 25px;
+        }
+      }
+      .tab-2{
+        width:280px;
+        height:360px;
+        border:1px solid #ccc;
+        ul li:hover{
+           box-shadow: -4px -2px 14px #ccc;
+        }
+        ul li{
+          width: 100%;
+          text-align: left;
+          box-sizing: border-box;
+          margin-top: 15px;
+          padding-left: 15px;
+          i{
+            color:#ccc;
+          }
+        }
+      }
+      .tabrt-main{
+        width:280px;
+        height:360px;
+        border:1px solid #ccc;
+        ul li{
+          font-size: 14px; 
+          color:black;
+          margin-top: 18px;
+          margin-left: 15px;
+        }
+        ul li span{
+          height: 25px;
+          width: 25px;
+          display: inline-block;
+          color: #fff;
+          border-radius: 50%;
+          background-color: #22d7bb;
+          text-align: center;
+          font-size: 12px;
+          line-height: 25px;
+        }
+      }
+   }
+   .calsde .ding{
+     height:42px;
+     width:100%;
+     border-bottom:2px solid #ccc;
+     td{
+      height:42px;
+     }
+     td:nth-child(1){
+       width:59px;
+       display: inline-block;
+      text-align: right;
+      line-height: 30px;
+     }
+    }
+    .calsde thead{
+      display: block;
+      position: fixed;
+      background-color: #fff;
+     }
+     .calsde .ding-main td{
+       height:44px;
+       text-align: right;
+     }
+     .calsde .ding-main td:nth-child(1){
+       width:59px;
+     }
+     .wdrc-main .null{
+        line-height: 568px;
+        text-align: center;
+        .icon-icon_wenjian:before {
+         font-size: 50px;
+         color: #ccc;
+      }
+     }
 </style>
 
 
