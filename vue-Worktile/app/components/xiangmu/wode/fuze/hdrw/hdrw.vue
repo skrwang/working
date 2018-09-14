@@ -29,11 +29,11 @@
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
                                     <i class="iconfont icon-jiantouarrow483"></i>
                                 </span>
-                                <thy-avatar class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
+                                <div class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
                                     <span class="avatar-default" style="background-color: rgb(44, 204, 218);">
                                         <div>SK</div>
                                     </span>
-                                </thy-avatar>
+                                </div>
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
@@ -82,11 +82,11 @@
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
                                     <i class="iconfont icon-jiantouarrow483"></i>
                                 </span>
-                                <thy-avatar class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
+                                <div class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
                                     <span class="avatar-default" style="background-color: rgb(44, 204, 218);">
                                         <div>SK</div>
                                     </span>
-                                </thy-avatar>
+                                </div>
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
@@ -135,11 +135,11 @@
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
                                     <i class="iconfont icon-jiantouarrow483"></i>
                                 </span>
-                                <thy-avatar class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
+                                <div class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
                                     <span class="avatar-default" style="background-color: rgb(44, 204, 218);">
                                         <div>SK</div>
                                     </span>
-                                </thy-avatar>
+                                </div>
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
@@ -188,11 +188,11 @@
                                     <img data-v-25f4dd50="" src="imgs/a1.png" alt="">任务 
                                     <i class="iconfont icon-jiantouarrow483"></i>
                                 </span>
-                                <thy-avatar class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
+                                <div class="cursor-pointer thy-avatar-22 thy-avatar" placement="right bottom" selectmember="" thysize="22">
                                     <span class="avatar-default" style="background-color: rgb(44, 204, 218);">
                                         <div>SK</div>
                                     </span>
-                                </thy-avatar>
+                                </div>
                             </div>
                             <div class="d-flex">
                                 <div class="flex-grow-1 btn-pair-sm">
@@ -227,6 +227,9 @@ export default {
     created() {
         // 发送默认 GETALL
         this.$store.dispatch("YUGETALL");
+        this.$store.dispatch("YU1GETALL");
+        this.$store.dispatch("YU2GETALL");
+        this.$store.dispatch("YU3GETALL");
     },
     methods:{
         showToggle:function(){
